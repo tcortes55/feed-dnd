@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import Picture from './components/picture';
+import img1 from './images/b1.jpg';
 
 function App() {
   return (
@@ -9,6 +11,9 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+
+        <Picture imgPath={img1}></Picture>
+
         <a
           className="App-link"
           href="https://reactjs.org"
