@@ -1,28 +1,17 @@
-import img1 from './images/b1.jpg';
-import img2 from './images/b2.jpg';
-import img3 from './images/b3.jpg';
+function incrementPosition(positions) {
+    positions.forEach(element => {
+        if (element[0] + 1 < 9) {
+            element[0] = element[0] + 1;
+        }
+        else {
+            element[0] = element[0] + 1 - 9;
+        }
+    });
 
-function getPositions(randPos) {   
-    const imagePositions = [];
-
-    let i = randPos();
-
-    imagePositions.push([(0 + i) % 9, null]);
-    imagePositions.push([(1 + i) % 9, null]);
-    imagePositions.push([(2 + i) % 9, img1]);
-    imagePositions.push([(3 + i) % 9, null]);
-    imagePositions.push([(4 + i) % 9, img2]);
-    imagePositions.push([(5 + i) % 9, img3]);
-    imagePositions.push([(6 + i) % 9, null]);
-    imagePositions.push([(7 + i) % 9, null]);
-    imagePositions.push([(8 + i) % 9, null]);
-
-    return imagePositions;
+    return positions;
 }
 
-export function observe(receive) {
-    const randPos = () => Math.floor(Math.random() * 8)
-    const myPositions = getPositions(randPos);
-    setInterval(() => receive(getPositions(randPos)), 500)
-  }
+export function observe(args, receive) {
+    setInterval(() => receive(incrementPosition(args)), 500)
+}
 
