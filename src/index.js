@@ -9,22 +9,22 @@ import img1 from './images/b1.jpg';
 import img2 from './images/b2.jpg';
 import img3 from './images/b3.jpg';
 
-const imagePositions = [];
+const imagesDictionary = {};
 
-imagePositions.push([0, null]);
-imagePositions.push([1, null]);
-imagePositions.push([2, img1]);
-imagePositions.push([3, null]);
-imagePositions.push([4, img2]);
-imagePositions.push([5, img3]);
-imagePositions.push([6, null]);
-imagePositions.push([7, null]);
-imagePositions.push([8, null]);
+imagesDictionary[0] = null;
+imagesDictionary[1] = null;
+imagesDictionary[2] = img1;
+imagesDictionary[3] = null;
+imagesDictionary[4] = img2;
+imagesDictionary[5] = img3;
+imagesDictionary[6] = null;
+imagesDictionary[7] = null;
+imagesDictionary[8] = null;
 
-observe(imagePositions, (imagePositions) => 
+observe(imagesDictionary, (imagesDictionary) => 
   ReactDOM.render(
     <React.StrictMode>
-      <Board imagePositions={imagePositions}></Board>
+      <Board imagePositions={imagesDictionary}></Board>
     </React.StrictMode>,
     document.getElementById('root')
     )

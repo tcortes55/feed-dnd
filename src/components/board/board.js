@@ -12,19 +12,17 @@ const BoardWrapper = styled.div`
 function renderSquares(imagePositions) {
     const squares = [];
 
-    var orderedPositions = imagePositions.sort(function (a, b) {
-        return  a[0] > b[0] ? 1 : -1;
-    })
+    let numberOfPositions = Object.keys(imagePositions).length;
 
-    orderedPositions.forEach(imagePosition => {
-        let position = imagePosition[0];
-        let imagePath = imagePosition[1];
+    for (var i = 0; i < numberOfPositions; i++) {
+        let position = i;
+        let imagePath = imagePositions[position];
 
         let fill = position % 2 === 0;
         let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath}></Picture> : null;
 
         squares.push(<Square key={position} fill={fill}>{picture}</Square>);
-    });
+    }
 
     return squares;
 }
