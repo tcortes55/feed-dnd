@@ -1,44 +1,29 @@
-function incrementPosition(positions) {
-    let numberOfPositions = Object.keys(positions).length;
-    let newPositions = Object.assign({}, positions);
+let imagePositions = {};
+let observer = null;
 
-    for (var i = 0; i < numberOfPositions; i++) {
-        if (i + 1 < numberOfPositions) {
-            positions[i] = newPositions[i + 1];
-        }
-        else {
-            positions[numberOfPositions - 1] = newPositions[0];
-        }
+
+export function observe(args, o) {
+    if (observer) {
+        throw new Error('Multiple observers not implemented.');
+    }
+  
+    imagePositions = args;
+    observer = o;
+    emitChange();
+}
+
+function emitChange() {
+    return observer(imagePositions);
+}
+
+export function moveImage(positions, origin, target) {
+    if (positions[origin] === null || positions[target] != null) {
+        return;
     }
 
-    return positions;
+    imagePositions = Object.assign({}, positions);
+    imagePositions[target] = imagePositions[origin];
+    imagePositions[origin] = null;
+
+    emitChange();
 }
-
-export function observe(args, receive) {
-    setInterval(() => receive(incrementPosition(args)), 500)
-}
-
-
-// let imagePositions = [...Array(9)];
-// let observer = null;
-
-// function emitChange() {
-//     return observer(imagePositions);
-// }
-
-// export function observe(o) {
-//     if (observer) {
-//       throw new Error('Multiple observers not implemented.');
-//     }
-  
-//     observer = o;
-//     emitChange();
-//   }
-
-//   export function moveImage(positions, origin, target) {
-//     imagePositions = positions;
-
-//     if (positions)
-
-//     emitChange();
-//   }
