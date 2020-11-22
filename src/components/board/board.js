@@ -3,6 +3,13 @@ import Square from '../square';
 import Picture from '../picture';
 import styled, { css } from 'styled-components';
 
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend"
+import { isMobile } from 'react-device-detect';
+
+let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
+
 const BoardWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
