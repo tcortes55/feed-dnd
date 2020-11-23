@@ -1,5 +1,5 @@
 import React from 'react'
-import Square from '../square';
+import BoardSquare from '../boardSquare';
 import Picture from '../picture';
 import styled, { css } from 'styled-components';
 
@@ -27,10 +27,7 @@ function renderSquares(imagePositions) {
         let position = i;
         let imagePath = imagePositions[position];
 
-        let fill = position % 2 === 0;
-        let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath}></Picture> : null;
-
-        squares.push(<div onClick={() => moveImage(imagePositions, position - 1, position)} ><Square key={position} fill={fill}>{picture}</Square></div>);
+        squares.push(<div><BoardSquare position={position} imagePath={imagePath}></BoardSquare></div>);
     }
 
     return squares;
@@ -38,9 +35,11 @@ function renderSquares(imagePositions) {
 
 function Board({ imagePositions }) {
     return (
-        <BoardWrapper>
-            {renderSquares(imagePositions)}
-        </BoardWrapper>
+        <DndProvider backend={DnDBackend}>
+            <BoardWrapper>
+                {renderSquares(imagePositions)}
+            </BoardWrapper>
+        </DndProvider>
     );
 }
 
