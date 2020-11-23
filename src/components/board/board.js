@@ -8,6 +8,8 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend"
 import { isMobile } from 'react-device-detect';
 
+import { moveImage } from '../../PictureManager';
+
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
 const BoardWrapper = styled.div`
@@ -28,7 +30,7 @@ function renderSquares(imagePositions) {
         let fill = position % 2 === 0;
         let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath}></Picture> : null;
 
-        squares.push(<Square key={position} fill={fill}>{picture}</Square>);
+        squares.push(<div onClick={() => moveImage(imagePositions, position - 1, position)} ><Square key={position} fill={fill}>{picture}</Square></div>);
     }
 
     return squares;
