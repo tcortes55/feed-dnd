@@ -1,7 +1,16 @@
 import React from 'react'
-import Square from '../square';
+import BoardSquare from '../boardSquare';
 import Picture from '../picture';
 import styled, { css } from 'styled-components';
+
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend"
+import { isMobile } from 'react-device-detect';
+
+import { moveImage } from '../../PictureManager';
+
+let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
 const BoardWrapper = styled.div`
     display: flex;
@@ -12,24 +21,25 @@ const BoardWrapper = styled.div`
 function renderSquares(imagePositions) {
     const squares = [];
 
-    imagePositions.forEach(imagePosition => {
-        let position = imagePosition[0];
-        let imagePath = imagePosition[1];
+    let numberOfPositions = Object.keys(imagePositions).length;
 
-        let fill = position % 2 === 0;
-        let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath}></Picture> : null;
+    for (var i = 0; i < numberOfPositions; i++) {
+        let position = i;
+        let imagePath = imagePositions[position];
 
-        squares.push(<Square key={position} fill={fill}>{picture}</Square>);
-    });
+        squares.push(<div key={position + "_div"}><BoardSquare key={position + "_bs"} imagePositions={imagePositions} position={position} imagePath={imagePath}></BoardSquare></div>);
+    }
 
     return squares;
 }
 
 function Board({ imagePositions }) {
     return (
-        <BoardWrapper>
-            {renderSquares(imagePositions)}
-        </BoardWrapper>
+        <DndProvider backend={DnDBackend}>
+            <BoardWrapper>
+                {renderSquares(imagePositions)}
+            </BoardWrapper>
+        </DndProvider>
     );
 }
 

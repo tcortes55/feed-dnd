@@ -1,5 +1,7 @@
-import React from 'react'
+import React from 'react';
 import styled, { css } from 'styled-components';
+import ItemTypes from '../../constants';
+import { useDrag } from 'react-dnd';
 
 const PictureWrapper = styled.div`
     height: 100px;
@@ -7,13 +9,26 @@ const PictureWrapper = styled.div`
 `;
 
 const Img = styled.img`
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
 `;
 
 function Picture({ imgPath }) {
+    const [{ isDragging }, drag] = useDrag({
+        item: { type: ItemTypes.PICTURE },
+        collect: (monitor) => ({
+          isDragging: !!monitor.isDragging()
+        })
+    })
+
     return (
-    <PictureWrapper>
+    <PictureWrapper
+        ref={drag}
+        style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: 'move',
+      }}
+    >
         <Img src={imgPath}></Img>
     </PictureWrapper>
     );
