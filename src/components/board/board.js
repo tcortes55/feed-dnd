@@ -1,14 +1,10 @@
-import React from 'react'
+import React from 'react';
 import BoardSquare from '../boardSquare';
-import Picture from '../picture';
 import styled, { css } from 'styled-components';
-
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { TouchBackend } from "react-dnd-touch-backend"
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 import { isMobile } from 'react-device-detect';
-
-import { moveImage } from '../../PictureManager';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
@@ -27,7 +23,7 @@ function renderSquares(imagePositions) {
         let position = i;
         let imagePath = imagePositions[position];
 
-        squares.push(<div key={position + "_div"}><BoardSquare key={position + "_bs"} imagePositions={imagePositions} position={position} imagePath={imagePath}></BoardSquare></div>);
+        squares.push(<BoardSquare key={position + "_bs"} imagePositions={imagePositions} position={position} imagePath={imagePath}></BoardSquare>);
     }
 
     return squares;

@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Board from './components/board';
-import { observe } from './PictureManager'
+import { observe } from './PictureManager';
 import img1 from './images/b1.jpg';
 import img2 from './images/b2.jpg';
 import img3 from './images/b3.jpg';

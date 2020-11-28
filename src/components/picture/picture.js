@@ -9,13 +9,16 @@ const PictureWrapper = styled.div`
 `;
 
 const Img = styled.img`
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
 `;
 
-function Picture({ imgPath }) {
+function Picture({ imgPath, currPosition }) {
     const [{ isDragging }, drag] = useDrag({
-        item: { type: ItemTypes.PICTURE },
+        item: {
+            type: ItemTypes.PICTURE,
+            currPosition: currPosition
+        },
         collect: (monitor) => ({
           isDragging: !!monitor.isDragging()
         })

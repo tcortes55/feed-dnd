@@ -3,18 +3,21 @@ import Square from '../square';
 import Picture from '../picture';
 import ItemTypes from '../../constants';
 import { moveImage } from '../../PictureManager';
-import { useDrop } from 'react-dnd'
+import { useDrop } from 'react-dnd';
 
 
 function BoardSquare({ imagePositions, position, imagePath}) {
     let fill = position % 2 === 0;
-    let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath}></Picture> : null;
+    let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath} currPosition={position}></Picture> : null;
 
-    const [{ isOver }, drop] = useDrop({
+    const [{ isOver, getItem }, drop] = useDrop({
         accept: ItemTypes.PICTURE,
-        drop: () => moveImage(imagePositions, position - 1, position),
+        drop: () => {
+          moveImage(imagePositions, getItem.currPosition, position)
+        },
         collect: monitor => ({
         isOver: !!monitor.isOver(),
+        getItem: monitor.getItem()
         }),
     });
 
