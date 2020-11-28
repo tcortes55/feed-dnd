@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import styled, { css } from 'styled-components';
-import ItemTypes from '../../constants'
-import { useDrag } from 'react-dnd'
+import ItemTypes from '../../constants';
+import { useDrag } from 'react-dnd';
 
 const PictureWrapper = styled.div`
     height: 100px;
@@ -24,6 +24,10 @@ function Picture({ imgPath }) {
     return (
     <PictureWrapper
         ref={drag}
+        style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: 'move',
+      }}
     >
         <Img src={imgPath}></Img>
     </PictureWrapper>

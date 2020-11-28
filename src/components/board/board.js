@@ -27,7 +27,7 @@ function renderSquares(imagePositions) {
         let position = i;
         let imagePath = imagePositions[position];
 
-        squares.push(<div><BoardSquare position={position} imagePath={imagePath}></BoardSquare></div>);
+        squares.push(<div key={position + "_div"}><BoardSquare key={position + "_bs"} imagePositions={imagePositions} position={position} imagePath={imagePath}></BoardSquare></div>);
     }
 
     return squares;
