@@ -21,9 +21,9 @@ export function moveImage(positions, origin, target) {
         return;
     }
 
-    imagePositions = Object.assign({}, positions);
-    imagePositions[target] = imagePositions[origin];
-    imagePositions[origin] = null;
+    imagePositions.feed = Object.assign({}, positions);
+    imagePositions.feed[target] = imagePositions.feed[origin];
+    imagePositions.feed[origin] = null;
 
     emitChange();
 }

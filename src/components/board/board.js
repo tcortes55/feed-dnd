@@ -8,10 +8,14 @@ import { isMobile } from 'react-device-detect';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
-const BoardWrapper = styled.div`
+const FeedWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     max-width: 312px;
+`;
+const DeckWrapper = styled.div`
+    display: flex;
+    max-width: 1000px;
 `;
 
 function renderSquares(imagePositions) {
@@ -32,9 +36,12 @@ function renderSquares(imagePositions) {
 function Board({ imagePositions }) {
     return (
         <DndProvider backend={DnDBackend}>
-            <BoardWrapper>
-                {renderSquares(imagePositions)}
-            </BoardWrapper>
+            <FeedWrapper>
+                {renderSquares(imagePositions.feed)}
+            </FeedWrapper>
+            <DeckWrapper>
+                {renderSquares(imagePositions.deck)}
+            </DeckWrapper>
         </DndProvider>
     );
 }
