@@ -14,35 +14,38 @@ const FeedWrapper = styled.div`
     max-width: 312px;
 `;
 const DeckWrapper = styled.div`
+    margin-top:50px;
     display: flex;
     max-width: 1000px;
 `;
 
-function renderSquares(imagePositions) {
+function renderSquares(imagePositions, currBoard) {
     const squares = [];
 
-    let numberOfPositions = Object.keys(imagePositions.feed).length;
-    let currBoard = "feed";
+    let numberOfPositions = Object.keys(imagePositions[currBoard]).length;
 
     for (var i = 0; i < numberOfPositions; i++) {
         let position = i;
-        let imagePath = imagePositions.feed[position];
+        let imagePath = imagePositions[currBoard][position];
 
-        squares.push(<BoardSquare key={position + "_bs"} imagePositions={imagePositions} board={currBoard} position={position} imagePath={imagePath}></BoardSquare>);
+        squares.push(<BoardSquare key={position + "_bs_" + currBoard} imagePositions={imagePositions} board={currBoard} position={position} imagePath={imagePath}></BoardSquare>);
     }
 
     return squares;
 }
 
+function renderBoard(imagePositions) {
+    const fullBoard = [];
+    fullBoard.push(<FeedWrapper>{renderSquares(imagePositions, "feed")}</FeedWrapper>);
+    fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, "deck")}</DeckWrapper>);
+
+    return fullBoard;
+}
+
 function Board({ imagePositions }) {
     return (
         <DndProvider backend={DnDBackend}>
-            <FeedWrapper>
-                {renderSquares(imagePositions)}
-            </FeedWrapper>
-            {/* <DeckWrapper>
-                {renderSquares(imagePositions.deck)}
-            </DeckWrapper> */}
+            {renderBoard(imagePositions)}
         </DndProvider>
     );
 }
