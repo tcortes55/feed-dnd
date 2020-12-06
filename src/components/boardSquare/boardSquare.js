@@ -6,18 +6,18 @@ import { moveImage, canMoveImage } from '../../PictureManager';
 import { useDrop } from 'react-dnd';
 
 
-function BoardSquare({ imagePositions, position, imagePath}) {
+function BoardSquare({ imagePositions, board, position, imagePath}) {
     let fill = position % 2 === 0;
-    let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath} currPosition={position}></Picture> : null;
+    let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath} currBoard={board} currPosition={position}></Picture> : null;
 
     const [{ isOver, getItem, canDrop }, drop] = useDrop({
         accept: ItemTypes.PICTURE,
         drop: () => {
-          moveImage(imagePositions, getItem.currPosition, position)
+          moveImage(imagePositions, getItem.currBoard, getItem.currPosition, board, position);
         },
         canDrop: () => {
           if (getItem)
-            return canMoveImage(imagePositions, getItem.currPosition, position);
+            return canMoveImage(imagePositions, getItem.currBoard, getItem.currPosition, board, position);
           else
             return false;
         },

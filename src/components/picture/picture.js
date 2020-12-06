@@ -13,10 +13,11 @@ const Img = styled.img`
     height: 100%;
 `;
 
-function Picture({ imgPath, currPosition }) {
+function Picture({ imgPath, currBoard, currPosition }) {
     const [{ isDragging }, drag] = useDrag({
         item: {
             type: ItemTypes.PICTURE,
+            currBoard: currBoard,
             currPosition: currPosition
         },
         collect: (monitor) => ({

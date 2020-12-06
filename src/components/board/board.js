@@ -21,13 +21,14 @@ const DeckWrapper = styled.div`
 function renderSquares(imagePositions) {
     const squares = [];
 
-    let numberOfPositions = Object.keys(imagePositions).length;
+    let numberOfPositions = Object.keys(imagePositions.feed).length;
+    let currBoard = "feed";
 
     for (var i = 0; i < numberOfPositions; i++) {
         let position = i;
-        let imagePath = imagePositions[position];
+        let imagePath = imagePositions.feed[position];
 
-        squares.push(<BoardSquare key={position + "_bs"} imagePositions={imagePositions} position={position} imagePath={imagePath}></BoardSquare>);
+        squares.push(<BoardSquare key={position + "_bs"} imagePositions={imagePositions} board={currBoard} position={position} imagePath={imagePath}></BoardSquare>);
     }
 
     return squares;
@@ -37,11 +38,11 @@ function Board({ imagePositions }) {
     return (
         <DndProvider backend={DnDBackend}>
             <FeedWrapper>
-                {renderSquares(imagePositions.feed)}
+                {renderSquares(imagePositions)}
             </FeedWrapper>
-            <DeckWrapper>
+            {/* <DeckWrapper>
                 {renderSquares(imagePositions.deck)}
-            </DeckWrapper>
+            </DeckWrapper> */}
         </DndProvider>
     );
 }
