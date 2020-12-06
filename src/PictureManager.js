@@ -16,14 +16,22 @@ function emitChange() {
     return observer(imagePositions);
 }
 
-export function moveImage(positions, origin, target) {
-    if (positions[origin] === null || positions[target] != null) {
+export function moveImage(positions, originBoard, origin, targetBoard, target) {
+    if (!canMoveImage(positions, originBoard, origin, targetBoard, target)) {
         return;
     }
 
     imagePositions = Object.assign({}, positions);
-    imagePositions[target] = imagePositions[origin];
-    imagePositions[origin] = null;
+    imagePositions[targetBoard][target] = imagePositions[originBoard][origin];
+    imagePositions[originBoard][origin] = null;
 
     emitChange();
+}
+
+export function canMoveImage(positions, originBoard, origin, targetBoard, target) {
+    if (positions[originBoard][origin] === null || positions[targetBoard][target] != null) {
+        return false;
+    }
+
+    return true;
 }

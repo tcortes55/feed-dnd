@@ -1,25 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Board from './components/board';
-import { observe } from './PictureManager'
+import { observe } from './PictureManager';
 import img1 from './images/b1.jpg';
 import img2 from './images/b2.jpg';
 import img3 from './images/b3.jpg';
 
 const imagesDictionary = {};
 
-imagesDictionary[0] = null;
-imagesDictionary[1] = null;
-imagesDictionary[2] = img1;
-imagesDictionary[3] = null;
-imagesDictionary[4] = img2;
-imagesDictionary[5] = img3;
-imagesDictionary[6] = null;
-imagesDictionary[7] = null;
-imagesDictionary[8] = null;
+imagesDictionary.feed = {};
+imagesDictionary.feed[0] = null;
+imagesDictionary.feed[1] = null;
+imagesDictionary.feed[2] = img1;
+imagesDictionary.feed[3] = null;
+imagesDictionary.feed[4] = img2;
+imagesDictionary.feed[5] = img3;
+imagesDictionary.feed[6] = null;
+imagesDictionary.feed[7] = null;
+imagesDictionary.feed[8] = null;
+
+imagesDictionary.deck = {};
+imagesDictionary.deck[0] = null;
+imagesDictionary.deck[1] = null;
+imagesDictionary.deck[2] = null;
+imagesDictionary.deck[3] = null;
+imagesDictionary.deck[4] = null;
+imagesDictionary.deck[5] = null;
+imagesDictionary.deck[6] = null;
+imagesDictionary.deck[7] = null;
+imagesDictionary.deck[8] = null;
 
 observe(imagesDictionary, (imagesDictionary) => 
   ReactDOM.render(

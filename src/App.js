@@ -1,7 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import Picture from './components/picture';
-import Square from './components/square';
 import Board from './components/board';
 import img1 from './images/b1.jpg';
 import img2 from './images/b2.jpg';

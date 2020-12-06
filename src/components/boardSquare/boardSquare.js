@@ -2,19 +2,29 @@ import React from 'react';
 import Square from '../square';
 import Picture from '../picture';
 import ItemTypes from '../../constants';
-import { moveImage } from '../../PictureManager';
-import { useDrop } from 'react-dnd'
+import { moveImage, canMoveImage } from '../../PictureManager';
+import { useDrop } from 'react-dnd';
 
 
-function BoardSquare({ imagePositions, position, imagePath}) {
+function BoardSquare({ imagePositions, board, position, imagePath}) {
     let fill = position % 2 === 0;
-    let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath}></Picture> : null;
+    let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath} currBoard={board} currPosition={position}></Picture> : null;
 
-    const [{ isOver }, drop] = useDrop({
+    const [{ isOver, getItem, canDrop }, drop] = useDrop({
         accept: ItemTypes.PICTURE,
-        drop: () => moveImage(imagePositions, position - 1, position),
+        drop: () => {
+          moveImage(imagePositions, getItem.currBoard, getItem.currPosition, board, position);
+        },
+        canDrop: () => {
+          if (getItem)
+            return canMoveImage(imagePositions, getItem.currBoard, getItem.currPosition, board, position);
+          else
+            return false;
+        },
         collect: monitor => ({
         isOver: !!monitor.isOver(),
+        getItem: monitor.getItem(),
+        canDrop: !!monitor.canDrop()
         }),
     });
 
@@ -28,7 +38,7 @@ function BoardSquare({ imagePositions, position, imagePath}) {
             }}
         >
         <Square key={position} fill={fill}>{picture}</Square>
-        {isOver && (
+        {isOver && canDrop && (
         <div
           style={{
             position: 'absolute',
