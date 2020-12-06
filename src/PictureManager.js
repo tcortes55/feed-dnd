@@ -17,7 +17,7 @@ function emitChange() {
 }
 
 export function moveImage(positions, origin, target) {
-    if (positions[origin] === null || positions[target] != null) {
+    if (!canMoveImage(positions, origin, target)) {
         return;
     }
 
@@ -26,4 +26,12 @@ export function moveImage(positions, origin, target) {
     imagePositions[origin] = null;
 
     emitChange();
+}
+
+export function canMoveImage(positions, origin, target) {
+    if (positions[origin] === null || positions[target] != null) {
+        return false;
+    }
+
+    return true;
 }
