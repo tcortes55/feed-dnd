@@ -24,6 +24,20 @@ function removeFromFeed(imagePositions, origin) {
     imagePositions["feed"][origin] = null;
 }
 
+function addToDeck() {
+
+}
+
+function removeFromDeck(imagePositions, origin) {
+    let numberOfPositions = Object.keys(imagePositions["deck"]).length;
+
+    for (var i = origin; i < numberOfPositions - 1; i++) {
+        imagePositions["deck"][i] = imagePositions["deck"][i + 1];
+    }
+
+    delete imagePositions["deck"][numberOfPositions - 1];
+}
+
 export function moveImage(positions, originBoard, origin, targetBoard, target) {
     if (!canMoveImage(positions, originBoard, origin, targetBoard, target)) {
         return;
@@ -41,8 +55,8 @@ export function moveImage(positions, originBoard, origin, targetBoard, target) {
     if (originBoard === "feed") {
         removeFromFeed(imagePositions, origin);
     }
-    else {//TODO: handle deck behavior
-        imagePositions[originBoard][origin] = null;
+    else {
+        removeFromDeck(imagePositions, origin);
     }
 
     emitChange();
