@@ -1,6 +1,8 @@
 let imagePositions = {};
 let observer = null;
-
+const FEED = "feed";
+const DECK = "deck";
+const NUM_COLUMNS = 3;
 
 export function observe(args, o) {
     if (observer) {
@@ -17,31 +19,36 @@ function emitChange() {
 }
 
 function addToFeed(imagePositions, target, image) {
-    imagePositions["feed"][target] = image;
+    imagePositions[FEED][target] = image;
 }
 
 function removeFromFeed(imagePositions, origin) {
-    imagePositions["feed"][origin] = null;
+    imagePositions[FEED][origin] = null;
 }
 
 function addToDeck(imagePositions, target, image) {
-    let numberOfPositions = Object.keys(imagePositions["deck"]).length;
+    let numberOfPositions = Object.keys(imagePositions[DECK]).length;
 
     for (var i = numberOfPositions; i > target; i--) {
-        imagePositions["deck"][i] = imagePositions["deck"][i - 1];
+        imagePositions[DECK][i] = imagePositions[DECK][i - 1];
     }
 
-    imagePositions["deck"][target] = image;
+    imagePositions[DECK][target] = image;
 }
 
 function removeFromDeck(imagePositions, origin) {
-    let numberOfPositions = Object.keys(imagePositions["deck"]).length;
+    let numberOfPositions = Object.keys(imagePositions[DECK]).length;
 
     for (var i = origin; i < numberOfPositions - 1; i++) {
-        imagePositions["deck"][i] = imagePositions["deck"][i + 1];
+        imagePositions[DECK][i] = imagePositions[DECK][i + 1];
     }
 
-    delete imagePositions["deck"][numberOfPositions - 1];
+    if (numberOfPositions > NUM_COLUMNS) {
+        delete imagePositions[DECK][numberOfPositions - 1];
+    }
+    else {
+        imagePositions[DECK][numberOfPositions - 1] = null;
+    }
 }
 
 export function moveImage(positions, originBoard, origin, targetBoard, target) {
@@ -51,14 +58,14 @@ export function moveImage(positions, originBoard, origin, targetBoard, target) {
 
     imagePositions = Object.assign({}, positions);
 
-    if (targetBoard === "feed") {
+    if (targetBoard === FEED) {
         addToFeed(imagePositions, target, imagePositions[originBoard][origin]);
     }
     else {
         addToDeck(imagePositions, target, imagePositions[originBoard][origin]);
     }
 
-    if (originBoard === "feed") {
+    if (originBoard === FEED) {
         removeFromFeed(imagePositions, origin);
     }
     else {
@@ -69,7 +76,7 @@ export function moveImage(positions, originBoard, origin, targetBoard, target) {
 }
 
 export function canMoveImage(positions, originBoard, origin, targetBoard, target) {
-    if (targetBoard === "deck") {
+    if (targetBoard === DECK) {
         return true;
     }
     
