@@ -70,6 +70,12 @@ export function moveImage(positions, originBoard, origin, targetBoard, target) {
 
     imagePositions = Object.assign({}, positions);
 
+    if (originBoard === DECK && targetBoard === DECK) {
+        if (imagePositions[targetBoard][target] === null) {
+            return;
+        }
+    }
+
     if (targetBoard === FEED) {
         addToFeed(imagePositions, target, imagePositions[originBoard][origin]);
     }
