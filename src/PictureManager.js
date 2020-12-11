@@ -74,14 +74,22 @@ export function moveImage(positions, originBoard, origin, targetBoard, target) {
         addToFeed(imagePositions, target, imagePositions[originBoard][origin]);
     }
     else {
-        addToDeck(imagePositions, target, imagePositions[originBoard][origin]);
+        let positionToInsert = target;
+        if (targetBoard === DECK && origin < target) {
+            positionToInsert++;
+        }
+        addToDeck(imagePositions, positionToInsert, imagePositions[originBoard][origin]);
     }
 
     if (originBoard === FEED) {
         removeFromFeed(imagePositions, origin);
     }
     else {
-        removeFromDeck(imagePositions, origin);
+        let positionToRemove = origin;
+        if (targetBoard === DECK && target < origin) {
+            positionToRemove++;
+        }
+        removeFromDeck(imagePositions, positionToRemove);
     }
 
     emitChange();
