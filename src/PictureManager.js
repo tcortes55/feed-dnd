@@ -29,11 +29,21 @@ function removeFromFeed(imagePositions, origin) {
 function addToDeck(imagePositions, target, image) {
     let numberOfPositions = Object.keys(imagePositions[DECK]).length;
 
-    for (var i = numberOfPositions; i > target; i--) {
-        imagePositions[DECK][i] = imagePositions[DECK][i - 1];
+    if (imagePositions[DECK][target] === null) {
+        for (var i = 0; i <= target; i++) {
+            if (imagePositions[DECK][i] === null) {
+                imagePositions[DECK][i] = image;
+                break;
+            }
+        }
     }
-
-    imagePositions[DECK][target] = image;
+    else {
+        for (var i = numberOfPositions; i > target; i--) {
+            imagePositions[DECK][i] = imagePositions[DECK][i - 1];
+        }
+        
+        imagePositions[DECK][target] = image;
+    }
 }
 
 function removeFromDeck(imagePositions, origin) {
