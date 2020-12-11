@@ -39,7 +39,9 @@ function addToDeck(imagePositions, target, image) {
     }
     else {
         for (var i = numberOfPositions; i > target; i--) {
-            imagePositions[DECK][i] = imagePositions[DECK][i - 1];
+            if (imagePositions[DECK][i - 1] !== null) {
+                imagePositions[DECK][i] = imagePositions[DECK][i - 1];
+            }
         }
         
         imagePositions[DECK][target] = image;
