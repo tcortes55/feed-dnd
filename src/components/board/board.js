@@ -48,7 +48,7 @@ function Board({ imagePositions }) {
     return (
         <DndProvider backend={DnDBackend}>
             {renderBoard(imagePositions)}
-            <Carousel></Carousel>
+            <Carousel>{renderSquares(imagePositions, "deck")}</Carousel>
         </DndProvider>
     );
 }
