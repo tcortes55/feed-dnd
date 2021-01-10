@@ -18,7 +18,7 @@ function Carousel({ children }) {
       slidesToShow: 3,
       slidesToScroll: 2,
       swipe: false,
-      draggable: true
+      draggable: false
     };
     return (
       <SliderContainer>
