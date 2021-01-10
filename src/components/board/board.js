@@ -5,6 +5,8 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { isMobile } from 'react-device-detect';
+import Carousel from '../carousel';
+import './board.css';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
@@ -12,11 +14,14 @@ const FeedWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     max-width: 312px;
+    margin: auto;
+    margin-top: 25px;
 `;
 const DeckWrapper = styled.div`
     margin-top:50px;
     display: flex;
-    max-width: 1000px;
+    max-width: 352px;
+    overflow-x: scroll;
 `;
 
 function renderSquares(imagePositions, currBoard) {
@@ -37,7 +42,7 @@ function renderSquares(imagePositions, currBoard) {
 function renderBoard(imagePositions) {
     const fullBoard = [];
     fullBoard.push(<FeedWrapper>{renderSquares(imagePositions, "feed")}</FeedWrapper>);
-    fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, "deck")}</DeckWrapper>);
+    // fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, "deck")}</DeckWrapper>);
 
     return fullBoard;
 }
@@ -46,6 +51,7 @@ function Board({ imagePositions }) {
     return (
         <DndProvider backend={DnDBackend}>
             {renderBoard(imagePositions)}
+            <Carousel>{renderSquares(imagePositions, "deck")}</Carousel>
         </DndProvider>
     );
 }
