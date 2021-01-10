@@ -18,6 +18,7 @@ const FeedWrapper = styled.div`
     margin-top: 25px;
 `;
 const DeckWrapper = styled.div`
+    margin: auto;
     margin-top:50px;
     display: flex;
     max-width: 352px;
@@ -42,7 +43,9 @@ function renderSquares(imagePositions, currBoard) {
 function renderBoard(imagePositions) {
     const fullBoard = [];
     fullBoard.push(<FeedWrapper>{renderSquares(imagePositions, "feed")}</FeedWrapper>);
-    // fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, "deck")}</DeckWrapper>);
+    if (!isMobile) {
+        fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, "deck")}</DeckWrapper>);
+    }
 
     return fullBoard;
 }
@@ -51,7 +54,7 @@ function Board({ imagePositions }) {
     return (
         <DndProvider backend={DnDBackend}>
             {renderBoard(imagePositions)}
-            <Carousel>{renderSquares(imagePositions, "deck")}</Carousel>
+            { isMobile && <Carousel>{renderSquares(imagePositions, "deck")}</Carousel> }
         </DndProvider>
     );
 }
