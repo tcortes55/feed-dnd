@@ -3,7 +3,11 @@ import styled from 'styled-components';
 
 function UploadForm() {
     return (
-        <div></div>
+        <div>
+            <form>
+                <input type="file" multiple="multiple"/>
+            </form>
+        </div>
     )
 }
 

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Board from './components/board';
+import UploadForm from './components/uploadForm';
 import { observe } from './PictureManager';
 import img1 from './images/b1.jpg';
 import img2 from './images/b2.jpg';
@@ -35,6 +36,7 @@ imagesDictionary.deck[5] = img6;
 observe(imagesDictionary, (imagesDictionary) => 
   ReactDOM.render(
     <React.StrictMode>
+      <UploadForm></UploadForm>
       <Board imagePositions={imagesDictionary}></Board>
     </React.StrictMode>,
     document.getElementById('root')
