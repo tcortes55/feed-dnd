@@ -26,12 +26,12 @@ imagesDictionary.feed[7] = null;
 imagesDictionary.feed[8] = null;
 
 imagesDictionary.deck = {};
-imagesDictionary.deck[0] = img1;
+/*imagesDictionary.deck[0] = img1;
 imagesDictionary.deck[1] = img2;
 imagesDictionary.deck[2] = img3;
 imagesDictionary.deck[3] = img4;
 imagesDictionary.deck[4] = img5;
-imagesDictionary.deck[5] = img6;
+imagesDictionary.deck[5] = img6;*/
 
 observe(imagesDictionary, (imagesDictionary) => 
   ReactDOM.render(
