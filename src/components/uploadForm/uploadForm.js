@@ -3,14 +3,13 @@ import {storage} from '../../firebase/firebase';
 import styled from 'styled-components';
 
 function UploadForm() {
-    const allInputs = {imgUrl: ''};
     const [imagesAsFiles, setImagesAsFiles] = useState('');
-    const [imagesAsUrls, setImagesAsUrls] = useState(allInputs);
+    const [imagesAsUrls, setImagesAsUrls] = useState([]);
 
     console.log(imagesAsFiles);
     const handleImageAsFile = (e) => {
         const images = e.target.files;
-        setImagesAsFiles(imageFiles => (images));
+        setImagesAsFiles(images);
     }
 
     const handleFirebaseUpload = e => {
@@ -33,8 +32,9 @@ function UploadForm() {
                     console.log(err);
                 }, () => {
                     storage.ref('images').child(imageAsFile.name).getDownloadURL()
-                    .then(firebaseUrl => {
-                        setImagesAsUrls(prevObject => ({...prevObject, imgUrl: firebaseUrl}));
+                    .then((firebaseUrl) => {
+                        setImagesAsUrls([...imagesAsUrls, firebaseUrl]);
+                        console.log(imagesAsUrls);
                     });
                 });
             }
