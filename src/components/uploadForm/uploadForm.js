@@ -22,12 +22,23 @@ function UploadForm() {
             console.log(`Not an image`);
         }
 
-        const uploadTask = Array.from(imagesAsFiles).forEach(
-            function (imageAsFile) {
-                storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
+        Array.from(imagesAsFiles).forEach(
+            (imageAsFile) => {
+                const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
+
+                uploadTask.on('state_changed',
+                (snapshot) => {
+                    console.log(snapshot);
+                }, (err) => {
+                    console.log(err);
+                }, () => {
+                    storage.ref('images').child(imageAsFile.name).getDownloadURL()
+                    .then(firebaseUrl => {
+                        setImagesAsUrls(prevObject => ({...prevObject, imgUrl: firebaseUrl}));
+                    });
+                });
             }
         );
-        
     }
 
     return (
