@@ -12,6 +12,8 @@ function UploadForm() {
         setImagesAsFiles(images);
     }
 
+    const urls = [];
+
     const handleFirebaseUpload = e => {
         e.preventDefault();
         console.log('start of upload');
@@ -28,14 +30,17 @@ function UploadForm() {
                 uploadTask.on('state_changed',
                 (snapshot) => {
                     console.log(snapshot);
-                }, (err) => {
+                },
+                (err) => {
                     console.log(err);
-                }, () => {
-                    storage.ref('images').child(imageAsFile.name).getDownloadURL()
-                    .then((firebaseUrl) => {
-                        setImagesAsUrls([...imagesAsUrls, firebaseUrl]);
-                        console.log(imagesAsUrls);
-                    });
+                },
+                async () => {
+                    const firebaseUrl = await storage.ref('images').child(imageAsFile.name).getDownloadURL();
+                    setImagesAsUrls([...imagesAsUrls, firebaseUrl]);
+                    urls.push(firebaseUrl);
+                    console.log(imagesAsUrls);
+                    console.log("urls:");
+                    console.log(urls);
                 });
             }
         );
