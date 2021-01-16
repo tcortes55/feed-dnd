@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {storage} from '../../firebase/firebase';
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ function UploadForm() {
 
     const urls = [];
 
-    const handleFirebaseUpload = e => {
+    async function handleFirebaseUpload(e) {
         e.preventDefault();
         console.log('start of upload');
 
@@ -36,15 +36,35 @@ function UploadForm() {
                 },
                 async () => {
                     const firebaseUrl = await storage.ref('images').child(imageAsFile.name).getDownloadURL();
-                    setImagesAsUrls([...imagesAsUrls, firebaseUrl]);
-                    urls.push(firebaseUrl);
-                    console.log(imagesAsUrls);
-                    console.log("urls:");
-                    console.log(urls);
+                    setImagesAsUrls(prevArray => [...prevArray, firebaseUrl]);
+                    // urls.push(firebaseUrl);
+                    // console.log(imagesAsUrls);
+                    // console.log("urls:");
+                    // console.log(urls);
+
+                    // setImagesAsUrls(oldArray => [...oldArray, oldArray.length]);
+                    // console.log('imagesAsUrls');
+                    // console.log(imagesAsUrls);
                 });
             }
         );
     }
+
+    useEffect(() => {
+        // urls = imagesAsUrls;
+        console.log('dentro do useEffect:');
+        console.log(imagesAsUrls);
+        // console.log(urls);
+    }, [imagesAsUrls]);
+
+    // async function lala(e) {
+    //     handleFirebaseUpload(e).then(function(value) {
+    //         setImagesAsUrls(oldArray => [...oldArray, urls]);
+
+    //         console.log('imagesAsUrls lala');
+    //         console.log(imagesAsUrls);
+    //     });
+    // }
 
     return (
         <div>
