@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {storage} from '../../firebase/firebase';
+import React, { useEffect, useState } from 'react';
+import { storage } from '../../firebase/firebase';
+import { initialLoadDeck } from '../../PictureManager';
 import styled from 'styled-components';
 
-function UploadForm() {
+function UploadForm({ imagePositions }) {
     const [imagesAsFiles, setImagesAsFiles] = useState('');
-    const [imagesAsUrls, setImagesAsUrls] = useState([]);
+    // const [imagesAsUrls, setImagesAsUrls] = useState([]);
 
     console.log(imagesAsFiles);
     const handleImageAsFile = (e) => {
@@ -34,7 +35,9 @@ function UploadForm() {
                 },
                 async () => {
                     const firebaseUrl = await storage.ref('images').child(imageAsFile.name).getDownloadURL();
-                    setImagesAsUrls(prevArray => [...prevArray, firebaseUrl]);
+                    // setImagesAsUrls(prevArray => [...prevArray, firebaseUrl]);
+                    initialLoadDeck(imagePositions, 0, firebaseUrl);
+                    // uploadImages(prevArray => [...prevArray, firebaseUrl]);
                 });
             }
         );
@@ -42,8 +45,8 @@ function UploadForm() {
 
     useEffect(() => {
         console.log('dentro do useEffect:');
-        console.log(imagesAsUrls);
-    }, [imagesAsUrls]);
+        console.log(imagePositions);
+    }, [imagePositions]);
 
     return (
         <div>
