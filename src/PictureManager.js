@@ -112,3 +112,8 @@ export function canMoveImage(positions, originBoard, origin, targetBoard, target
 
     return true;
 }
+
+export function initialLoadDeck(imagePositions, target, image) {
+    addToDeck(imagePositions, target, image);
+    emitChange();
+}

@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Board from './components/board';
+import UploadForm from './components/uploadForm';
 import { observe } from './PictureManager';
 import img1 from './images/b1.jpg';
 import img2 from './images/b2.jpg';
 import img3 from './images/b3.jpg';
-import img4 from './images/b4.jpg';
-import img5 from './images/b5.jpg';
-import img6 from './images/b6.jpg';
+// import img4 from './images/b4.jpg';
+// import img5 from './images/b5.jpg';
+// import img6 from './images/b6.jpg';
 
 const imagesDictionary = {};
 
@@ -25,16 +26,17 @@ imagesDictionary.feed[7] = null;
 imagesDictionary.feed[8] = null;
 
 imagesDictionary.deck = {};
-imagesDictionary.deck[0] = img1;
-imagesDictionary.deck[1] = img2;
-imagesDictionary.deck[2] = img3;
-imagesDictionary.deck[3] = img4;
-imagesDictionary.deck[4] = img5;
-imagesDictionary.deck[5] = img6;
+imagesDictionary.deck[0] = null;
+imagesDictionary.deck[1] = null;
+imagesDictionary.deck[2] = null;
+// imagesDictionary.deck[3] = img4;
+// imagesDictionary.deck[4] = img5;
+// imagesDictionary.deck[5] = img6;
 
 observe(imagesDictionary, (imagesDictionary) => 
   ReactDOM.render(
     <React.StrictMode>
+      <UploadForm imagePositions={imagesDictionary}></UploadForm>
       <Board imagePositions={imagesDictionary}></Board>
     </React.StrictMode>,
     document.getElementById('root')
