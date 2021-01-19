@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import Board from './components/board';
 import UploadForm from './components/uploadForm';
 import { observe } from './PictureManager';
-import { getUserId } from './firebase/userIdManager';
+import { getUserId } from './firebase/feedIdManager';
 
 const imagesDictionary = {};
 
