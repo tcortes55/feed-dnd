@@ -5,8 +5,12 @@ function uuidv4() {
 }
 
 export function getUserId() {
-    let myId = uuidv4();
-    console.log(myId);
+    let feedUuid = localStorage.getItem('feedUuid');
 
-    return myId;
+    if (!feedUuid) {
+        feedUuid = uuidv4();
+        localStorage.setItem('feedUuid', feedUuid);
+    }
+
+    return feedUuid;
 }
