@@ -5,7 +5,6 @@ import reportWebVitals from './reportWebVitals';
 import Board from './components/board';
 import UploadForm from './components/uploadForm';
 import { observe } from './PictureManager';
-import { getUserId } from './firebase/feedIdManager';
 
 const imagesDictionary = {};
 
@@ -24,8 +23,6 @@ imagesDictionary.deck = {};
 imagesDictionary.deck[0] = null;
 imagesDictionary.deck[1] = null;
 imagesDictionary.deck[2] = null;
-
-console.log(getUserId());
 
 observe(imagesDictionary, (imagesDictionary) => 
   ReactDOM.render(
