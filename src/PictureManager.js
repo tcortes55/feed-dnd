@@ -1,3 +1,5 @@
+import { updateImagePositions } from './firebase/firebase';
+
 let imagePositions = {};
 let observer = null;
 const FEED = "feed";
@@ -15,6 +17,7 @@ export function observe(args, o) {
 }
 
 function emitChange() {
+    updateImagePositions(imagePositions);
     return observer(imagePositions);
 }
 

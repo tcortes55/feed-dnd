@@ -5,14 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import Board from './components/board';
 import UploadForm from './components/uploadForm';
 import { observe } from './PictureManager';
-import img1 from './images/b1.jpg';
-import img2 from './images/b2.jpg';
-import img3 from './images/b3.jpg';
-// import img4 from './images/b4.jpg';
-// import img5 from './images/b5.jpg';
-// import img6 from './images/b6.jpg';
+import { getUserId } from './firebase/feedIdManager';
+import { getImagePositions } from './firebase/firebase';
 
-const imagesDictionary = {};
+var imagesDictionary = {};
 
 imagesDictionary.feed = {};
 imagesDictionary.feed[0] = null;
@@ -29,21 +25,19 @@ imagesDictionary.deck = {};
 imagesDictionary.deck[0] = null;
 imagesDictionary.deck[1] = null;
 imagesDictionary.deck[2] = null;
-// imagesDictionary.deck[3] = img4;
-// imagesDictionary.deck[4] = img5;
-// imagesDictionary.deck[5] = img6;
 
-observe(imagesDictionary, (imagesDictionary) => 
-  ReactDOM.render(
-    <React.StrictMode>
-      <UploadForm imagePositions={imagesDictionary}></UploadForm>
-      <Board imagePositions={imagesDictionary}></Board>
-    </React.StrictMode>,
-    document.getElementById('root')
-    )
-);
+var positions = getImagePositions().then(function(result) {
+  if (result.imagePositions) {
+    imagesDictionary = result.imagePositions;
+  }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  observe(imagesDictionary, (imagesDictionary) => 
+    ReactDOM.render(
+      <React.StrictMode>
+        <UploadForm imagePositions={imagesDictionary}></UploadForm>
+        <Board imagePositions={imagesDictionary}></Board>
+      </React.StrictMode>,
+      document.getElementById('root')
+      )
+  );
+});
