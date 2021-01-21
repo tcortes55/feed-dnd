@@ -19,9 +19,27 @@ firebase.initializeApp(firebaseConfig);
 const storage = firebase.storage();
 var db = firebase.firestore();
 
+export function getImagePositions() {
+    var getImagePositionsPromise = new Promise(function(resolve, reject) {
+        var imagePositions = {};
+        
+        db.collection("users").doc(getUserId()).get().then(function(doc) {
+            if (doc.exists) {
+                imagePositions = doc.data();
+            }
+
+            resolve(imagePositions);
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+    });
+
+    return getImagePositionsPromise;
+}
+
 export function updateImagePositions(imagePositions) {
     var updateImagePositionsPromise = new Promise(function(resolve, reject) {
-        db.collection("users").doc(getUserId()).set(imagePositions)
+        db.collection("users").doc(getUserId()).set({ imagePositions: imagePositions})
         .then(function(docRef) {
             resolve(docRef);
         });
