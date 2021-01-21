@@ -1,5 +1,6 @@
 import React from 'react';
 import BoardSquare from '../boardSquare';
+import Dustbin from '../dustbin';
 import styled, { css } from 'styled-components';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -54,6 +55,7 @@ function Board({ imagePositions }) {
         <DndProvider backend={DnDBackend}>
             {renderBoard(imagePositions)}
             { isMobile && <Carousel>{renderSquares(imagePositions, "deck")}</Carousel> }
+            <Dustbin></Dustbin>
         </DndProvider>
     );
 }
