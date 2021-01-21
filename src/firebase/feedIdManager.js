@@ -5,11 +5,11 @@ function uuidv4() {
 }
 
 export function getUserId() {
-    let feedUuid = localStorage.getItem('feedUuid');
+    let feedUuid = localStorage.getItem('InboxFeedDndOrganizerUuid');
 
     if (!feedUuid) {
         feedUuid = uuidv4();
-        localStorage.setItem('feedUuid', feedUuid);
+        localStorage.setItem('InboxFeedDndOrganizerUuid', feedUuid);
     }
 
     return feedUuid;
