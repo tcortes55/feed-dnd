@@ -1,5 +1,7 @@
-import firebase from 'firebase/app'
-import 'firebase/storage'
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/firestore';
+import { getUserId } from './feedIdManager';
 
 var firebaseConfig = {
     apiKey: "AIzaSyAxdiOlnFBRP-FEoGZnKhJQkQ4BTL4Thyg",
@@ -14,7 +16,19 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const storage = firebase.storage()
+const storage = firebase.storage();
+var db = firebase.firestore();
+
+export function updateImagePositions(imagePositions) {
+    var updateImagePositionsPromise = new Promise(function(resolve, reject) {
+        db.collection("users").doc(getUserId()).set(imagePositions)
+        .then(function(docRef) {
+            resolve(docRef);
+        });
+    });
+
+    return updateImagePositionsPromise;
+}
 
 export  {
     storage, firebase as default
