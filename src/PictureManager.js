@@ -120,3 +120,7 @@ export function initialLoadDeck(imagePositions, target, image) {
     addToDeck(imagePositions, target, image);
     emitChange();
 }
+
+export function deleteImage(imagePositions, board, position) {
+    console.log("delete");
+}

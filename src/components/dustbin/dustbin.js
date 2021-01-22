@@ -1,14 +1,13 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
 import ItemTypes from '../../constants';
+import { deleteImage } from '../../PictureManager';
 
-function Dustbin() {
-    const [{ isOver }, drop] = useDrop({
+function Dustbin({ imagePositions }) {
+    const [{ isOver, getItem }, drop] = useDrop({
         accept: ItemTypes.PICTURE,
         drop: () => {
-            console.log("delete");
-        //   moveImage(imagePositions, getItem.currBoard, getItem.currPosition, board, position);
-        //   deleteImage();
+            deleteImage(imagePositions, getItem.currBoard, getItem.currPosition);
         },
         // canDrop: () => {
         //   if (getItem)
@@ -17,8 +16,8 @@ function Dustbin() {
         //     return false;
         // },
         collect: monitor => ({
-        isOver: !!monitor.isOver()
-        // getItem: monitor.getItem(),
+        isOver: !!monitor.isOver(),
+        getItem: monitor.getItem()
         // canDrop: !!monitor.canDrop()
         }),
     });

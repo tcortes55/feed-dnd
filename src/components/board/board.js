@@ -55,7 +55,7 @@ function Board({ imagePositions }) {
         <DndProvider backend={DnDBackend}>
             {renderBoard(imagePositions)}
             { isMobile && <Carousel>{renderSquares(imagePositions, "deck")}</Carousel> }
-            <Dustbin></Dustbin>
+            <Dustbin imagePositions={imagePositions}></Dustbin>
         </DndProvider>
     );
 }
