@@ -48,6 +48,13 @@ export function updateImagePositions(imagePositions) {
     return updateImagePositionsPromise;
 }
 
+export function deleteImageFromStorage(imageUrl) {
+    var imageFileRef = firebase.storage().refFromURL(imageUrl);
+    imageFileRef.delete().then(function() {
+        console.log("File deleted!");
+    })
+}
+
 export  {
     storage, firebase as default
 }

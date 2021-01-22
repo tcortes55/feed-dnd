@@ -1,4 +1,4 @@
-import { updateImagePositions } from './firebase/firebase';
+import { deleteImageFromStorage, updateImagePositions } from './firebase/firebase';
 
 let imagePositions = {};
 let observer = null;
@@ -122,5 +122,15 @@ export function initialLoadDeck(imagePositions, target, image) {
 }
 
 export function deleteImage(imagePositions, board, position) {
-    console.log("delete");
+    let imageUrl = imagePositions[board][position];
+    deleteImageFromStorage(imageUrl);
+    
+    if (board === DECK) {
+        removeFromDeck(imagePositions, position);
+    }
+    else {
+        removeFromFeed(imagePositions, position);
+    }
+
+    emitChange();
 }
