@@ -28,12 +28,13 @@ function Dustbin({ imagePositions }) {
             style={{
                 position: 'relative',
                 width: '100%',
-                height: '15%',
+                height: '100px',
+                marginTop: '20px',
                 bottom: '0px',
                 backgroundColor: 'pink'
             }}
         >
-            <div>Lixo</div>
+            <div>MOVE IMAGE HERE TO DELETE IT</div>
             {isOver && (
                 <div
                 style={{
