@@ -1,6 +1,7 @@
 import React from 'react';
 import BoardSquare from '../boardSquare';
 import Dustbin from '../dustbin';
+import UploadForm from '../uploadForm';
 import styled, { css } from 'styled-components';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -10,12 +11,27 @@ import Carousel from '../carousel';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
+const BoardWrapper = styled.div`
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    background-color: #e9d5bf;
+    /* margin: auto; */
+    /* margin-top: 25px; */
+
+    @media (min-width: 768px) {
+        width: 352px !important;
+        height: 800px !important;
+        margin: auto;
+    }
+`;
 const FeedWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     max-width: 312px;
     margin: auto;
-    margin-top: 25px;
 `;
 const DeckWrapper = styled.div`
     margin: auto;
@@ -53,9 +69,12 @@ function renderBoard(imagePositions) {
 function Board({ imagePositions }) {
     return (
         <DndProvider backend={DnDBackend}>
-            {renderBoard(imagePositions)}
-            { isMobile && <Carousel>{renderSquares(imagePositions, "deck")}</Carousel> }
-            <Dustbin imagePositions={imagePositions}></Dustbin>
+            <BoardWrapper>
+                {renderBoard(imagePositions)}
+                { isMobile && <Carousel>{renderSquares(imagePositions, "deck")}</Carousel> }
+                <Dustbin imagePositions={imagePositions}></Dustbin>
+                <UploadForm imagePositions={imagePositions}></UploadForm>
+            </BoardWrapper>
         </DndProvider>
     );
 }

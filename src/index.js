@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Board from './components/board';
-import UploadForm from './components/uploadForm';
 import { observe } from './PictureManager';
 import { getUserId } from './firebase/feedIdManager';
 import { getImagePositions } from './firebase/firebase';
@@ -34,7 +33,6 @@ var positions = getImagePositions().then(function(result) {
   observe(imagesDictionary, (imagesDictionary) => 
     ReactDOM.render(
       <React.StrictMode>
-        <UploadForm imagePositions={imagesDictionary}></UploadForm>
         <Board imagePositions={imagesDictionary}></Board>
       </React.StrictMode>,
       document.getElementById('root')
