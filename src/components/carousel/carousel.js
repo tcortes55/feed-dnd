@@ -6,7 +6,13 @@ import styled, { css } from 'styled-components';
 
 const SliderContainer = styled.div`
   max-width: 352px;
-  margin: 40px;
+  padding: 40px;
+  background-color: white;
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: darkgrey;
+  }
 `;
 
 function Carousel({ children }) {
@@ -15,7 +21,7 @@ function Carousel({ children }) {
       dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 3,
+      slidesToShow: 4,
       slidesToScroll: 2,
       swipe: false,
       draggable: false

@@ -7,8 +7,8 @@ const FEED = "feed";
 const DECK = "deck";
 
 const PictureWrapper = styled.div`
-    height: ${props => props.reduced ? "80px" : "100px"};
-    width: ${props => props.reduced ? "80px" : "100px"};
+    height: ${props => props.reduced ? "70px" : "100px"};
+    width: ${props => props.reduced ? "70px" : "100px"};
 `;
 
 const Img = styled.img`
