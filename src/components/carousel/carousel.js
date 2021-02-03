@@ -5,8 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 import styled, { css } from 'styled-components';
 
 const SliderContainer = styled.div`
-  max-width: 232px;
-  padding: 40px;
+  max-width: 256px;
+  padding: 24px 28px 24px 28px;
   margin: auto;
   background-color: white;
 
