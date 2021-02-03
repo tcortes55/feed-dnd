@@ -11,7 +11,7 @@ const SquareWrapper = styled.div`
 `;
 
 function Square({ fill, currBoard, children }) {
-    const squareColor = currBoard === DECK ? 'black' : (fill ? 'darkgrey' : 'lightgrey');
+    const squareColor = currBoard === DECK ? '#575757' : (fill ? 'darkgrey' : 'lightgrey');
     
     return (
         <SquareWrapper reduced={currBoard === DECK} style={{ backgroundColor: squareColor }}>
