@@ -24,6 +24,7 @@ imagesDictionary.deck = {};
 imagesDictionary.deck[0] = null;
 imagesDictionary.deck[1] = null;
 imagesDictionary.deck[2] = null;
+imagesDictionary.deck[3] = null;
 
 var positions = getImagePositions().then(function(result) {
   if (result.imagePositions) {

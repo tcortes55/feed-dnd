@@ -5,8 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import styled, { css } from 'styled-components';
 
 const SliderContainer = styled.div`
-  max-width: 352px;
+  max-width: 232px;
   padding: 40px;
+  margin: auto;
   background-color: white;
 
   .slick-prev:before,
@@ -22,9 +23,10 @@ function Carousel({ children }) {
       infinite: true,
       speed: 500,
       slidesToShow: 4,
-      slidesToScroll: 2,
+      slidesToScroll: 3,
       swipe: false,
-      draggable: false
+      draggable: false,
+      rows: 1
     };
     return (
       <SliderContainer>
