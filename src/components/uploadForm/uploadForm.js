@@ -5,16 +5,12 @@ import { getUserId } from '../../firebase/feedIdManager';
 import styled from 'styled-components';
 
 function UploadForm({ imagePositions }) {
-    const [imagesAsFiles, setImagesAsFiles] = useState('');
-
-    console.log(imagesAsFiles);
     const handleImageAsFile = (e) => {
-        const images = e.target.files;
-        setImagesAsFiles(images);
+        const imagesAsFiles = e.target.files;
+        handleFirebaseUpload(imagesAsFiles);
     }
 
-    async function handleFirebaseUpload(e) {
-        e.preventDefault();
+    async function handleFirebaseUpload(imagesAsFiles) {
         console.log('start of upload');
 
         // TODO: error handling
@@ -37,9 +33,7 @@ function UploadForm({ imagePositions }) {
                 },
                 async () => {
                     const firebaseUrl = await storage.ref('images').child(feedId).child(imageAsFile.name).getDownloadURL();
-                    // setImagesAsUrls(prevArray => [...prevArray, firebaseUrl]);
                     initialLoadDeck(imagePositions, 0, firebaseUrl);
-                    // uploadImages(prevArray => [...prevArray, firebaseUrl]);
                 });
             }
         );
@@ -52,13 +46,12 @@ function UploadForm({ imagePositions }) {
 
     return (
         <div>
-            <form onSubmit={handleFirebaseUpload}>
+            <form>
                 <input
                     type="file"
                     multiple="multiple"
                     onChange={handleImageAsFile}
                 />
-                <button>Upload</button>
             </form>
         </div>
     )

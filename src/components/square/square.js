@@ -1,16 +1,20 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+const FEED = "feed";
+const DECK = "deck";
+
 const SquareWrapper = styled.div`
-    height: 100px;
-    width: 100px;
+    height: ${props => props.reduced ? "60px" : "100px"};
+    width: ${props => props.reduced ? "60px" : "100px"};
     border: 2px solid white;
 `;
 
-function Square({ fill, children }) {
-    const squareColor = fill ? 'darkgrey' : 'lightgrey';
+function Square({ fill, currBoard, children }) {
+    const squareColor = currBoard === DECK ? '#575757' : (fill ? 'darkgrey' : 'lightgrey');
+    
     return (
-        <SquareWrapper style={{ backgroundColor: squareColor }}>
+        <SquareWrapper reduced={currBoard === DECK} style={{ backgroundColor: squareColor }}>
             {children}
         </SquareWrapper>
     );

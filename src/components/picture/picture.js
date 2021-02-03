@@ -3,9 +3,12 @@ import styled, { css } from 'styled-components';
 import ItemTypes from '../../constants';
 import { useDrag } from 'react-dnd';
 
+const FEED = "feed";
+const DECK = "deck";
+
 const PictureWrapper = styled.div`
-    height: 100px;
-    width: 100px;
+    height: ${props => props.reduced ? "60px" : "100px"};
+    width: ${props => props.reduced ? "60px" : "100px"};
 `;
 
 const Img = styled.img`
@@ -28,6 +31,7 @@ function Picture({ imgPath, currBoard, currPosition }) {
     return (
     <PictureWrapper
         ref={drag}
+        reduced={currBoard === DECK}
         style={{
         opacity: isDragging ? 0.5 : 1,
         cursor: 'move',

@@ -37,7 +37,7 @@ function BoardSquare({ imagePositions, board, position, imagePath}) {
                 // height: '100%',
             }}
         >
-        <Square key={position} fill={fill}>{picture}</Square>
+        <Square key={position} currBoard={board} fill={fill}>{picture}</Square>
         {isOver && canDrop && (
         <div
           style={{
