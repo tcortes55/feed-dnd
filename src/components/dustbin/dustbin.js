@@ -2,6 +2,7 @@ import React from 'react';
 import { useDrop } from 'react-dnd';
 import ItemTypes from '../../constants';
 import { deleteImage } from '../../PictureManager';
+import { ReactComponent as DustbinIcon } from '../../assets/dustbin-icon.svg';
 
 function Dustbin({ imagePositions }) {
     const [{ isOver, canDrop, getItem }, drop] = useDrop({
@@ -23,18 +24,19 @@ function Dustbin({ imagePositions }) {
     });
 
     return (
-        true && <div
+        canDrop && <div
             ref={drop}
             style={{
                 position: 'relative',
                 width: '312px',
-                height: '60px',
+                // height: '60px',
                 margin: 'auto',
-                backgroundColor: '#031b23'
+                backgroundColor: '#031b23',
+                textAlign: 'center',
+                padding: '5px 0px 5px 0px'
             }}
-            
         >
-            <div>MOVE IMAGE HERE TO DELETE IT</div>
+            <DustbinIcon fill='#e9d5bf' stroke='#e9d5bf' fontSize='1em' width='50px'/>
             {isOver && (
                 <div
                 style={{
