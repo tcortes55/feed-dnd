@@ -4,7 +4,7 @@ import ItemTypes from '../../constants';
 import { deleteImage } from '../../PictureManager';
 
 function Dustbin({ imagePositions }) {
-    const [{ isOver, getItem }, drop] = useDrop({
+    const [{ isOver, canDrop, getItem }, drop] = useDrop({
         accept: ItemTypes.PICTURE,
         drop: () => {
             deleteImage(imagePositions, getItem.currBoard, getItem.currPosition);
@@ -17,13 +17,13 @@ function Dustbin({ imagePositions }) {
         // },
         collect: monitor => ({
         isOver: !!monitor.isOver(),
-        getItem: monitor.getItem()
-        // canDrop: !!monitor.canDrop()
+        getItem: monitor.getItem(),
+        canDrop: !!monitor.canDrop()
         }),
     });
 
     return (
-        <div
+        canDrop && <div
             ref={drop}
             style={{
                 position: 'relative',
@@ -33,6 +33,7 @@ function Dustbin({ imagePositions }) {
                 bottom: '0px',
                 backgroundColor: 'pink'
             }}
+            
         >
             <div>MOVE IMAGE HERE TO DELETE IT</div>
             {isOver && (
