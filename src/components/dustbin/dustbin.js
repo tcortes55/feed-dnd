@@ -23,15 +23,14 @@ function Dustbin({ imagePositions }) {
     });
 
     return (
-        canDrop && <div
+        true && <div
             ref={drop}
             style={{
                 position: 'relative',
-                width: '100%',
-                height: '100px',
-                marginTop: '20px',
-                bottom: '0px',
-                backgroundColor: 'pink'
+                width: '312px',
+                height: '60px',
+                margin: 'auto',
+                backgroundColor: '#031b23'
             }}
             
         >
