@@ -33,7 +33,6 @@ function Dustbin({ imagePositions }) {
                 margin: 'auto',
                 backgroundColor: '#031b23',
                 textAlign: 'center',
-                // padding: '5px 0px 5px 0px'
                 overflow: 'visible'
             }}
         >
