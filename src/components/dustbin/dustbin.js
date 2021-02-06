@@ -24,16 +24,17 @@ function Dustbin({ imagePositions }) {
     });
 
     return (
-        canDrop && <div
+        true && <div
             ref={drop}
             style={{
                 position: 'relative',
                 width: '312px',
-                // height: '60px',
+                height: '50px',
                 margin: 'auto',
                 backgroundColor: '#031b23',
                 textAlign: 'center',
-                padding: '5px 0px 5px 0px'
+                // padding: '5px 0px 5px 0px'
+                overflow: 'hidden'
             }}
         >
             <DustbinIcon/>
