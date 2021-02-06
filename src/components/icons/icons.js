@@ -10,10 +10,10 @@ const CircleWrapper = styled.div`
     background-color: #e9d5bf;
     width: 60px;
     height: 60px;
-    margin-top: -5px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
+    transform: translateY(-5px);
 `;
 
 export const DustbinIcon = () => {
