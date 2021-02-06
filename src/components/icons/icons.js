@@ -7,7 +7,7 @@ import { ReactComponent as UserIconSvg } from '../../assets/user-icon.svg';
 import { ReactComponent as XIconSvg } from '../../assets/x-icon.svg';
 
 const CircleWrapper = styled.div`
-    background-color: #e9d5bf;
+    background-color: yellow;//#e9d5bf;
     width: 60px;
     height: 60px;
     margin-left: auto;
@@ -19,7 +19,15 @@ const CircleWrapper = styled.div`
 export const DustbinIcon = () => {
     return (
         <CircleWrapper>
-            <DustbinIconSvg fill='#031b23' stroke='#031b23' fontSize='1em' width='30px' style={{transform: `translateY(50%)`}}/>
+            <DustbinIconSvg fill='#031b23' stroke='#031b23' width='30px' style={{transform: `translateY(50%)`}}/>
+        </CircleWrapper>
+    )
+}
+
+export const UploadIcon = () => {
+    return (
+        <CircleWrapper>
+            <PlusIconSvg fill='#031b23' stroke='#031b23' width='30px' style={{transform: `translate(45%, 55%)`}}/>
         </CircleWrapper>
     )
 }

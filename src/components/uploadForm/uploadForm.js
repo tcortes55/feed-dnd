@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { storage } from '../../firebase/firebase';
 import { initialLoadDeck } from '../../PictureManager';
 import { getUserId } from '../../firebase/feedIdManager';
+import { UploadIcon } from '../icons/icons';
 import styled from 'styled-components';
 
 function UploadForm({ imagePositions }) {
@@ -47,11 +48,15 @@ function UploadForm({ imagePositions }) {
     return (
         <div>
             <form>
-                <input
-                    type="file"
-                    multiple="multiple"
-                    onChange={handleImageAsFile}
-                />
+                <label>
+                    <UploadIcon/>
+                    <input
+                        type="file"
+                        multiple="multiple"
+                        onChange={handleImageAsFile}
+                        style={{visibility: 'hidden'}}
+                    />
+                </label>
             </form>
         </div>
     )
