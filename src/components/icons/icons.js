@@ -32,6 +32,12 @@ export const UploadIcon = () => {
     )
 }
 
+export const UserIcon = () => {
+    return (
+        <UserIconSvg fill='yellow' stroke='yellow' width='30px'/>
+    )
+}
+
 function Icons() {
     return (
         <div></div>
