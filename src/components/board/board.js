@@ -1,13 +1,13 @@
 import React from 'react';
 import BoardSquare from '../boardSquare';
 import Dustbin from '../dustbin';
-import UploadForm from '../uploadForm';
 import styled, { css } from 'styled-components';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { isMobile } from 'react-device-detect';
 import Carousel from '../carousel';
+import Menu from '../menu';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
@@ -72,8 +72,8 @@ function Board({ imagePositions }) {
             <BoardWrapper>
                 {renderBoard(imagePositions)}
                 { isMobile && <Carousel>{renderSquares(imagePositions, "deck")}</Carousel> }
+                <Menu imagePositions={imagePositions}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
-                <UploadForm imagePositions={imagePositions}></UploadForm>
             </BoardWrapper>
         </DndProvider>
     );
