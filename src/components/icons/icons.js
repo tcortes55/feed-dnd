@@ -27,7 +27,7 @@ export const DustbinIcon = () => {
 export const UploadIcon = () => {
     return (
         <CircleWrapper>
-            <PlusIconSvg fill='#031b23' stroke='#031b23' width='30px' style={{transform: `translate(45%, 55%)`}}/>
+            <PlusIconSvg fill='#031b23' stroke='#031b23' width='30px' style={{transform: `translateY(55%)`}}/>
         </CircleWrapper>
     )
 }

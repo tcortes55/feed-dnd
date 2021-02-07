@@ -5,6 +5,12 @@ import { getUserId } from '../../firebase/feedIdManager';
 import { UploadIcon } from '../icons/icons';
 import styled from 'styled-components';
 
+const FormContainer = styled.form`
+    height: 100%;
+    width: fit-content;
+    margin: auto;
+`;
+
 function UploadForm({ imagePositions }) {
     const handleImageAsFile = (e) => {
         const imagesAsFiles = e.target.files;
@@ -46,19 +52,22 @@ function UploadForm({ imagePositions }) {
     }, [imagePositions]);
 
     return (
-        <div>
-            <form>
+            <FormContainer>
                 <label>
                     <UploadIcon/>
                     <input
                         type="file"
                         multiple="multiple"
                         onChange={handleImageAsFile}
-                        style={{visibility: 'hidden'}}
+                        style={{
+                            visibility: 'hidden',
+                            height: '0px',
+                            width: '0px',
+                            position: 'absolute'
+                        }}
                     />
                 </label>
-            </form>
-        </div>
+            </FormContainer>
     )
 }
 
