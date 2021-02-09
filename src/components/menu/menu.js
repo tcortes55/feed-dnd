@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import UploadForm from '../uploadForm';
+import TemplateSelector from '../templateSelector';
 import { useDrop } from 'react-dnd';
 import ItemTypes from '../../constants';
 import styled from 'styled-components';
@@ -14,7 +15,7 @@ const MenuContainer = styled.div`
     overflow: visible;
 `;
 
-function Menu({ imagePositions }) {
+function Menu({ imagePositions, selectedGrid }) {
     const [{ canDrop }] = useDrop({
         accept: ItemTypes.PICTURE,
         // drop: () => {
@@ -34,6 +35,7 @@ function Menu({ imagePositions }) {
     return (
         !canDrop && <MenuContainer>
             <UploadForm imagePositions={imagePositions}></UploadForm>
+            <TemplateSelector selectedGrid={selectedGrid}></TemplateSelector>
         </MenuContainer>
     )
 }
