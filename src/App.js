@@ -1,47 +1,32 @@
-import React, {useEffect, useState} from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import './App.css';
 import Board from './components/board';
-import { observe } from './PictureManager';
-import { getUserId } from './firebase/feedIdManager';
-import { getImagePositions } from './firebase/firebase';
+import img1 from './images/b1.jpg';
+import img2 from './images/b2.jpg';
+import img3 from './images/b3.jpg';
 
 function App() {
-  const TEMPLATE_BLANK = 'TEMPLATE_BLANK';
-  const TEMPLATE_X = 'TEMPLATE_X';
-  const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
 
-  const [selectedGrid, setSelectedGrid] = useState(TEMPLATE_BLANK);
+  const imagePositions = [];
 
-  var imagesDictionary = {};
+  imagePositions.push([0, null]);
+  imagePositions.push([1, null]);
+  imagePositions.push([2, img1]);
+  imagePositions.push([3, null]);
+  imagePositions.push([4, img2]);
+  imagePositions.push([5, img3]);
+  imagePositions.push([6, null]);
+  imagePositions.push([7, null]);
+  imagePositions.push([8, null]);
 
-  imagesDictionary.feed = {};
-  imagesDictionary.feed[0] = null;
-  imagesDictionary.feed[1] = null;
-  imagesDictionary.feed[2] = null;
-  imagesDictionary.feed[3] = null;
-  imagesDictionary.feed[4] = null;
-  imagesDictionary.feed[5] = null;
-  imagesDictionary.feed[6] = null;
-  imagesDictionary.feed[7] = null;
-  imagesDictionary.feed[8] = null;
+  return (
+    <div className="App">
+      <header className="App-header">
+        
+        <Board imagePositions={imagePositions}></Board>
 
-  imagesDictionary.deck = {};
-  imagesDictionary.deck[0] = null;
-  imagesDictionary.deck[1] = null;
-  imagesDictionary.deck[2] = null;
-  imagesDictionary.deck[3] = null;
-
-  var positions = getImagePositions().then(function(result) {
-    if (result.imagePositions) {
-      imagesDictionary = result.imagePositions;
-    }
-
-    observe(imagesDictionary, (imagesDictionary) => 
-          <Board imagePositions={imagesDictionary}></Board>
-    );
-  });
+      </header>
+    </div>
+  );
 }
 
 export default App;
