@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { TemplateBlankIcon, TemplateXIcon, TemplateDiagonalIcon } from '../icons/icons';
 import styled, { css } from 'styled-components';
 
-function TemplateSelector({ selectedGrid }) {
+function TemplateSelector({ selectedGrid, updateSelectedGrid }) {
     const TEMPLATE_BLANK = 'TEMPLATE_BLANK';
     const TEMPLATE_X = 'TEMPLATE_X';
     const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
@@ -23,6 +23,10 @@ function TemplateSelector({ selectedGrid }) {
             break;
     }
     console.log(selectedGrid);
+
+    setTimeout(() => {
+        updateSelectedGrid(TEMPLATE_DIAGONAL);
+    }, 1000);
 
     return (
         <div>{lala}</div>

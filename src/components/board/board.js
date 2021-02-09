@@ -73,12 +73,16 @@ const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
 function Board({ imagePositions }) {
     const [selectedGrid, setSelectedGrid] = useState(TEMPLATE_BLANK)
 
+    function updateSelectedGrid(newSelection) {
+        setSelectedGrid(newSelection);
+    }
+
     return (
         <DndProvider backend={DnDBackend}>
             <BoardWrapper>
                 {renderBoard(imagePositions)}
                 { isMobile && <Carousel>{renderSquares(imagePositions, "deck")}</Carousel> }
-                <Menu imagePositions={imagePositions} selectedGrid={selectedGrid}></Menu>
+                <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>
         </DndProvider>
