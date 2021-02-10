@@ -5,6 +5,11 @@ import { getUserId } from '../../firebase/feedIdManager';
 import { UploadIcon } from '../icons/icons';
 import styled from 'styled-components';
 
+const MenuItemWrapper = styled.div`
+    width: 33%;
+    display: inline-block;
+`;
+
 const FormContainer = styled.form`
     height: 100%;
     width: fit-content;
@@ -52,6 +57,7 @@ function UploadForm({ imagePositions }) {
     }, [imagePositions]);
 
     return (
+        <MenuItemWrapper>
             <FormContainer>
                 <label>
                     <UploadIcon/>
@@ -68,6 +74,7 @@ function UploadForm({ imagePositions }) {
                     />
                 </label>
             </FormContainer>
+        </MenuItemWrapper>
     )
 }
 

@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { TemplateBlankIcon, TemplateXIcon, TemplateDiagonalIcon } from '../icons/icons';
 import styled, { css } from 'styled-components';
 
+const MenuItemWrapper = styled.div`
+    width: 33%;
+    display: inline-block;
+`;
+
 function TemplateSelector({ selectedGrid, updateSelectedGrid }) {
     const TEMPLATE_BLANK = 'TEMPLATE_BLANK';
     const TEMPLATE_X = 'TEMPLATE_X';
@@ -12,11 +17,11 @@ function TemplateSelector({ selectedGrid, updateSelectedGrid }) {
     }, 1000);
 
     return (
-        <div>
+        <MenuItemWrapper>
             {(selectedGrid === TEMPLATE_BLANK) && <TemplateBlankIcon></TemplateBlankIcon>}
             {(selectedGrid === TEMPLATE_X) && <TemplateXIcon></TemplateXIcon>}
             {(selectedGrid === TEMPLATE_DIAGONAL) && <TemplateDiagonalIcon></TemplateDiagonalIcon>}
-        </div>
+        </MenuItemWrapper>
     )
 }
 

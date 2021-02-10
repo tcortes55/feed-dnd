@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import UploadForm from '../uploadForm';
 import TemplateSelector from '../templateSelector';
+import UserForm from '../userForm';
 import { useDrop } from 'react-dnd';
 import ItemTypes from '../../constants';
 import styled from 'styled-components';
@@ -34,6 +35,7 @@ function Menu({ imagePositions, selectedGrid, updateSelectedGrid }) {
     
     return (
         !canDrop && <MenuContainer>
+            <UserForm></UserForm>
             <UploadForm imagePositions={imagePositions}></UploadForm>
             <TemplateSelector selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid}></TemplateSelector>
         </MenuContainer>
