@@ -40,19 +40,19 @@ export const UserIcon = () => {
 
 export const TemplateBlankIcon = () => {
     return (
-        <GridIconSvg fill='red' stroke='yellow' width='30px'/>
+        <GridIconSvg fill='red' stroke='red' width='30px'/>
     )
 }
 
 export const TemplateXIcon = () => {
     return (
-        <GridIconSvg fill='green' stroke='yellow' width='30px'/>
+        <GridIconSvg fill='green' stroke='green' width='30px'/>
     )
 }
 
 export const TemplateDiagonalIcon = () => {
     return (
-        <GridIconSvg fill='blue' stroke='yellow' width='30px'/>
+        <GridIconSvg fill='blue' stroke='blue' width='30px'/>
     )
 }
 
