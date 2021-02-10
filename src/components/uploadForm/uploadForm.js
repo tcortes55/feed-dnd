@@ -6,7 +6,7 @@ import { UploadIcon } from '../icons/icons';
 import styled from 'styled-components';
 
 const MenuItemWrapper = styled.div`
-    width: 33%;
+    width: 33.33333333%;
     display: inline-block;
 `;
 
