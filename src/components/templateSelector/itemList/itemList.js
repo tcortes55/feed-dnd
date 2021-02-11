@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { TemplateBlankIcon, TemplateXIcon, TemplateDiagonalIcon } from '../../icons/icons';
 import { Templates } from '../../../constants';
 import TemplateItem from '../templateItem';
 import styled, { css } from 'styled-components';
@@ -16,14 +15,6 @@ const TemplateListContainer = styled.div`
 const TemplateList = styled.ul`
 
 `;
-
-// const TemplateItem = styled.li`
-//     list-style-type: none;
-// `;
-
-function handleClick(event) {
-    console.log(event.target);
-}
 
 function ItemList({ updateSelectedGrid, toggleItemList }) {
     return (
