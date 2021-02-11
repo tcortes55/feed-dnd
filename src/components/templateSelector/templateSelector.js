@@ -15,9 +15,9 @@ function TemplateSelector({ selectedGrid, updateSelectedGrid }) {
     const TEMPLATE_X = 'TEMPLATE_X';
     const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
 
-    setTimeout(() => {
-        updateSelectedGrid(TEMPLATE_X);
-    }, 1000);
+    // setTimeout(() => {
+    //     updateSelectedGrid(TEMPLATE_X);
+    // }, 1000);
 
     return (
         <MenuItemWrapper>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { TemplateBlankIcon, TemplateXIcon, TemplateDiagonalIcon } from '../../icons/icons';
+// import { TemplateBlankIcon, TemplateXIcon, TemplateDiagonalIcon } from '../../icons/icons';
+import TemplateItem from '../templateItem';
 import styled, { css } from 'styled-components';
 
 const TemplateListContainer = styled.div`
@@ -15,22 +16,25 @@ const TemplateList = styled.ul`
 
 `;
 
-const TemplateItem = styled.li`
-    list-style-type: none;
-`;
+// const TemplateItem = styled.li`
+//     list-style-type: none;
+// `;
+
+function handleClick(event) {
+    console.log(event.target);
+}
 
 function ItemList({ updateSelectedGrid }) {
     const TEMPLATE_BLANK = 'TEMPLATE_BLANK';
     const TEMPLATE_X = 'TEMPLATE_X';
     const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
 
-
     return (
         <TemplateListContainer>
             <TemplateList>
-                <TemplateItem value={TEMPLATE_BLANK}><TemplateBlankIcon/></TemplateItem>
-                <TemplateItem value={TEMPLATE_X}><TemplateXIcon/></TemplateItem>
-                <TemplateItem value={TEMPLATE_DIAGONAL}><TemplateDiagonalIcon/></TemplateItem>
+                <TemplateItem templateType={TEMPLATE_BLANK} updateSelectedGrid={updateSelectedGrid}></TemplateItem>
+                <TemplateItem templateType={TEMPLATE_X} updateSelectedGrid={updateSelectedGrid}></TemplateItem>
+                <TemplateItem templateType={TEMPLATE_DIAGONAL} updateSelectedGrid={updateSelectedGrid}></TemplateItem>
             </TemplateList>
         </TemplateListContainer>
     );
