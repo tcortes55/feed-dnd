@@ -24,7 +24,7 @@ function TemplateSelector({ selectedGrid, updateSelectedGrid }) {
             {(selectedGrid === TEMPLATE_BLANK) && <TemplateBlankIcon></TemplateBlankIcon>}
             {(selectedGrid === TEMPLATE_X) && <TemplateXIcon></TemplateXIcon>}
             {(selectedGrid === TEMPLATE_DIAGONAL) && <TemplateDiagonalIcon></TemplateDiagonalIcon>}
-            {/* <ItemList></ItemList> */}
+            <ItemList updateSelectedGrid={updateSelectedGrid}></ItemList>
         </MenuItemWrapper>
     )
 }
