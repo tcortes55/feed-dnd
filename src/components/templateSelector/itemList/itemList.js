@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 // import { TemplateBlankIcon, TemplateXIcon, TemplateDiagonalIcon } from '../../icons/icons';
+import { Templates } from '../../../constants';
 import TemplateItem from '../templateItem';
 import styled, { css } from 'styled-components';
 
@@ -25,16 +26,12 @@ function handleClick(event) {
 }
 
 function ItemList({ updateSelectedGrid, toggleItemList }) {
-    const TEMPLATE_BLANK = 'TEMPLATE_BLANK';
-    const TEMPLATE_X = 'TEMPLATE_X';
-    const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
-
     return (
         <TemplateListContainer>
             <TemplateList>
-                <TemplateItem templateType={TEMPLATE_BLANK} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
-                <TemplateItem templateType={TEMPLATE_X} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
-                <TemplateItem templateType={TEMPLATE_DIAGONAL} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
+                <TemplateItem templateType={Templates.BLANK} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
+                <TemplateItem templateType={Templates.X} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
+                <TemplateItem templateType={Templates.DIAGONAL} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
             </TemplateList>
         </TemplateListContainer>
     );

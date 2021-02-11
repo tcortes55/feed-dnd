@@ -7,6 +7,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { isMobile } from 'react-device-detect';
 import Carousel from '../carousel';
+import { Templates } from '../../constants';
 import Menu from '../menu';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
@@ -66,12 +67,8 @@ function renderBoard(imagePositions) {
     return fullBoard;
 }
 
-const TEMPLATE_BLANK = 'TEMPLATE_BLANK';
-const TEMPLATE_X = 'TEMPLATE_X';
-const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
-
 function Board({ imagePositions }) {
-    const [selectedGrid, setSelectedGrid] = useState(TEMPLATE_BLANK)
+    const [selectedGrid, setSelectedGrid] = useState(Templates.BLANK)
 
     function updateSelectedGrid(newSelection) {
         setSelectedGrid(newSelection);
