@@ -16,7 +16,7 @@ function TemplateSelector({ selectedGrid, updateSelectedGrid }) {
     const TEMPLATE_X = 'TEMPLATE_X';
     const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
 
-    const [itemListVisibility, setItemListVisibility] = useState(true);
+    const [itemListVisibility, setItemListVisibility] = useState(false);
 
     function toggleItemList() {
         if (itemListVisibility) {
