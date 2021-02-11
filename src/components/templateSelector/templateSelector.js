@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import { TemplateBlankIcon, TemplateXIcon, TemplateDiagonalIcon } from '../icons/icons';
 import ItemList from './itemList';
+import TemplateItem from './templateItem';
 import styled, { css } from 'styled-components';
 
 const MenuItemWrapper = styled.div`
@@ -32,9 +33,7 @@ function TemplateSelector({ selectedGrid, updateSelectedGrid }) {
 
     return (
         <MenuItemWrapper>
-            {(selectedGrid === TEMPLATE_BLANK) && <TemplateBlankIcon></TemplateBlankIcon>}
-            {(selectedGrid === TEMPLATE_X) && <TemplateXIcon></TemplateXIcon>}
-            {(selectedGrid === TEMPLATE_DIAGONAL) && <TemplateDiagonalIcon></TemplateDiagonalIcon>}
+            <TemplateItem templateType={selectedGrid} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
             {itemListVisibility && <ItemList updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></ItemList>}
         </MenuItemWrapper>
     )
