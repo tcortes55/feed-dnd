@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { TemplateBlankIcon, TemplateXIcon, TemplateDiagonalIcon } from '../icons/icons';
 import ItemList from './itemList';
 import styled, { css } from 'styled-components';
@@ -15,6 +15,17 @@ function TemplateSelector({ selectedGrid, updateSelectedGrid }) {
     const TEMPLATE_X = 'TEMPLATE_X';
     const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
 
+    const [itemListVisibility, setItemListVisibility] = useState(true);
+
+    function toggleItemList() {
+        if (itemListVisibility) {
+            setItemListVisibility(false);
+        }
+        else {
+            setItemListVisibility(true);
+        }
+    }
+
     // setTimeout(() => {
     //     updateSelectedGrid(TEMPLATE_X);
     // }, 1000);
@@ -24,7 +35,7 @@ function TemplateSelector({ selectedGrid, updateSelectedGrid }) {
             {(selectedGrid === TEMPLATE_BLANK) && <TemplateBlankIcon></TemplateBlankIcon>}
             {(selectedGrid === TEMPLATE_X) && <TemplateXIcon></TemplateXIcon>}
             {(selectedGrid === TEMPLATE_DIAGONAL) && <TemplateDiagonalIcon></TemplateDiagonalIcon>}
-            <ItemList updateSelectedGrid={updateSelectedGrid}></ItemList>
+            {itemListVisibility && <ItemList updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></ItemList>}
         </MenuItemWrapper>
     )
 }

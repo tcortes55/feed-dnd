@@ -24,7 +24,7 @@ function handleClick(event) {
     console.log(event.target);
 }
 
-function ItemList({ updateSelectedGrid }) {
+function ItemList({ updateSelectedGrid, toggleItemList }) {
     const TEMPLATE_BLANK = 'TEMPLATE_BLANK';
     const TEMPLATE_X = 'TEMPLATE_X';
     const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
@@ -32,9 +32,9 @@ function ItemList({ updateSelectedGrid }) {
     return (
         <TemplateListContainer>
             <TemplateList>
-                <TemplateItem templateType={TEMPLATE_BLANK} updateSelectedGrid={updateSelectedGrid}></TemplateItem>
-                <TemplateItem templateType={TEMPLATE_X} updateSelectedGrid={updateSelectedGrid}></TemplateItem>
-                <TemplateItem templateType={TEMPLATE_DIAGONAL} updateSelectedGrid={updateSelectedGrid}></TemplateItem>
+                <TemplateItem templateType={TEMPLATE_BLANK} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
+                <TemplateItem templateType={TEMPLATE_X} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
+                <TemplateItem templateType={TEMPLATE_DIAGONAL} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
             </TemplateList>
         </TemplateListContainer>
     );
