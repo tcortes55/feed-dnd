@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BoardSquare from '../boardSquare';
 import Dustbin from '../dustbin';
 import styled, { css } from 'styled-components';
@@ -66,13 +66,23 @@ function renderBoard(imagePositions) {
     return fullBoard;
 }
 
+const TEMPLATE_BLANK = 'TEMPLATE_BLANK';
+const TEMPLATE_X = 'TEMPLATE_X';
+const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
+
 function Board({ imagePositions }) {
+    const [selectedGrid, setSelectedGrid] = useState(TEMPLATE_BLANK)
+
+    function updateSelectedGrid(newSelection) {
+        setSelectedGrid(newSelection);
+    }
+
     return (
         <DndProvider backend={DnDBackend}>
             <BoardWrapper>
                 {renderBoard(imagePositions)}
                 { isMobile && <Carousel>{renderSquares(imagePositions, "deck")}</Carousel> }
-                <Menu imagePositions={imagePositions}></Menu>
+                <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>
         </DndProvider>

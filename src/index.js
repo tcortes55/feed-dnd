@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Board from './components/board';
 import { observe } from './PictureManager';
@@ -34,7 +35,7 @@ var positions = getImagePositions().then(function(result) {
   observe(imagesDictionary, (imagesDictionary) => 
     ReactDOM.render(
       <React.StrictMode>
-        <Board imagePositions={imagesDictionary}></Board>
+        <App imagePositions={imagesDictionary}></App>
       </React.StrictMode>,
       document.getElementById('root')
       )
