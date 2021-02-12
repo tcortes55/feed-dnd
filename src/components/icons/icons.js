@@ -5,9 +5,10 @@ import { ReactComponent as GridIconSvg } from '../../assets/grid-icon.svg';
 import { ReactComponent as PlusIconSvg } from '../../assets/plus-icon.svg';
 import { ReactComponent as UserIconSvg } from '../../assets/user-icon.svg';
 import { ReactComponent as XIconSvg } from '../../assets/x-icon.svg';
+import { AppColors } from '../../constants';
 
 const CircleWrapper = styled.div`
-    background-color: yellow;//#e9d5bf;
+    background-color: ${AppColors.LightRose}; //yellow;//#e9d5bf;
     width: 60px;
     height: 60px;
     margin-left: auto;
@@ -19,7 +20,7 @@ const CircleWrapper = styled.div`
 export const DustbinIcon = () => {
     return (
         <CircleWrapper>
-            <DustbinIconSvg fill='#031b23' stroke='#031b23' width='30px' style={{transform: `translateY(50%)`}}/>
+            <DustbinIconSvg fill={AppColors.DarkBlue} stroke={AppColors.DarkBlue} width='30px' style={{transform: `translateY(50%)`}}/>
         </CircleWrapper>
     )
 }
@@ -27,14 +28,14 @@ export const DustbinIcon = () => {
 export const UploadIcon = () => {
     return (
         <CircleWrapper>
-            <PlusIconSvg fill='#031b23' stroke='#031b23' width='30px' style={{transform: `translateY(55%)`}}/>
+            <PlusIconSvg fill={AppColors.DarkBlue} stroke={AppColors.DarkBlue} width='30px' style={{transform: `translateY(55%)`}}/>
         </CircleWrapper>
     )
 }
 
 export const UserIcon = () => {
     return (
-        <UserIconSvg fill='yellow' stroke='yellow' width='30px'/>
+        <UserIconSvg fill={AppColors.White} stroke={AppColors.LightRose} width='30px'/>
     )
 }
 

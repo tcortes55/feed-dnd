@@ -13,7 +13,8 @@ export const AppColors = {
     DarkBlue: '#031b23',
     LightGrey: '#cdcdcd',
     MediumGrey: '#9d9d9d',
-    DarkGrey: '#575757'
+    DarkGrey: '#575757',
+    White: '#ffffff'
 }
 
 export const Boards = {
