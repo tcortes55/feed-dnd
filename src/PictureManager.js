@@ -3,8 +3,6 @@ import { Boards } from './constants';
 
 let imagePositions = {};
 let observer = null;
-// const FEED = "feed";
-// const DECK = "deck";
 const NUM_COLUMNS = 4;
 
 export function observe(args, o) {

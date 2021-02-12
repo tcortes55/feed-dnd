@@ -3,9 +3,6 @@ import styled, { css } from 'styled-components';
 import ItemTypes, { Boards } from '../../constants';
 import { useDrag } from 'react-dnd';
 
-// const FEED = "feed";
-// const DECK = "deck";
-
 const PictureWrapper = styled.div`
     height: ${props => props.reduced ? "60px" : "100px"};
     width: ${props => props.reduced ? "60px" : "100px"};
