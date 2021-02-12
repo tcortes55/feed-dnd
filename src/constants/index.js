@@ -16,4 +16,9 @@ export const AppColors = {
     DarkGrey: '#575757'
 }
 
+export const Boards = {
+    FEED: "feed",
+    DECK: "deck"
+}
+
 export default ItemTypes;

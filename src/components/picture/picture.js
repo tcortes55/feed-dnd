@@ -1,10 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import ItemTypes from '../../constants';
+import ItemTypes, { Boards } from '../../constants';
 import { useDrag } from 'react-dnd';
 
-const FEED = "feed";
-const DECK = "deck";
+// const FEED = "feed";
+// const DECK = "deck";
 
 const PictureWrapper = styled.div`
     height: ${props => props.reduced ? "60px" : "100px"};
@@ -31,7 +31,7 @@ function Picture({ imgPath, currBoard, currPosition }) {
     return (
     <PictureWrapper
         ref={drag}
-        reduced={currBoard === DECK}
+        reduced={currBoard === Boards.DECK}
         style={{
         opacity: isDragging ? 0.5 : 1,
         cursor: 'move',

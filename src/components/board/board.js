@@ -7,7 +7,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { isMobile } from 'react-device-detect';
 import Carousel from '../carousel';
-import { Templates } from '../../constants';
+import { Templates, Boards } from '../../constants';
 import Menu from '../menu';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
@@ -59,9 +59,9 @@ function renderSquares(imagePositions, currBoard, selectedGrid) {
 
 function renderBoard(imagePositions, selectedGrid) {
     const fullBoard = [];
-    fullBoard.push(<FeedWrapper>{renderSquares(imagePositions, "feed", selectedGrid)}</FeedWrapper>);
+    fullBoard.push(<FeedWrapper>{renderSquares(imagePositions, Boards.FEED, selectedGrid)}</FeedWrapper>);
     if (!isMobile) {
-        fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, "deck", selectedGrid)}</DeckWrapper>);
+        fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</DeckWrapper>);
     }
 
     return fullBoard;
@@ -78,7 +78,7 @@ function Board({ imagePositions }) {
         <DndProvider backend={DnDBackend}>
             <BoardWrapper>
                 {renderBoard(imagePositions, selectedGrid)}
-                { isMobile && <Carousel>{renderSquares(imagePositions, "deck", selectedGrid)}</Carousel> }
+                { isMobile && <Carousel>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</Carousel> }
                 <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>

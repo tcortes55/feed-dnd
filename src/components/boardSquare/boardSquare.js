@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Square from '../square';
 import Picture from '../picture';
-import ItemTypes, { Templates, AppColors } from '../../constants';
+import ItemTypes, { Templates, AppColors, Boards } from '../../constants';
 import { moveImage, canMoveImage } from '../../PictureManager';
 import { useDrop } from 'react-dnd';
 
-const FEED = "feed";
-const DECK = "deck";
+// const FEED = "feed";
+// const DECK = "deck";
 
 function getTemplateBackground(selectedGrid, board, position) {
-  if (board === DECK) {
+  if (board === Boards.DECK) {
     return AppColors.DarkGrey;
   }
 

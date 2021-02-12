@@ -1,8 +1,6 @@
 import React from 'react';
+import { Boards } from '../../constants';
 import styled, { css } from 'styled-components';
-
-const FEED = "feed";
-const DECK = "deck";
 
 const SquareWrapper = styled.div`
     height: ${props => props.reduced ? "60px" : "100px"};
@@ -12,7 +10,7 @@ const SquareWrapper = styled.div`
 
 function Square({ squareBackgroundColor, currBoard, children }) {
     return (
-        <SquareWrapper reduced={currBoard === DECK} style={{ backgroundColor: squareBackgroundColor }}>
+        <SquareWrapper reduced={currBoard === Boards.DECK} style={{ backgroundColor: squareBackgroundColor }}>
             {children}
         </SquareWrapper>
     );
