@@ -24,7 +24,6 @@ function getTemplateBackground(selectedGrid, board, position) {
         return AppColors.DarkGrey;
       }
     case Templates.DIAGONAL:
-      console.log(position);
       switch (position) {
         case 0:
         case 5:
@@ -38,19 +37,11 @@ function getTemplateBackground(selectedGrid, board, position) {
         case 4:
         case 6:
           return AppColors.LightGrey;
-        default:
-          break;
       }
-      break;
-    default:
-      break;
   }
 }
 
 function BoardSquare({ imagePositions, board, position, imagePath, selectedGrid}) {
-    // const [squareBackgroundColor, setSquareBackgroundColor] = useState(AppColors.DarkGrey);
-    // setSquareBackgroundColor(getTemplateBackground(selectedGrid, board, position));
-
     const squareBackgroundColor = getTemplateBackground(selectedGrid, board, position);
 
     let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath} currBoard={board} currPosition={position}></Picture> : null;
