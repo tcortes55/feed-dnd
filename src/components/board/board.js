@@ -7,19 +7,16 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { isMobile } from 'react-device-detect';
 import Carousel from '../carousel';
+import { Templates, Boards } from '../../constants';
 import Menu from '../menu';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
 const BoardWrapper = styled.div`
-    /* display: flex; */
-    /* flex-wrap: wrap; */
     width: 100vw;
     height: 100vh;
     margin: 0px;
     background-color: #e9d5bf;
-    /* margin: auto; */
-    /* margin-top: 25px; */
 
     @media (min-width: 768px) {
         width: 352px !important;
@@ -41,7 +38,7 @@ const DeckWrapper = styled.div`
     overflow-x: scroll;
 `;
 
-function renderSquares(imagePositions, currBoard) {
+function renderSquares(imagePositions, currBoard, selectedGrid) {
     const squares = [];
 
     let numberOfPositions = Object.keys(imagePositions[currBoard]).length;
@@ -50,28 +47,24 @@ function renderSquares(imagePositions, currBoard) {
         let position = i;
         let imagePath = imagePositions[currBoard][position];
 
-        squares.push(<BoardSquare key={position + "_bs_" + currBoard} imagePositions={imagePositions} board={currBoard} position={position} imagePath={imagePath}></BoardSquare>);
+        squares.push(<BoardSquare key={position + "_bs_" + currBoard} imagePositions={imagePositions} board={currBoard} position={position} imagePath={imagePath} selectedGrid={selectedGrid}></BoardSquare>);
     }
 
     return squares;
 }
 
-function renderBoard(imagePositions) {
+function renderBoard(imagePositions, selectedGrid) {
     const fullBoard = [];
-    fullBoard.push(<FeedWrapper>{renderSquares(imagePositions, "feed")}</FeedWrapper>);
+    fullBoard.push(<FeedWrapper>{renderSquares(imagePositions, Boards.FEED, selectedGrid)}</FeedWrapper>);
     if (!isMobile) {
-        fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, "deck")}</DeckWrapper>);
+        fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</DeckWrapper>);
     }
 
     return fullBoard;
 }
 
-const TEMPLATE_BLANK = 'TEMPLATE_BLANK';
-const TEMPLATE_X = 'TEMPLATE_X';
-const TEMPLATE_DIAGONAL = 'TEMPLATE_DIAGONAL';
-
 function Board({ imagePositions }) {
-    const [selectedGrid, setSelectedGrid] = useState(TEMPLATE_BLANK)
+    const [selectedGrid, setSelectedGrid] = useState(Templates.BLANK)
 
     function updateSelectedGrid(newSelection) {
         setSelectedGrid(newSelection);
@@ -80,8 +73,8 @@ function Board({ imagePositions }) {
     return (
         <DndProvider backend={DnDBackend}>
             <BoardWrapper>
-                {renderBoard(imagePositions)}
-                { isMobile && <Carousel>{renderSquares(imagePositions, "deck")}</Carousel> }
+                {renderBoard(imagePositions, selectedGrid)}
+                { isMobile && <Carousel>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</Carousel> }
                 <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>

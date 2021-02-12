@@ -1,13 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Square from '../square';
 import Picture from '../picture';
-import ItemTypes from '../../constants';
+import ItemTypes, { Templates, AppColors, Boards } from '../../constants';
 import { moveImage, canMoveImage } from '../../PictureManager';
 import { useDrop } from 'react-dnd';
 
+function getTemplateBackground(selectedGrid, board, position) {
+  if (board === Boards.DECK) {
+    return AppColors.DarkGrey;
+  }
 
-function BoardSquare({ imagePositions, board, position, imagePath}) {
-    let fill = position % 2 === 0;
+  switch (selectedGrid) {
+    case Templates.BLANK:
+      return AppColors.DarkGrey;
+    case Templates.X:
+      if (position % 2 == 0) {
+        return AppColors.LightGrey;
+      }
+      else {
+        return AppColors.DarkGrey;
+      }
+    case Templates.DIAGONAL:
+      switch (position) {
+        case 0:
+        case 5:
+        case 7:
+          return AppColors.MediumGrey;
+        case 1:
+        case 3:
+        case 8:
+          return AppColors.DarkGrey;
+        case 2:
+        case 4:
+        case 6:
+          return AppColors.LightGrey;
+      }
+  }
+}
+
+function BoardSquare({ imagePositions, board, position, imagePath, selectedGrid}) {
+    const squareBackgroundColor = getTemplateBackground(selectedGrid, board, position);
+
     let picture = (imagePath != null && imagePath != undefined) ? <Picture imgPath={imagePath} currBoard={board} currPosition={position}></Picture> : null;
 
     const [{ isOver, getItem, canDrop }, drop] = useDrop({
@@ -37,7 +70,7 @@ function BoardSquare({ imagePositions, board, position, imagePath}) {
                 // height: '100%',
             }}
         >
-        <Square key={position} currBoard={board} fill={fill}>{picture}</Square>
+        <Square key={position} currBoard={board} squareBackgroundColor={squareBackgroundColor}>{picture}</Square>
         {isOver && canDrop && (
         <div
           style={{
