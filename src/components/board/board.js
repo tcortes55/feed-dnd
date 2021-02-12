@@ -13,14 +13,10 @@ import Menu from '../menu';
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
 const BoardWrapper = styled.div`
-    /* display: flex; */
-    /* flex-wrap: wrap; */
     width: 100vw;
     height: 100vh;
     margin: 0px;
     background-color: #e9d5bf;
-    /* margin: auto; */
-    /* margin-top: 25px; */
 
     @media (min-width: 768px) {
         width: 352px !important;
