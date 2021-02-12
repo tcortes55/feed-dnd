@@ -42,7 +42,7 @@ const DeckWrapper = styled.div`
     overflow-x: scroll;
 `;
 
-function renderSquares(imagePositions, currBoard) {
+function renderSquares(imagePositions, currBoard, selectedGrid) {
     const squares = [];
 
     let numberOfPositions = Object.keys(imagePositions[currBoard]).length;
@@ -51,17 +51,17 @@ function renderSquares(imagePositions, currBoard) {
         let position = i;
         let imagePath = imagePositions[currBoard][position];
 
-        squares.push(<BoardSquare key={position + "_bs_" + currBoard} imagePositions={imagePositions} board={currBoard} position={position} imagePath={imagePath}></BoardSquare>);
+        squares.push(<BoardSquare key={position + "_bs_" + currBoard} imagePositions={imagePositions} board={currBoard} position={position} imagePath={imagePath} selectedGrid={selectedGrid}></BoardSquare>);
     }
 
     return squares;
 }
 
-function renderBoard(imagePositions) {
+function renderBoard(imagePositions, selectedGrid) {
     const fullBoard = [];
-    fullBoard.push(<FeedWrapper>{renderSquares(imagePositions, "feed")}</FeedWrapper>);
+    fullBoard.push(<FeedWrapper>{renderSquares(imagePositions, "feed", selectedGrid)}</FeedWrapper>);
     if (!isMobile) {
-        fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, "deck")}</DeckWrapper>);
+        fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, "deck", selectedGrid)}</DeckWrapper>);
     }
 
     return fullBoard;
@@ -77,8 +77,8 @@ function Board({ imagePositions }) {
     return (
         <DndProvider backend={DnDBackend}>
             <BoardWrapper>
-                {renderBoard(imagePositions)}
-                { isMobile && <Carousel>{renderSquares(imagePositions, "deck")}</Carousel> }
+                {renderBoard(imagePositions, selectedGrid)}
+                { isMobile && <Carousel>{renderSquares(imagePositions, "deck", selectedGrid)}</Carousel> }
                 <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>
