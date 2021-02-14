@@ -66,6 +66,7 @@ function UploadForm({ imagePositions }) {
                     <input
                         type="file"
                         multiple="multiple"
+                        accept="image/*"
                         onChange={handleImageAsFile}
                         style={{
                             visibility: 'hidden',

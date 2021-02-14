@@ -39,21 +39,27 @@ export const UserIcon = () => {
     )
 }
 
-export const TemplateBlankIcon = () => {
+export function TemplateBlankIcon({ isLarge }) {
+    const iconWidth = isLarge ? '80px' : '30px';
+
     return (
-        <GridIconSvg fill='red' stroke='red' width='30px'/>
+        <GridIconSvg fill='red' stroke='red' width={iconWidth}/>
     )
 }
 
-export const TemplateXIcon = () => {
+export function TemplateXIcon({ isLarge }) {
+    const iconWidth = isLarge ? '80px' : '30px';
+
     return (
-        <GridIconSvg fill='green' stroke='green' width='30px'/>
+        <GridIconSvg fill='green' stroke='green' width={iconWidth}/>
     )
 }
 
-export const TemplateDiagonalIcon = () => {
+export function TemplateDiagonalIcon({ isLarge }) {
+    const iconWidth = isLarge ? '80px' : '30px';
+
     return (
-        <GridIconSvg fill='blue' stroke='blue' width='30px'/>
+        <GridIconSvg fill='blue' stroke='blue' width={iconWidth}/>
     )
 }
 
