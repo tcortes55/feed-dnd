@@ -16,8 +16,14 @@ const SliderContainer = styled.div`
   }
 `;
 
+const ArrowPlaceholder = styled.div`
+  color: darkgrey;
+  font-family: 'slick';
+  font-size: 20px;
+  line-height: 1;
+`;
+
 function Carousel({ children }) {
-  
     const settings = {
       dots: false,
       infinite: true,
@@ -28,8 +34,11 @@ function Carousel({ children }) {
       draggable: false,
       rows: 1
     };
+
+    let className = 'slick-arrow slick-prev lala';
     return (
       <SliderContainer>
+        <ArrowPlaceholder>←</ArrowPlaceholder>
         <Slider {...settings}>
           {children}
         </Slider>
