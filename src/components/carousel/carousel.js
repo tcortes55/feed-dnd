@@ -17,10 +17,20 @@ const SliderContainer = styled.div`
 `;
 
 const ArrowPlaceholder = styled.div`
+  position: absolute;
+  margin-top: 22px;
   color: darkgrey;
   font-family: 'slick';
   font-size: 20px;
   line-height: 1;
+
+  .arrow-left {
+    margin-left: -25px;
+  }
+
+  .arrow-right {
+    margin-left: calc(256px + 5px);
+  }
 `;
 
 function Carousel({ children }) {
@@ -38,7 +48,8 @@ function Carousel({ children }) {
     let className = 'slick-arrow slick-prev lala';
     return (
       <SliderContainer>
-        <ArrowPlaceholder>←</ArrowPlaceholder>
+        <ArrowPlaceholder><div className="arrow-left">←</div></ArrowPlaceholder>
+        <ArrowPlaceholder><div className="arrow-right">→</div></ArrowPlaceholder>
         <Slider {...settings}>
           {children}
         </Slider>
