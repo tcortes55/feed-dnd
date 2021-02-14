@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
-import ItemTypes from '../../constants';
+import ItemTypes,{ AppColors } from '../../constants';
 import { deleteImage } from '../../PictureManager';
 import { DustbinIcon } from '../icons/icons';
 
@@ -31,7 +31,7 @@ function Dustbin({ imagePositions }) {
                 width: '312px',
                 height: '50px',
                 margin: 'auto',
-                backgroundColor: '#031b23',
+                backgroundColor: AppColors.DarkBlue,
                 textAlign: 'center',
                 overflow: 'visible'
             }}
@@ -47,7 +47,7 @@ function Dustbin({ imagePositions }) {
                     width: '100%',
                     zIndex: 1,
                     opacity: 0.5,
-                    backgroundColor: 'yellow',
+                    backgroundColor: AppColors.MediumBlue,
                 }}
                 />
             )}

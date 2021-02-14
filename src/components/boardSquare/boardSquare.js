@@ -61,6 +61,8 @@ function BoardSquare({ imagePositions, board, position, imagePath, selectedGrid}
         }),
     });
 
+    const layoverColor = AppColors.MediumBlue;
+
     return (
         <div
             ref={drop}
@@ -81,7 +83,7 @@ function BoardSquare({ imagePositions, board, position, imagePath, selectedGrid}
             width: '100%',
             zIndex: 1,
             opacity: 0.5,
-            backgroundColor: 'yellow',
+            backgroundColor: layoverColor,
           }}
         />
       )}
