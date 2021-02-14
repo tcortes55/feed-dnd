@@ -5,15 +5,18 @@ import styled, { css } from 'styled-components';
 
 const TemplateListContainer = styled.div`
     width: 306px;
-    height: 135px;
+    /* height: 135px; */
     background-color: darkviolet;
     float: right;
     margin-right: 3px;
-    margin-top: -180px;
+    margin-top: -159px;
 `;
 
-const TemplateList = styled.ul`
+const TemplateList = styled.div`
     padding-inline: 0px;
+    justify-content: space-between;
+    display: flex;
+    margin: 15px;
 `;
 
 function ItemList({ updateSelectedGrid, toggleItemList }) {
