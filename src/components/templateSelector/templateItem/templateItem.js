@@ -3,30 +3,34 @@ import { TemplateBlankIcon, TemplateXIcon, TemplateDiagonalIcon } from '../../ic
 import { Templates } from '../../../constants';
 import styled, { css } from 'styled-components';
 
-function TemplateItem({ templateType, updateSelectedGrid, toggleItemList }){
+const TemplateItemWrapper = styled.div`
+    display: inline-block;
+`;
+
+function TemplateItem({ templateType, updateSelectedGrid, toggleItemList, isLarge }){
     function handleClick() {
         toggleItemList();
         updateSelectedGrid(templateType);
     }
     
     return (
-        <div>
+        <TemplateItemWrapper>
             {(templateType === Templates.BLANK) && 
             <div onClick={handleClick}>
-                <TemplateBlankIcon></TemplateBlankIcon>
+                <TemplateBlankIcon isLarge={isLarge}></TemplateBlankIcon>
             </div>
             }
             {(templateType === Templates.X) && 
             <div onClick={handleClick}>
-                <TemplateXIcon></TemplateXIcon>
+                <TemplateXIcon isLarge={isLarge}></TemplateXIcon>
             </div>
             }
             {(templateType === Templates.DIAGONAL) && 
             <div onClick={handleClick}>
-                <TemplateDiagonalIcon></TemplateDiagonalIcon>
+                <TemplateDiagonalIcon isLarge={isLarge}></TemplateDiagonalIcon>
             </div>
             }
-        </div>
+        </TemplateItemWrapper>
     );
 }
 

@@ -13,16 +13,16 @@ const TemplateListContainer = styled.div`
 `;
 
 const TemplateList = styled.ul`
-
+    padding-inline: 0px;
 `;
 
 function ItemList({ updateSelectedGrid, toggleItemList }) {
     return (
         <TemplateListContainer>
             <TemplateList>
-                <TemplateItem templateType={Templates.BLANK} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
-                <TemplateItem templateType={Templates.X} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
-                <TemplateItem templateType={Templates.DIAGONAL} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}></TemplateItem>
+                <TemplateItem templateType={Templates.BLANK} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}  isLarge={true}></TemplateItem>
+                <TemplateItem templateType={Templates.X} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList} isLarge={true}></TemplateItem>
+                <TemplateItem templateType={Templates.DIAGONAL} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList} isLarge={true}></TemplateItem>
             </TemplateList>
         </TemplateListContainer>
     );
