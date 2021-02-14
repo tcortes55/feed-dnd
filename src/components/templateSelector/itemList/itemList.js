@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { Templates } from '../../../constants';
+import { Templates, AppColors } from '../../../constants';
 import TemplateItem from '../templateItem';
 import styled, { css } from 'styled-components';
 
 const TemplateListContainer = styled.div`
     width: 306px;
-    /* height: 135px; */
-    background-color: darkviolet;
+    background-color: ${AppColors.DarkBlue};
     float: right;
     margin-right: 3px;
     margin-top: -159px;
