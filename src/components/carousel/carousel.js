@@ -23,7 +23,7 @@ const ArrowWrapper = styled.div`
 
   .arrow-right {
     float: right;
-    right: 34px;
+    right: 34.5px;
   }
 `;
 
@@ -34,6 +34,7 @@ const ArrowPlaceholder = styled.div`
   font-family: 'slick';
   font-size: 20px;
   line-height: 1;
+  opacity: .75;
 `;
 
 function Carousel({ children }) {
@@ -48,13 +49,14 @@ function Carousel({ children }) {
       rows: 1
     };
 
-    let className = 'slick-arrow slick-prev lala';
+    const showPlaceholderArrows = (children.length <= 4);
+    
     return (
       <SliderContainer>
-        <ArrowWrapper>
+        {showPlaceholderArrows && <ArrowWrapper>
           <ArrowPlaceholder className="arrow-left">←</ArrowPlaceholder>
           <ArrowPlaceholder className="arrow-right">→</ArrowPlaceholder>
-        </ArrowWrapper>
+        </ArrowWrapper>}
         <Slider {...settings}>
           {children}
         </Slider>
