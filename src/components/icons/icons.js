@@ -5,6 +5,9 @@ import { ReactComponent as GridIconSvg } from '../../assets/grid-icon.svg';
 import { ReactComponent as PlusIconSvg } from '../../assets/plus-icon.svg';
 import { ReactComponent as UserIconSvg } from '../../assets/user-icon.svg';
 import { ReactComponent as XIconSvg } from '../../assets/x-icon.svg';
+import { ReactComponent as GridIcon1Svg } from '../../assets/grid-icon-1.svg';
+import { ReactComponent as GridIcon2Svg } from '../../assets/grid-icon-2.svg';
+import { ReactComponent as GridIcon3Svg } from '../../assets/grid-icon-3.svg';
 import { AppColors } from '../../constants';
 
 const CircleWrapper = styled.div`
@@ -35,7 +38,7 @@ export const UploadIcon = () => {
 
 export const UserIcon = () => {
     return (
-        <UserIconSvg fill={AppColors.White} stroke={AppColors.LightRose} width='30px'/>
+        <UserIconSvg fill={AppColors.White} stroke={AppColors.White} width='30px'/>
     )
 }
 
@@ -43,7 +46,7 @@ export function TemplateBlankIcon({ isLarge }) {
     const iconWidth = isLarge ? '80px' : '30px';
 
     return (
-        <GridIconSvg fill='red' stroke='red' width={iconWidth}/>
+        <GridIcon1Svg width={iconWidth}/>
     )
 }
 
@@ -51,7 +54,7 @@ export function TemplateXIcon({ isLarge }) {
     const iconWidth = isLarge ? '80px' : '30px';
 
     return (
-        <GridIconSvg fill='green' stroke='green' width={iconWidth}/>
+        <GridIcon2Svg width={iconWidth}/>
     )
 }
 
@@ -59,7 +62,7 @@ export function TemplateDiagonalIcon({ isLarge }) {
     const iconWidth = isLarge ? '80px' : '30px';
 
     return (
-        <GridIconSvg fill='blue' stroke='blue' width={iconWidth}/>
+        <GridIcon3Svg width={iconWidth}/>
     )
 }
 
