@@ -24,8 +24,7 @@ const ArrowWrapper = styled.div`
   }
 
   .arrow-right {
-    float: right;
-    right: 34.5px;
+    margin-left: 261px;
   }
 `;
 
