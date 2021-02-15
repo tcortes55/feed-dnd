@@ -53,11 +53,6 @@ function UploadForm({ imagePositions }) {
         );
     }
 
-    useEffect(() => {
-        console.log('dentro do useEffect:');
-        console.log(imagePositions);
-    }, [imagePositions]);
-
     return (
         <MenuItemWrapper>
             <FormContainer>
