@@ -36,6 +36,9 @@ function UploadForm({ imagePositions }) {
 
         Array.from(imagesAsFiles).forEach(
             (imageAsFile) => {
+
+                // COMPRESS IMAGE AND SET RATIO 1:1 HERE
+
                 const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(imageAsFile);
 
                 uploadTask.on('state_changed',
