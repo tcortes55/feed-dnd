@@ -106,21 +106,13 @@ function UploadForm({ imagePositions }) {
                 var imageObj = new Image();
                 imageObj.title = imageAsFile.name;
                 imageObj.src = URL.createObjectURL(imageAsFile);
+                // alert(imageObj);
                 console.log('imageObj');
                 console.log(imageObj);
                 
-                var lala2 = imageObj;// compress(imageObj, 80, 200);
-                console.log('lala2');
-                console.log(lala2);
-
-                // var canvas = document.getElementById('myCanvas');
-                // var context = canvas.getContext('2d');
                 var lala3;
-                lala2.onload = function() {
-                    // context.drawImage(lala2, 0, 0, 200, 100);
-                    // console.log('canvas:');
-                    // lala3 = canvas.toDataURL("image/jpeg");
-                    var canvas4 = compress(lala2, 80, 100);
+                imageObj.onload = function() {
+                    var canvas4 = compress(imageObj, 80, 100);
                     lala3 = canvas4.toDataURL("image/jpeg");
 
                     var fileFromCanvas = dataURItoBlob(lala3)
