@@ -46,6 +46,23 @@ function compress(source_img_obj, quality, maxWidth, output_format){
     return result_image_obj;
 }
 
+function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], {type:mimeString});
+}
+
 function UploadForm({ imagePositions }) {
     const handleImageAsFile = (e) => {
         const imagesAsFiles = e.target.files;
@@ -87,22 +104,24 @@ function UploadForm({ imagePositions }) {
                 lala2.onload = function() {
                     context.drawImage(lala2, 0, 0, 200, 200);
                     console.log('canvas:');
-                    console.log(canvas.toDataURL("image/jpeg"));
+                    lala3 = canvas.toDataURL("image/jpeg");
+
+                    var fileFromCanvas = dataURItoBlob(lala3)
+                    
+                    const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(fileFromCanvas);
+
+                    uploadTask.on('state_changed',
+                    (snapshot) => {
+                        console.log(snapshot);
+                    },
+                    (err) => {
+                        console.log(err);
+                    },
+                    async () => {
+                        const firebaseUrl = await storage.ref('images').child(feedId).child(imageAsFile.name).getDownloadURL();
+                        initialLoadDeck(imagePositions, 0, firebaseUrl);
+                    });
                 };
-
-                const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(lala3);
-
-                uploadTask.on('state_changed',
-                (snapshot) => {
-                    console.log(snapshot);
-                },
-                (err) => {
-                    console.log(err);
-                },
-                async () => {
-                    const firebaseUrl = await storage.ref('images').child(feedId).child(imageAsFile.name).getDownloadURL();
-                    initialLoadDeck(imagePositions, 0, firebaseUrl);
-                });
             }
         );
     }
