@@ -96,10 +96,20 @@ function UploadForm({ imagePositions }) {
                 var lala2 = imageObj;// compress(imageObj, 80, 200);
                 console.log('lala2');
                 console.log(lala2);
-                var outputLala = document.getElementById('output');
-                outputLala.title = lala2.title;
-                outputLala.src = lala2.src;
-                const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(lala2);
+                // var outputLala = document.getElementById('output');
+                // outputLala.title = lala2.title;
+                // outputLala.src = lala2.src;
+
+                var canvas = document.getElementById('myCanvas');
+                var context = canvas.getContext('2d');
+                var lala3;
+                lala2.onload = function() {
+                    context.drawImage(lala2, 0, 0, 200, 200);
+                    console.log('canvas:');
+                    console.log(canvas.toDataURL("image/jpeg"));
+                };
+
+                const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(lala3);
 
                 uploadTask.on('state_changed',
                 (snapshot) => {
