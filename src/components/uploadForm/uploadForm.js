@@ -26,9 +26,9 @@ function compress(source_img_obj, quality, maxWidth, output_format){
         mime_type = "image/png";
     }
 
-    maxWidth = maxWidth || 1000;
-    var natW = 200;//source_img_obj.naturalWidth;
-    var natH = 200;//source_img_obj.naturalHeight;
+    maxWidth = maxWidth || 100;
+    var natW = source_img_obj.naturalWidth;
+    var natH = source_img_obj.naturalHeight;
     var ratio = natH / natW;
     if (natW > maxWidth) {
         natW = maxWidth;
@@ -41,6 +41,7 @@ function compress(source_img_obj, quality, maxWidth, output_format){
 
     var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0, natW, natH);
     var newImageData = cvs.toDataURL(mime_type, quality/100);
+    return cvs;
     var result_image_obj = new Image();
     result_image_obj.src = newImageData;
     return result_image_obj;
@@ -98,13 +99,15 @@ function UploadForm({ imagePositions }) {
                 console.log('lala2');
                 console.log(lala2);
 
-                var canvas = document.getElementById('myCanvas');
-                var context = canvas.getContext('2d');
+                // var canvas = document.getElementById('myCanvas');
+                // var context = canvas.getContext('2d');
                 var lala3;
                 lala2.onload = function() {
-                    context.drawImage(lala2, 0, 0, 200, 200);
-                    console.log('canvas:');
-                    lala3 = canvas.toDataURL("image/jpeg");
+                    // context.drawImage(lala2, 0, 0, 200, 100);
+                    // console.log('canvas:');
+                    // lala3 = canvas.toDataURL("image/jpeg");
+                    var canvas4 = compress(lala2, 80, 100);
+                    lala3 = canvas4.toDataURL("image/jpeg");
 
                     var fileFromCanvas = dataURItoBlob(lala3)
                     
