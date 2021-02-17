@@ -25,15 +25,26 @@ function compress(source_img_obj, quality, maxWidth, output_format){
     if(typeof output_format !== "undefined" && output_format=="png"){
         mime_type = "image/png";
     }
-
-    maxWidth = maxWidth || 100;
+    
     var natW = source_img_obj.naturalWidth;
     var natH = source_img_obj.naturalHeight;
+
+    maxWidth = 100;
     var ratio = natH / natW;
-    if (natW > maxWidth) {
+
+    if (ratio > 1) {
         natW = maxWidth;
         natH = ratio * maxWidth;
     }
+    else {
+        natH = maxWidth;
+        natW = ratio * maxWidth;
+    }
+
+    // if (natW > maxWidth) {
+    //     natW = maxWidth;
+    //     natH = ratio * maxWidth;
+    // }
 
     var cvs = document.createElement('canvas');
     cvs.width = natW;
