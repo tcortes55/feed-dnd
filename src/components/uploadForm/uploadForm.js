@@ -76,29 +76,10 @@ function UploadForm({ imagePositions }) {
                 imageObj.src = URL.createObjectURL(imageAsFile);
                 console.log('imageObj');
                 console.log(imageObj);
-
-                // var fr = new FileReader();
-                // fr.onload = function (event) {
-                //     console.log('inside fr');
-                //     // imageObj.src = event.target.result;
-                //     imageObj.src = URL.createObjectURL(imageAsFile);
-                // };
-                // console.log('before readAs');
-
-                // var lala = fr.readAsDataURL(imageAsFile);
-                // console.log('after compress');
-                // console.log(lala);
-                // END
-
-                // var lala = document.createElement('img');
-
-                // var lala2 = document.getElementById('output');
+                
                 var lala2 = imageObj;// compress(imageObj, 80, 200);
                 console.log('lala2');
                 console.log(lala2);
-                // var outputLala = document.getElementById('output');
-                // outputLala.title = lala2.title;
-                // outputLala.src = lala2.src;
 
                 var canvas = document.getElementById('myCanvas');
                 var context = canvas.getContext('2d');
