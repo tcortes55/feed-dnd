@@ -53,15 +53,12 @@ function compress(source_img_obj, quality, output_format){
     console.log("offX=" + offsetX + " offY=" + offsetY);
 
     var cvs = document.createElement('canvas');
-    cvs.width = 100;
-    cvs.height = 100;
+    cvs.width = maxWidth;
+    cvs.height = maxWidth;
 
     var ctx = cvs.getContext("2d").drawImage(source_img_obj, offsetX, offsetY, natW, natH);
     var newImageData = cvs.toDataURL(mime_type, quality/100);
     return cvs;
-    var result_image_obj = new Image();
-    result_image_obj.src = newImageData;
-    return result_image_obj;
 }
 
 function dataURItoBlob(dataURI) {
