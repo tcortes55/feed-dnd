@@ -18,9 +18,39 @@ const FormContainer = styled.form`
     margin: auto;
 `;
 
+function compress(source_img_obj, quality, maxWidth, output_format){
+    console.log(source_img_obj);
+
+    var mime_type = "image/jpeg";
+    if(typeof output_format !== "undefined" && output_format=="png"){
+        mime_type = "image/png";
+    }
+
+    maxWidth = maxWidth || 1000;
+    var natW = 200;//source_img_obj.naturalWidth;
+    var natH = 200;//source_img_obj.naturalHeight;
+    var ratio = natH / natW;
+    if (natW > maxWidth) {
+        natW = maxWidth;
+        natH = ratio * maxWidth;
+    }
+
+    var cvs = document.createElement('canvas');
+    cvs.width = natW;
+    cvs.height = natH;
+
+    var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0, natW, natH);
+    var newImageData = cvs.toDataURL(mime_type, quality/100);
+    var result_image_obj = new Image();
+    result_image_obj.src = newImageData;
+    return result_image_obj;
+}
+
 function UploadForm({ imagePositions }) {
     const handleImageAsFile = (e) => {
         const imagesAsFiles = e.target.files;
+        console.log('e.target.result');
+        console.log(e.target.files[0]);
         handleFirebaseUpload(imagesAsFiles);
     }
 
@@ -38,8 +68,38 @@ function UploadForm({ imagePositions }) {
             (imageAsFile) => {
 
                 // COMPRESS IMAGE AND SET RATIO 1:1 HERE
+                console.log('before compress');
+                console.log(imageAsFile);
 
-                const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(imageAsFile);
+                var imageObj = new Image();
+                imageObj.title = imageAsFile.name;
+                imageObj.src = URL.createObjectURL(imageAsFile);
+                console.log('imageObj');
+                console.log(imageObj);
+
+                // var fr = new FileReader();
+                // fr.onload = function (event) {
+                //     console.log('inside fr');
+                //     // imageObj.src = event.target.result;
+                //     imageObj.src = URL.createObjectURL(imageAsFile);
+                // };
+                // console.log('before readAs');
+
+                // var lala = fr.readAsDataURL(imageAsFile);
+                // console.log('after compress');
+                // console.log(lala);
+                // END
+
+                // var lala = document.createElement('img');
+
+                // var lala2 = document.getElementById('output');
+                var lala2 = imageObj;// compress(imageObj, 80, 200);
+                console.log('lala2');
+                console.log(lala2);
+                var outputLala = document.getElementById('output');
+                outputLala.title = lala2.title;
+                outputLala.src = lala2.src;
+                const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(lala2);
 
                 uploadTask.on('state_changed',
                 (snapshot) => {
