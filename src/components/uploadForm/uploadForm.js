@@ -18,7 +18,7 @@ const FormContainer = styled.form`
     margin: auto;
 `;
 
-function compress(source_img_obj, quality, maxWidth, output_format){
+function compress(source_img_obj, quality, output_format){
     console.log(source_img_obj);
 
     var mime_type = "image/jpeg";
@@ -28,29 +28,35 @@ function compress(source_img_obj, quality, maxWidth, output_format){
     
     var natW = source_img_obj.naturalWidth;
     var natH = source_img_obj.naturalHeight;
+    console.log("w=" + natW + " h=" + natH);
 
-    maxWidth = 100;
+    var maxWidth = 100;
+    var offsetX = 0;
+    var offsetY = 0;
     var ratio = natH / natW;
+
+    console.log("ratio=" + ratio);
 
     if (ratio > 1) {
         natW = maxWidth;
         natH = ratio * maxWidth;
+        console.log("w=" + natW + " h=" + natH);
+        offsetY = (natH - natW) / 2 * (-1);
     }
     else {
         natH = maxWidth;
         natW = ratio * maxWidth;
+        console.log("w=" + natW + " h=" + natH);
+        offsetX = (natW - natH) / 2 * (-1);
     }
 
-    // if (natW > maxWidth) {
-    //     natW = maxWidth;
-    //     natH = ratio * maxWidth;
-    // }
+    console.log("offX=" + offsetX + " offY=" + offsetY);
 
     var cvs = document.createElement('canvas');
-    cvs.width = natW;
-    cvs.height = natH;
+    cvs.width = 100;
+    cvs.height = 100;
 
-    var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0, natW, natH);
+    var ctx = cvs.getContext("2d").drawImage(source_img_obj, offsetX, offsetY, natW, natH);
     var newImageData = cvs.toDataURL(mime_type, quality/100);
     return cvs;
     var result_image_obj = new Image();
