@@ -104,18 +104,36 @@ function UploadForm({ imagePositions }) {
                 console.log('before compress');
                 console.log(imageAsFile);
 
-                var imageObj = new Image();
+                var imageObj;// = new Image();
 
                 loadImage(
                     imageAsFile,
                     function (img) {
                         console.log('img');
                         console.log(img);
-                        document.body.appendChild(img);
-                        imageObj.src = img.src;
+                        // document.body.appendChild(img);
+                        // imageObj = new Image();
+
+                        var lala3 = img.toDataURL("image/jpeg");
+                        var fileFromCanvas = dataURItoBlob(lala3);
+                        console.log('fileFromCanvas');
+                        console.log(fileFromCanvas);
+                    
+                        const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(fileFromCanvas);
+
+                        uploadTask.on('state_changed',
+                        (snapshot) => {
+                            console.log(snapshot);
+                        },
+                        (err) => {
+                            console.log(err);
+                        },
+                        async () => {
+                            const firebaseUrl = await storage.ref('images').child(feedId).child(imageAsFile.name).getDownloadURL();
+                            initialLoadDeck(imagePositions, 0, firebaseUrl);
+                        });
                     },
                     { 
-                        // maxWidth: img.naturalHeight > img.naturalWidth ? 100 : 100,
                         maxWidth: 100,
                         maxHeight: 100,
                         cover: true,
@@ -131,27 +149,27 @@ function UploadForm({ imagePositions }) {
                 console.log('imageObj');
                 console.log(imageObj);
                 
-                var lala3;
-                imageObj.onload = function() {
-                    var canvas4 = compress(imageObj, 80, 100);
-                    lala3 = canvas4.toDataURL("image/jpeg");
+                // var lala3;
+                // imageObj.onload = function() {
+                //     var canvas4 = compress(imageObj, 80, 100);
+                //     lala3 = canvas4.toDataURL("image/jpeg");
 
-                    var fileFromCanvas = dataURItoBlob(lala3)
+                //     var fileFromCanvas = dataURItoBlob(lala3)
                     
-                    const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(fileFromCanvas);
+                //     const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(fileFromCanvas);
 
-                    uploadTask.on('state_changed',
-                    (snapshot) => {
-                        console.log(snapshot);
-                    },
-                    (err) => {
-                        console.log(err);
-                    },
-                    async () => {
-                        const firebaseUrl = await storage.ref('images').child(feedId).child(imageAsFile.name).getDownloadURL();
-                        initialLoadDeck(imagePositions, 0, firebaseUrl);
-                    });
-                };
+                //     uploadTask.on('state_changed',
+                //     (snapshot) => {
+                //         console.log(snapshot);
+                //     },
+                //     (err) => {
+                //         console.log(err);
+                //     },
+                //     async () => {
+                //         const firebaseUrl = await storage.ref('images').child(feedId).child(imageAsFile.name).getDownloadURL();
+                //         initialLoadDeck(imagePositions, 0, firebaseUrl);
+                //     });
+                // };
             }
         );
     }
