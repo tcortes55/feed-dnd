@@ -114,7 +114,15 @@ function UploadForm({ imagePositions }) {
                         document.body.appendChild(img);
                         imageObj.src = img.src;
                     },
-                    { orientation: true }
+                    { 
+                        // maxWidth: img.naturalHeight > img.naturalWidth ? 100 : 100,
+                        maxWidth: 100,
+                        maxHeight: 100,
+                        cover: true,
+                        crop: true,
+                        imageSmoothingQuality: 'high',
+                        orientation: true 
+                    }
                   )
 
                 // imageObj.title = imageAsFile.name;
