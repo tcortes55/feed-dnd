@@ -45,6 +45,24 @@ function dataURItoBlob(dataURI) {
     return new Blob([ia], {type:mimeString});
 }
 
+function executeUpload(file, filename, imagePositions) {   
+    let feedId = getUserId();          
+
+    const uploadTask = storage.ref(`/images/${feedId}/${filename}`).put(file);
+
+    uploadTask.on('state_changed',
+    (snapshot) => {
+        console.log(snapshot);
+    },
+    (err) => {
+        console.log(err);
+    },
+    async () => {
+        const firebaseUrl = await storage.ref('images').child(feedId).child(filename).getDownloadURL();
+        initialLoadDeck(imagePositions, 0, firebaseUrl);
+    });
+}
+
 function UploadForm({ imagePositions }) {
     const handleImageAsFile = (e) => {
         const imagesAsFiles = e.target.files;
@@ -61,32 +79,20 @@ function UploadForm({ imagePositions }) {
             console.log(`Not an image`);
         }
 
-        let feedId = getUserId();
-
         Array.from(imagesAsFiles).forEach(
             (imageAsFile) => {
+                var imgURI;
+                var fileFromCanvas;
+
                 loadImage(
                     imageAsFile,
                     function (canvas) {
-                        var imgURI = canvas.toDataURL("image/jpeg");
-                        var fileFromCanvas = dataURItoBlob(imgURI);
-                    
-                        const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(fileFromCanvas);
-
-                        uploadTask.on('state_changed',
-                        (snapshot) => {
-                            console.log(snapshot);
-                        },
-                        (err) => {
-                            console.log(err);
-                        },
-                        async () => {
-                            const firebaseUrl = await storage.ref('images').child(feedId).child(imageAsFile.name).getDownloadURL();
-                            initialLoadDeck(imagePositions, 0, firebaseUrl);
-                        });
+                        imgURI = canvas.toDataURL("image/jpeg");
+                        fileFromCanvas = dataURItoBlob(imgURI);
+                        executeUpload(fileFromCanvas, imageAsFile.name, imagePositions);
                     },
                     loadImgOptions
-                  );
+                );
             }
         );
     }
