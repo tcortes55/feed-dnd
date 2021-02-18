@@ -19,14 +19,58 @@ const FormContainer = styled.form`
     margin: auto;
 `;
 
-const loadImgOptions = { 
-    maxWidth: 100,
-    maxHeight: 100,
-    cover: true,
-    crop: true,
-    imageSmoothingQuality: 'high',
-    orientation: true 
-};
+// const loadImgOptions = { 
+//     // maxWidth: 100,
+//     // maxHeight: 100,
+//     // cover: true,
+//     // crop: true,
+//     // imageSmoothingEnabled: false,
+//     // canvas: true,
+//     orientation: true 
+// };
+
+function compress(source_img_obj, quality, output_format){
+    console.log(source_img_obj);
+
+    var mime_type = "image/jpeg";
+    if(typeof output_format !== "undefined" && output_format=="png"){
+        mime_type = "image/png";
+    }
+    
+    var natW = source_img_obj.naturalWidth;
+    var natH = source_img_obj.naturalHeight;
+    console.log("w=" + natW + " h=" + natH);
+
+    var maxWidth = 100;
+    var offsetX = 0;
+    var offsetY = 0;
+    var ratio = natH / natW;
+
+    console.log("ratio=" + ratio);
+
+    if (ratio > 1) {
+        natW = maxWidth;
+        natH = ratio * maxWidth;
+        console.log("w=" + natW + " h=" + natH);
+        offsetY = (natH - natW) / 2 * (-1);
+    }
+    else {
+        natH = maxWidth;
+        natW = ratio * maxWidth;
+        console.log("w=" + natW + " h=" + natH);
+        offsetX = (natW - natH) / 2 * (-1);
+    }
+
+    console.log("offX=" + offsetX + " offY=" + offsetY);
+
+    var cvs = document.createElement('canvas');
+    cvs.width = maxWidth;
+    cvs.height = maxWidth;
+
+    var ctx = cvs.getContext("2d").drawImage(source_img_obj, offsetX, offsetY, natW, natH);
+    var newImageData = cvs.toDataURL(mime_type, quality/100);
+    return cvs;
+}
 
 function dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string
@@ -87,11 +131,37 @@ function UploadForm({ imagePositions }) {
                 loadImage(
                     imageAsFile,
                     function (canvas) {
+                        console.log(canvas);
+                        document.body.appendChild(canvas);
                         imgURI = canvas.toDataURL("image/jpeg");
-                        fileFromCanvas = dataURItoBlob(imgURI);
-                        executeUpload(fileFromCanvas, imageAsFile.name, imagePositions);
+                        console.log(imgURI);
+                        let imageFoo = new Image();
+                        imageFoo.src = imgURI;
+                        imageFoo.title = imageAsFile.name;
+
+                        console.log(imageFoo.src);
+
+                        imageFoo.onload = function() {
+                            console.log(imageFoo)
+                            let lala = compress(imageFoo, 100);
+                            console.log(lala)
+                            document.body.appendChild(lala);
+                            let imgURI2 = lala.toDataURL("image/jpeg");
+                            console.log(imgURI2)
+                            alert(imgURI2);
+                            fileFromCanvas = dataURItoBlob(imgURI2);
+                            executeUpload(fileFromCanvas, imageAsFile.name, imagePositions);
+                        }
                     },
-                    loadImgOptions
+                    { 
+                        // maxWidth: 100,
+                        // maxHeight: 100,
+                        // cover: true,
+                        // crop: true,
+                        // imageSmoothingEnabled: false,
+                        canvas: true,
+                        orientation: true 
+                    }
                 );
             }
         );
