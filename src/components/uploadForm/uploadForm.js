@@ -3,6 +3,7 @@ import { storage } from '../../firebase/firebase';
 import { initialLoadDeck } from '../../PictureManager';
 import { getUserId } from '../../firebase/feedIdManager';
 import { UploadIcon } from '../icons/icons';
+import loadImage from 'blueimp-load-image';
 import styled from 'styled-components';
 
 const MenuItemWrapper = styled.div`
@@ -18,9 +19,55 @@ const FormContainer = styled.form`
     margin: auto;
 `;
 
+const loadImgOptions = { 
+    maxWidth: 100,
+    maxHeight: 100,
+    cover: true,
+    crop: true,
+    imageSmoothingQuality: 'high',
+    orientation: true 
+};
+
+function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], {type:mimeString});
+}
+
+function executeUpload(file, filename, imagePositions) {   
+    let feedId = getUserId();          
+
+    const uploadTask = storage.ref(`/images/${feedId}/${filename}`).put(file);
+
+    uploadTask.on('state_changed',
+    (snapshot) => {
+        console.log(snapshot);
+    },
+    (err) => {
+        console.log(err);
+    },
+    async () => {
+        const firebaseUrl = await storage.ref('images').child(feedId).child(filename).getDownloadURL();
+        initialLoadDeck(imagePositions, 0, firebaseUrl);
+    });
+}
+
 function UploadForm({ imagePositions }) {
     const handleImageAsFile = (e) => {
         const imagesAsFiles = e.target.files;
+        console.log('e.target.result');
+        console.log(e.target.files[0]);
         handleFirebaseUpload(imagesAsFiles);
     }
 
@@ -32,23 +79,20 @@ function UploadForm({ imagePositions }) {
             console.log(`Not an image`);
         }
 
-        let feedId = getUserId();
-
         Array.from(imagesAsFiles).forEach(
             (imageAsFile) => {
-                const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(imageAsFile);
+                var imgURI;
+                var fileFromCanvas;
 
-                uploadTask.on('state_changed',
-                (snapshot) => {
-                    console.log(snapshot);
-                },
-                (err) => {
-                    console.log(err);
-                },
-                async () => {
-                    const firebaseUrl = await storage.ref('images').child(feedId).child(imageAsFile.name).getDownloadURL();
-                    initialLoadDeck(imagePositions, 0, firebaseUrl);
-                });
+                loadImage(
+                    imageAsFile,
+                    function (canvas) {
+                        imgURI = canvas.toDataURL("image/jpeg");
+                        fileFromCanvas = dataURItoBlob(imgURI);
+                        executeUpload(fileFromCanvas, imageAsFile.name, imagePositions);
+                    },
+                    loadImgOptions
+                );
             }
         );
     }
