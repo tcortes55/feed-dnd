@@ -113,7 +113,8 @@ function UploadForm({ imagePositions }) {
                         console.log(img);
                         document.body.appendChild(img);
                         imageObj.src = img.src;
-                    }
+                    },
+                    { orientation: true }
                   )
 
                 // imageObj.title = imageAsFile.name;
