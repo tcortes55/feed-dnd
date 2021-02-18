@@ -3,6 +3,7 @@ import { storage } from '../../firebase/firebase';
 import { initialLoadDeck } from '../../PictureManager';
 import { getUserId } from '../../firebase/feedIdManager';
 import { UploadIcon } from '../icons/icons';
+import loadImage from 'blueimp-load-image';
 import styled from 'styled-components';
 
 const MenuItemWrapper = styled.div`
@@ -104,8 +105,19 @@ function UploadForm({ imagePositions }) {
                 console.log(imageAsFile);
 
                 var imageObj = new Image();
-                imageObj.title = imageAsFile.name;
-                imageObj.src = URL.createObjectURL(imageAsFile);
+
+                loadImage(
+                    imageAsFile,
+                    function (img) {
+                        console.log('img');
+                        console.log(img);
+                        document.body.appendChild(img);
+                        imageObj.src = img.src;
+                    }
+                  )
+
+                // imageObj.title = imageAsFile.name;
+                // imageObj.src = URL.createObjectURL(imageAsFile);
                 // alert(imageObj);
                 console.log('imageObj');
                 console.log(imageObj);
