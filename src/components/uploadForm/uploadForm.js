@@ -19,48 +19,14 @@ const FormContainer = styled.form`
     margin: auto;
 `;
 
-function compress(source_img_obj, quality, output_format){
-    console.log(source_img_obj);
-
-    var mime_type = "image/jpeg";
-    if(typeof output_format !== "undefined" && output_format=="png"){
-        mime_type = "image/png";
-    }
-    
-    var natW = source_img_obj.naturalWidth;
-    var natH = source_img_obj.naturalHeight;
-    console.log("w=" + natW + " h=" + natH);
-
-    var maxWidth = 100;
-    var offsetX = 0;
-    var offsetY = 0;
-    var ratio = natH / natW;
-
-    console.log("ratio=" + ratio);
-
-    if (ratio > 1) {
-        natW = maxWidth;
-        natH = ratio * maxWidth;
-        console.log("w=" + natW + " h=" + natH);
-        offsetY = (natH - natW) / 2 * (-1);
-    }
-    else {
-        natH = maxWidth;
-        natW = ratio * maxWidth;
-        console.log("w=" + natW + " h=" + natH);
-        offsetX = (natW - natH) / 2 * (-1);
-    }
-
-    console.log("offX=" + offsetX + " offY=" + offsetY);
-
-    var cvs = document.createElement('canvas');
-    cvs.width = maxWidth;
-    cvs.height = maxWidth;
-
-    var ctx = cvs.getContext("2d").drawImage(source_img_obj, offsetX, offsetY, natW, natH);
-    var newImageData = cvs.toDataURL(mime_type, quality/100);
-    return cvs;
-}
+const loadImgOptions = { 
+    maxWidth: 100,
+    maxHeight: 100,
+    cover: true,
+    crop: true,
+    imageSmoothingQuality: 'high',
+    orientation: true 
+};
 
 function dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string
@@ -99,25 +65,11 @@ function UploadForm({ imagePositions }) {
 
         Array.from(imagesAsFiles).forEach(
             (imageAsFile) => {
-
-                // COMPRESS IMAGE AND SET RATIO 1:1 HERE
-                console.log('before compress');
-                console.log(imageAsFile);
-
-                var imageObj;// = new Image();
-
                 loadImage(
                     imageAsFile,
-                    function (img) {
-                        console.log('img');
-                        console.log(img);
-                        // document.body.appendChild(img);
-                        // imageObj = new Image();
-
-                        var lala3 = img.toDataURL("image/jpeg");
-                        var fileFromCanvas = dataURItoBlob(lala3);
-                        console.log('fileFromCanvas');
-                        console.log(fileFromCanvas);
+                    function (canvas) {
+                        var imgURI = canvas.toDataURL("image/jpeg");
+                        var fileFromCanvas = dataURItoBlob(imgURI);
                     
                         const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(fileFromCanvas);
 
@@ -133,43 +85,8 @@ function UploadForm({ imagePositions }) {
                             initialLoadDeck(imagePositions, 0, firebaseUrl);
                         });
                     },
-                    { 
-                        maxWidth: 100,
-                        maxHeight: 100,
-                        cover: true,
-                        crop: true,
-                        imageSmoothingQuality: 'high',
-                        orientation: true 
-                    }
-                  )
-
-                // imageObj.title = imageAsFile.name;
-                // imageObj.src = URL.createObjectURL(imageAsFile);
-                // alert(imageObj);
-                console.log('imageObj');
-                console.log(imageObj);
-                
-                // var lala3;
-                // imageObj.onload = function() {
-                //     var canvas4 = compress(imageObj, 80, 100);
-                //     lala3 = canvas4.toDataURL("image/jpeg");
-
-                //     var fileFromCanvas = dataURItoBlob(lala3)
-                    
-                //     const uploadTask = storage.ref(`/images/${feedId}/${imageAsFile.name}`).put(fileFromCanvas);
-
-                //     uploadTask.on('state_changed',
-                //     (snapshot) => {
-                //         console.log(snapshot);
-                //     },
-                //     (err) => {
-                //         console.log(err);
-                //     },
-                //     async () => {
-                //         const firebaseUrl = await storage.ref('images').child(feedId).child(imageAsFile.name).getDownloadURL();
-                //         initialLoadDeck(imagePositions, 0, firebaseUrl);
-                //     });
-                // };
+                    loadImgOptions
+                  );
             }
         );
     }
