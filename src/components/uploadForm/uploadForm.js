@@ -20,8 +20,8 @@ const FormContainer = styled.form`
 `;
 
 const loadImgOptions = { 
-    maxWidth: 100,
-    maxHeight: 100,
+    maxWidth: 300,
+    maxHeight: 300,
     cover: true,
     crop: true,
     imageSmoothingQuality: 'high',
