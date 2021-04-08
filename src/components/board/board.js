@@ -7,6 +7,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { isMobile } from 'react-device-detect';
 import Carousel from '../carousel';
+import LoginForm from '../loginForm';
 import { Templates, Boards } from '../../constants';
 import Menu from '../menu';
 import { startUi } from '../../firebase/firebase';
@@ -65,10 +66,20 @@ function renderBoard(imagePositions, selectedGrid) {
 }
 
 function Board({ imagePositions }) {
-
     useEffect(() => {
         startUi();
     });
+
+    const [loginFormVisibility, setLoginFormVisibility] = useState(false);
+
+    function toggleLoginForm() {
+        if (loginFormVisibility) {
+            setLoginFormVisibility(false);
+        }
+        else {
+            setLoginFormVisibility(true);
+        }
+    }
 
     const [selectedGrid, setSelectedGrid] = useState(Templates.BLANK)
 
@@ -81,8 +92,8 @@ function Board({ imagePositions }) {
             <BoardWrapper>
                 {renderBoard(imagePositions, selectedGrid)}
                 { isMobile && <Carousel>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</Carousel> }
-                <div id ="firebaseui-auth-container"></div>
-                <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid}></Menu>
+                <LoginForm loginFormVisibility={loginFormVisibility}></LoginForm>
+                <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid} toggleLoginForm={toggleLoginForm}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>
         </DndProvider>

@@ -16,7 +16,7 @@ const MenuContainer = styled.div`
     overflow: visible;
 `;
 
-function Menu({ imagePositions, selectedGrid, updateSelectedGrid }) {
+function Menu({ imagePositions, selectedGrid, updateSelectedGrid, toggleLoginForm }) {
     const [{ canDrop }] = useDrop({
         accept: ItemTypes.PICTURE,
         // drop: () => {
@@ -35,7 +35,7 @@ function Menu({ imagePositions, selectedGrid, updateSelectedGrid }) {
     
     return (
         !canDrop && <MenuContainer>
-            <UserForm></UserForm>
+            <UserForm toggleLoginForm={toggleLoginForm}></UserForm>
             <UploadForm imagePositions={imagePositions}></UploadForm>
             <TemplateSelector selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid}></TemplateSelector>
         </MenuContainer>

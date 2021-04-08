@@ -16,10 +16,9 @@ const IconWrapper = styled.div`
     height: fit-content;
 `;
 
-function UserForm() {
+function UserForm({ toggleLoginForm }) {
     function handleClick() {
-        // toggleItemList();
-        console.log("click");
+        toggleLoginForm();
     }
 
     return (
