@@ -48,4 +48,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       );
     });
   }
+  else {
+    firebase.auth().signInAnonymously();
+  }
 });

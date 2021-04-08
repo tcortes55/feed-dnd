@@ -58,7 +58,9 @@ var uiConfig = {
     privacyPolicyUrl: '<your-privacy-policy-url>'
   };
 
-ui.start('#firebaseui-auth-container', uiConfig);
+export function startUi() {
+    ui.start('#firebaseui-auth-container', uiConfig);
+}
 
 export function getImagePositions() {
     var getImagePositionsPromise = new Promise(function(resolve, reject) {

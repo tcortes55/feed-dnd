@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BoardSquare from '../boardSquare';
 import Dustbin from '../dustbin';
 import styled, { css } from 'styled-components';
@@ -9,6 +9,7 @@ import { isMobile } from 'react-device-detect';
 import Carousel from '../carousel';
 import { Templates, Boards } from '../../constants';
 import Menu from '../menu';
+import { startUi } from '../../firebase/firebase';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
@@ -64,6 +65,11 @@ function renderBoard(imagePositions, selectedGrid) {
 }
 
 function Board({ imagePositions }) {
+
+    useEffect(() => {
+        startUi();
+    });
+
     const [selectedGrid, setSelectedGrid] = useState(Templates.BLANK)
 
     function updateSelectedGrid(newSelection) {
@@ -75,6 +81,7 @@ function Board({ imagePositions }) {
             <BoardWrapper>
                 {renderBoard(imagePositions, selectedGrid)}
                 { isMobile && <Carousel>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</Carousel> }
+                <div id ="firebaseui-auth-container"></div>
                 <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>
