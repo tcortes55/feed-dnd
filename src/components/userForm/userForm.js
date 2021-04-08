@@ -9,11 +9,24 @@ const MenuItemWrapper = styled.div`
     max-height: 50px;
 `;
 
+const IconWrapper = styled.div`
+    margin: auto;
+    padding: 0px;
+    width: fit-content;
+    height: fit-content;
+`;
+
 function UserForm() {
+    function handleClick() {
+        // toggleItemList();
+        console.log("click");
+    }
 
     return (
         <MenuItemWrapper>
-            <UserIcon></UserIcon>
+            <IconWrapper onClick={handleClick}>
+                <UserIcon></UserIcon>
+            </IconWrapper>
         </MenuItemWrapper>
     )
 }
