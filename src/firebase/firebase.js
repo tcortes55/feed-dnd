@@ -5,6 +5,7 @@ import 'firebase/firestore';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 import { getUserId } from './feedIdManager';
+import { initialLoad } from '../PictureManager';
 
 var firebaseConfig = {
     apiKey: "AIzaSyAxdiOlnFBRP-FEoGZnKhJQkQ4BTL4Thyg",
@@ -43,7 +44,14 @@ var uiConfig = {
         }
         // The credential the user tried to sign in with.
         var cred = error.credential;
-        return firebase.auth().signInWithCredential(cred);
+        
+        return firebase.auth().signInWithCredential(cred).then(function() {
+            var positions = getImagePositions().then(function(result) {
+                if (result.imagePositions) {
+                    initialLoad(result.imagePositions);
+                }
+            });
+        });
 
 
         // If using Firebase Realtime Database. The anonymous user data has to be

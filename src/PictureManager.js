@@ -133,3 +133,9 @@ export function deleteImage(imagePositions, board, position) {
 
     emitChange();
 }
+
+export function initialLoad(positions) {
+    imagePositions = Object.assign({}, positions);
+
+    emitChange();
+}
