@@ -68,9 +68,9 @@ function renderBoard(imagePositions, selectedGrid) {
 function Board({ imagePositions }) {
     useEffect(() => {
         startUi();
-    });
+    }, []);
 
-    const [loginFormVisibility, setLoginFormVisibility] = useState(false);
+    const [loginFormVisibility, setLoginFormVisibility] = useState(true);
 
     function toggleLoginForm() {
         if (loginFormVisibility) {

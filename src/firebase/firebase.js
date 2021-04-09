@@ -120,6 +120,7 @@ var uiConfig = {
   };
 
 export function startUi() {
+    console.log("startUi");
     ui.start('#firebaseui-auth-container', uiConfig);
 }
 
