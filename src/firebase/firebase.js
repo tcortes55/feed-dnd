@@ -22,6 +22,8 @@ firebase.initializeApp(firebaseConfig);
 const storage = firebase.storage();
 var db = firebase.firestore();
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
+var data = null;
+var anonymousUser = firebase.auth().currentUser;
 
 var uiConfig = {
     callbacks: {
@@ -31,6 +33,53 @@ var uiConfig = {
         // or whether we leave that to developer to handle.
         return false;
       },
+      signInFailure: function(error) {
+        // For merge conflicts, the error.code will be
+        // 'firebaseui/anonymous-upgrade-merge-conflict'.
+        console.log(error);
+        console.log(error.code);
+        if (error.code != 'firebaseui/anonymous-upgrade-merge-conflict') {
+          return Promise.resolve();
+        }
+        // The credential the user tried to sign in with.
+        var cred = error.credential;
+        return firebase.auth().signInWithCredential(cred);
+
+
+        // If using Firebase Realtime Database. The anonymous user data has to be
+        // copied to the non-anonymous user.
+        var app = firebase.app();
+        // Save anonymous user data first.
+        return db.ref('users/' + firebase.auth().currentUser.uid)
+            .once('value')
+            .then(function(snapshot) {
+              data = snapshot.val();
+              // This will trigger onAuthStateChanged listener which
+              // could trigger a redirect to another page.
+              // Ensure the upgrade flow is not interrupted by that callback
+              // and that this is given enough time to complete before
+              // redirection.
+              return firebase.auth().signInWithCredential(cred);
+            })
+            .then(function(user) {
+              // Original Anonymous Auth instance now has the new user.
+              return db.ref('users/' + user.uid).set(data);
+            })
+            .then(function() {
+              // Delete anonymnous user.
+              return anonymousUser.delete();
+            }).then(function() {
+              // Clear data in case a new user signs in, and the state change
+              // triggers.
+              data = null;
+              // FirebaseUI will reset and the UI cleared when this promise
+              // resolves.
+              // signInSuccessWithAuthResult will not run. Successful sign-in
+              // logic has to be run explicitly.
+              window.location.assign('<url-to-redirect-to-on-success>');
+            });
+  
+      },
       uiShown: function() {
         // The widget is rendered.
         // Hide the loader.
@@ -38,7 +87,7 @@ var uiConfig = {
       }
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-    // autoUpgradeAnonymousUsers: true,
+    autoUpgradeAnonymousUsers: true,
     signInFlow: 'popup',
     // signInSuccessUrl: '<url-to-redirect-to-on-success>',
     signInOptions: [
@@ -47,7 +96,8 @@ var uiConfig = {
     //   firebase.auth.FacebookAuthProvider.PROVIDER_I
       {
           provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-          requireDisplayName: false
+          requireDisplayName: false,
+          forceSameDevice: true
       },
 
       firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
