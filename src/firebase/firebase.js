@@ -24,7 +24,7 @@ const storage = firebase.storage();
 var db = firebase.firestore();
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 var data = null;
-var anonymousUser = firebase.auth().currentUser;
+// var currentUser = firebase.auth().currentUser;
 
 var uiConfig = {
     callbacks: {
@@ -44,14 +44,22 @@ var uiConfig = {
         }
         // The credential the user tried to sign in with.
         var cred = error.credential;
+        var currentUser = firebase.auth().currentUser;
         
-        return firebase.auth().signInWithCredential(cred).then(function() {
-            var positions = getImagePositions().then(function(result) {
-                if (result.imagePositions) {
-                    initialLoad(result.imagePositions);
+        return firebase.auth().signInWithCredential(cred)
+            .then(function() {
+                var positions = getImagePositions().then(function(result) {
+                    if (result.imagePositions) {
+                        initialLoad(result.imagePositions);
+                    }
+                });
+            })
+            .then(function() {
+                if (currentUser.isAnonymous) {
+                    currentUser.delete();
+                    deleteUserData(currentUser.uid);
                 }
             });
-        });
 
 
         // If using Firebase Realtime Database. The anonymous user data has to be
@@ -75,7 +83,7 @@ var uiConfig = {
             })
             .then(function() {
               // Delete anonymnous user.
-              return anonymousUser.delete();
+              return currentUser.delete();
             }).then(function() {
               // Clear data in case a new user signs in, and the state change
               // triggers.
@@ -154,6 +162,15 @@ export function deleteImageFromStorage(imageUrl) {
     imageFileRef.delete().then(function() {
         console.log("File deleted!");
     })
+}
+
+function deleteUserData(uid) {
+    db.collection("users").doc(uid).delete();
+    
+    // const bucket = storage.bucket();
+    // bucket.deleteFiles({
+    //     prefix: `images/${uid}`
+    // });
 }
 
 export  {
