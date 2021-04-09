@@ -24,7 +24,6 @@ const storage = firebase.storage();
 var db = firebase.firestore();
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 var data = null;
-// var currentUser = firebase.auth().currentUser;
 
 var uiConfig = {
     callbacks: {
@@ -35,10 +34,6 @@ var uiConfig = {
         return false;
       },
       signInFailure: function(error) {
-        // For merge conflicts, the error.code will be
-        // 'firebaseui/anonymous-upgrade-merge-conflict'.
-        console.log(error);
-        console.log(error.code);
         if (error.code != 'firebaseui/anonymous-upgrade-merge-conflict') {
           return Promise.resolve();
         }
@@ -166,12 +161,30 @@ export function deleteImageFromStorage(imageUrl) {
 
 function deleteUserData(uid) {
     db.collection("users").doc(uid).delete();
-    
-    // const bucket = storage.bucket();
-    // bucket.deleteFiles({
-    //     prefix: `images/${uid}`
-    // });
+    deleteFolderContents(`images/${uid}`);
 }
+
+function deleteFolderContents(path) {
+    const ref = storage.ref(path);
+    ref.listAll()
+      .then(dir => {
+        dir.items.forEach(fileRef => {
+          deleteFile(ref.fullPath, fileRef.name);
+        });
+        dir.prefixes.forEach(folderRef => {
+          deleteFolderContents(folderRef.fullPath);
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  function deleteFile(pathToFile, fileName) {
+    const ref = firebase.storage().ref(pathToFile);
+    const childRef = ref.child(fileName);
+    childRef.delete()
+  }
 
 export  {
     storage, firebase as default
