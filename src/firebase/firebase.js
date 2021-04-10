@@ -25,9 +25,22 @@ var db = firebase.firestore();
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 var data = null;
 
+export function startUi() {
+    console.log("startUi");
+    ui.start('#firebaseui-auth-container', uiConfig);
+}
+
 var uiConfig = {
     callbacks: {
       signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+          console.log("authResult=" + authResult.user);
+          console.log("authResult isAnon=" + authResult.user.isAnonymous);
+          if (authResult.user && authResult.user.isAnonymous)
+          {
+              console.log("authResult entra no if");
+              ui.reset();
+              startUi();
+          }
         // User successfully signed in.
         // Return type determines whether we continue the redirect automatically
         // or whether we leave that to developer to handle.
@@ -118,11 +131,6 @@ var uiConfig = {
     // Privacy policy url.
     privacyPolicyUrl: '<your-privacy-policy-url>'
   };
-
-export function startUi() {
-    console.log("startUi");
-    ui.start('#firebaseui-auth-container', uiConfig);
-}
 
 export function getImagePositions() {
     var getImagePositionsPromise = new Promise(function(resolve, reject) {

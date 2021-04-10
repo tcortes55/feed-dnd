@@ -20,6 +20,10 @@ function LoginForm({ loginFormVisibility, toggleLoginForm }) {
         firebase.auth().signOut();
         // toggleLoginForm();
     }
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        console.log("AuthChanged loginForm");
+    });
     
     useEffect(() => {
         firebase.auth().onAuthStateChanged(function(user) {
