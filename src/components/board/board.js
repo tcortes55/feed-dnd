@@ -10,7 +10,8 @@ import Carousel from '../carousel';
 import LoginForm from '../loginForm';
 import { Templates, Boards } from '../../constants';
 import Menu from '../menu';
-import { startUi } from '../../firebase/firebase';
+import firebase from '../../firebase/firebase';
+import { startUi, startUi2 } from '../../firebase/firebase';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
@@ -67,14 +68,27 @@ function renderBoard(imagePositions, selectedGrid) {
 
 function Board({ imagePositions }) {
 
-    const [loginFormVisibility, setLoginFormVisibility] = useState(true);
+    const [loginFormVisibility, setLoginFormVisibility] = useState(false);
+
+    console.log("loginFormVisibility=" + loginFormVisibility);
+
+    function hideLoginForm() {
+        console.log("setando pra false NO HIDE")
+        setLoginFormVisibility(false);
+    }
 
     function toggleLoginForm() {
+        console.log("entrou no toggle")
         if (loginFormVisibility) {
+            console.log("setando pra false")
             setLoginFormVisibility(false);
         }
         else {
+            console.log("setando pra true")
             setLoginFormVisibility(true);
+            if (firebase.auth().currentUser.isAnonymous) {
+                startUi2(hideLoginForm);
+            }
         }
     }
 
@@ -89,7 +103,7 @@ function Board({ imagePositions }) {
             <BoardWrapper>
                 {renderBoard(imagePositions, selectedGrid)}
                 { isMobile && <Carousel>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</Carousel> }
-                <LoginForm loginFormVisibility={loginFormVisibility} toggleLoginForm={toggleLoginForm}></LoginForm>
+                <LoginForm loginFormVisibility={loginFormVisibility} hideLoginForm={hideLoginForm}></LoginForm>
                 <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid} toggleLoginForm={toggleLoginForm}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../../firebase/firebase';
-import { startUi } from '../../firebase/firebase';
+import { startUi, startUi2 } from '../../firebase/firebase';
 import styled from 'styled-components';
 
 const AuthContainer = styled.div`
@@ -12,7 +12,7 @@ const AuthWrapper = styled(AuthContainer)`
     }
 `;
 
-function LoginForm({ loginFormVisibility, toggleLoginForm }) {
+function LoginForm({ loginFormVisibility, hideLoginForm }) {
     let currentUser = firebase.auth().currentUser;
     let isLoggedAndNotAnon = currentUser && !currentUser.isAnonymous;
 
@@ -21,19 +21,20 @@ function LoginForm({ loginFormVisibility, toggleLoginForm }) {
         // toggleLoginForm();
     }
 
-    firebase.auth().onAuthStateChanged(function(user) {
-        console.log("AuthChanged loginForm");
-    });
+    // firebase.auth().onAuthStateChanged(function(user) {
+    //     console.log("AuthChanged loginForm");
+    // });
     
     useEffect(() => {
         firebase.auth().onAuthStateChanged(function(user) {
             if (!(user && !user.isAnonymous))
             {
-                console.log("startUi dentro do useEffect")
-                startUi();
+                console.log("startUi2 dentro do useEffect")
+                console.log("hideLoginForm="+ hideLoginForm)
+                startUi2(hideLoginForm);
             }
 
-            toggleLoginForm();
+            hideLoginForm();
         });
     }, []);
         
