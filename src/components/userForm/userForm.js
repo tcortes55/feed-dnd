@@ -18,6 +18,7 @@ const IconWrapper = styled.div`
 
 function UserForm({ toggleLoginForm }) {
     function handleClick() {
+        console.log("chamando toggle a partir do click")
         toggleLoginForm();
     }
 

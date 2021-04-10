@@ -37,20 +37,13 @@ export function startUi2(callbackSetState) {
 
     var uiConfig2 = {
         callbacks: {
-          signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-              console.log("authResult=" + authResult.user);
-              console.log("authResult isAnon=" + authResult.user.isAnonymous);
-              if (authResult.user && authResult.user.isAnonymous)
-              {
-                  console.log("authResult entra no if");
-                  callbackSetState();
-                //   ui.reset();
-                //   startUi();
-              }
-            // User successfully signed in.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.
-            return false;
+            signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+                console.log("authResult=" + authResult.user);
+                console.log("authResult isAnon=" + authResult.user.isAnonymous);
+                console.log("authResult entra no if");
+                callbackSetState();
+                
+                return false;
           },
           signInFailure: function(error) {
             if (error.code != 'firebaseui/anonymous-upgrade-merge-conflict') {
