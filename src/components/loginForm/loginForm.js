@@ -12,12 +12,13 @@ const AuthWrapper = styled(AuthContainer)`
     }
 `;
 
-function LoginForm({ loginFormVisibility }) {
+function LoginForm({ loginFormVisibility, toggleLoginForm }) {
     let currentUser = firebase.auth().currentUser;
     let isLoggedAndNotAnon = currentUser && !currentUser.isAnonymous;
 
     function handleSignout() {
         firebase.auth().signOut();
+        // toggleLoginForm();
     }
     
     useEffect(() => {
@@ -27,6 +28,8 @@ function LoginForm({ loginFormVisibility }) {
                 console.log("startUi dentro do useEffect")
                 startUi();
             }
+
+            toggleLoginForm();
         });
     }, []);
         

@@ -89,7 +89,7 @@ function Board({ imagePositions }) {
             <BoardWrapper>
                 {renderBoard(imagePositions, selectedGrid)}
                 { isMobile && <Carousel>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</Carousel> }
-                <LoginForm loginFormVisibility={loginFormVisibility}></LoginForm>
+                <LoginForm loginFormVisibility={loginFormVisibility} toggleLoginForm={toggleLoginForm}></LoginForm>
                 <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid} toggleLoginForm={toggleLoginForm}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>
