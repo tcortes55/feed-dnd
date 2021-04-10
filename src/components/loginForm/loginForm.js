@@ -21,13 +21,15 @@ function LoginForm({ loginFormVisibility }) {
     }
     
     useEffect(() => {
-        if (!isLoggedAndNotAnon)
-        {
-            console.log("startUi dentro do useEffect")
-            startUi();
-        }
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (!(user && !user.isAnonymous))
+            {
+                console.log("startUi dentro do useEffect")
+                startUi();
+            }
+        });
     }, []);
-
+        
     return (
         <AuthWrapper>
             <AuthContainer className={loginFormVisibility ? '' : 'hidden'}>
