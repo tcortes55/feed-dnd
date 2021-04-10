@@ -15,6 +15,10 @@ const AuthWrapper = styled(AuthContainer)`
 function LoginForm({ loginFormVisibility }) {
     let currentUser = firebase.auth().currentUser;
     let isLoggedAndNotAnon = currentUser && !currentUser.isAnonymous;
+
+    function handleSignout() {
+        firebase.auth().signOut();
+    }
     
     useEffect(() => {
         if (!isLoggedAndNotAnon)
@@ -28,7 +32,7 @@ function LoginForm({ loginFormVisibility }) {
         <AuthWrapper>
             <AuthContainer className={loginFormVisibility ? '' : 'hidden'}>
                 <div id ="firebaseui-auth-container"></div>
-                {isLoggedAndNotAnon && <div>SIGNOUT</div>}
+                {isLoggedAndNotAnon && <div><button onClick={handleSignout}>SIGNOUT</button></div>}
             </AuthContainer>
         </AuthWrapper>
     )
