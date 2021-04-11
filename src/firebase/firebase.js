@@ -68,9 +68,9 @@ export function startUi(callbackSetState) {
         signInOptions: [
           // Leave the lines as is for the providers you want to offer your users.
         //   firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            {
-                provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID
-            },
+            // {
+            //     provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID
+            // },
             {
                 provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
                 requireDisplayName: false,
