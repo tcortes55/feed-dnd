@@ -20,6 +20,17 @@ const CircleWrapper = styled.div`
     transform: translateY(-5px);
 `;
 
+const CloseCircleWrapper = styled.div`
+    background-color: ${AppColors.Black}; //yellow;//#e9d5bf;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    transform: translate(15px, -15px);
+    float: right;
+`;
+
 export const DustbinIcon = () => {
     return (
         <CircleWrapper>
@@ -39,6 +50,14 @@ export const UploadIcon = () => {
 export const UserIcon = () => {
     return (
         <UserIconSvg fill={AppColors.White} stroke={AppColors.White} width='30px'/>
+    )
+}
+
+export const CloseIcon = () => {
+    return (
+        <CloseCircleWrapper>
+            <XIconSvg fill={AppColors.White} stroke={AppColors.White}/>
+        </CloseCircleWrapper>
     )
 }
 

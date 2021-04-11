@@ -15,7 +15,9 @@ export const AppColors = {
     LightGrey: '#cdcdcd',
     MediumGrey: '#9d9d9d',
     DarkGrey: '#575757',
-    White: '#ffffff'
+    White: '#ffffff',
+    Black: '#000000',
+    LightRoseTransparent: '#e9d5bfbf',
 }
 
 export const Boards = {

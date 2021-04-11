@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../../firebase/firebase';
 import { handleSignout, userIsLoggedAndNotAnon } from '../../firebase/firebase';
+import { CloseIcon } from '../icons/icons';
+import { AppColors } from '../../constants';
 import styled from 'styled-components';
 
 const AuthInnerContainer = styled.div`
-    background-color: #FFFFFF;
+    background-color: ${AppColors.White};
     padding: 10px;
     margin: 30px;
 `;
@@ -18,7 +20,7 @@ const AuthWrapper = styled(AuthContainer)`
     }
 
     .visible {
-        background-color: rgb(0, 0, 0, 0.5);
+        background-color: ${AppColors.LightRoseTransparent};
         position: absolute;
         height: 100%;
         width: 100%;
@@ -30,18 +32,25 @@ const AuthWrapper = styled(AuthContainer)`
 function LoginForm({ loginFormVisibility, hideLoginForm }) {
     let isLoggedAndNotAnon = userIsLoggedAndNotAnon();
     
-    function handleModalClick(e) {
+    function handleOutOfModalClick(e) {
         if(e.target !== e.currentTarget) {
             return;
         }
 
         hideLoginForm();
     }
+    
+    function handleCloseModalButtonClick(e) {
+        hideLoginForm();
+    }
 
     return (
         <AuthWrapper>
-            <AuthContainer className={loginFormVisibility ? 'visible' : 'hidden'} onClick={handleModalClick}>
+            <AuthContainer className={loginFormVisibility ? 'visible' : 'hidden'} onClick={handleOutOfModalClick}>
                 <AuthInnerContainer>
+                    <div onClick={handleCloseModalButtonClick}>
+                        <CloseIcon></CloseIcon>
+                    </div>
                     <div id ="firebaseui-auth-container"></div>
                     {isLoggedAndNotAnon && <div><button onClick={handleSignout}>SIGNOUT</button></div>}
                 </AuthInnerContainer>
