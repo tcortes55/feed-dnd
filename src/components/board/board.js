@@ -92,6 +92,12 @@ function Board({ imagePositions }) {
         }
     }
 
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(function(user) {
+            hideLoginForm();
+        });
+    }, []);
+
     const [selectedGrid, setSelectedGrid] = useState(Templates.BLANK)
 
     function updateSelectedGrid(newSelection) {
@@ -103,7 +109,7 @@ function Board({ imagePositions }) {
             <BoardWrapper>
                 {renderBoard(imagePositions, selectedGrid)}
                 { isMobile && <Carousel>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</Carousel> }
-                <LoginForm loginFormVisibility={loginFormVisibility} hideLoginForm={hideLoginForm}></LoginForm>
+                <LoginForm loginFormVisibility={loginFormVisibility}></LoginForm>
                 <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid} toggleLoginForm={toggleLoginForm}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>

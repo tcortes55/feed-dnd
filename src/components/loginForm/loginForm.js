@@ -12,15 +12,9 @@ const AuthWrapper = styled(AuthContainer)`
     }
 `;
 
-function LoginForm({ loginFormVisibility, hideLoginForm }) {
+function LoginForm({ loginFormVisibility }) {
     let currentUser = firebase.auth().currentUser;
     let isLoggedAndNotAnon = currentUser && !currentUser.isAnonymous;
-    
-    useEffect(() => {
-        firebase.auth().onAuthStateChanged(function(user) {
-            hideLoginForm();
-        });
-    }, []);
         
     return (
         <AuthWrapper>
