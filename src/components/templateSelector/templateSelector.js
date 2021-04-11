@@ -1,6 +1,4 @@
 import React, { Component, useState } from "react";
-import { TemplateBlankIcon, TemplateXIcon, TemplateDiagonalIcon } from '../icons/icons';
-import { Templates } from '../../constants';
 import ItemList from './itemList';
 import TemplateItem from './templateItem';
 import styled, { css } from 'styled-components';

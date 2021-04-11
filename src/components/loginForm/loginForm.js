@@ -29,6 +29,10 @@ const AuthWrapper = styled(AuthContainer)`
     }
 `;
 
+const CloseButtonWrapper = styled.div`
+    transform: translate(15px, -15px);
+`;
+
 function LoginForm({ loginFormVisibility, hideLoginForm }) {
     let isLoggedAndNotAnon = userIsLoggedAndNotAnon();
     
@@ -48,9 +52,9 @@ function LoginForm({ loginFormVisibility, hideLoginForm }) {
         <AuthWrapper>
             <AuthContainer className={loginFormVisibility ? 'visible' : 'hidden'} onClick={handleOutOfModalClick}>
                 <AuthInnerContainer>
-                    <div onClick={handleCloseModalButtonClick}>
+                    <CloseButtonWrapper onClick={handleCloseModalButtonClick}>
                         <CloseIcon></CloseIcon>
-                    </div>
+                    </CloseButtonWrapper>
                     <div id ="firebaseui-auth-container"></div>
                     {isLoggedAndNotAnon && <div><button onClick={handleSignout}>SIGNOUT</button></div>}
                 </AuthInnerContainer>

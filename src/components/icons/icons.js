@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as DustbinIconSvg } from '../../assets/dustbin-icon.svg';
-import { ReactComponent as GridIconSvg } from '../../assets/grid-icon.svg';
 import { ReactComponent as PlusIconSvg } from '../../assets/plus-icon.svg';
 import { ReactComponent as UserIconSvg } from '../../assets/user-icon.svg';
 import { ReactComponent as XIconSvg } from '../../assets/x-icon.svg';
@@ -27,7 +26,6 @@ const CloseCircleWrapper = styled.div`
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
-    transform: translate(15px, -15px);
     float: right;
 `;
 
