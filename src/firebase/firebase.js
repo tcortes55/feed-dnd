@@ -130,6 +130,10 @@ export function startUi2(callbackSetState) {
     ui.start('#firebaseui-auth-container', uiConfig2);
 }
 
+export function handleSignout() {
+    firebase.auth().signOut();
+}
+
 export function getImagePositions() {
     var getImagePositionsPromise = new Promise(function(resolve, reject) {
         var imagePositions = {};
