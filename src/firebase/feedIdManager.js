@@ -7,13 +7,6 @@ function uuidv4() {
 }
 
 export function getUserId() {
-    // let feedUuid = localStorage.getItem('InboxFeedDndOrganizerUuid');
-
-    // if (!feedUuid) {
-    //     feedUuid = uuidv4();
-    //     localStorage.setItem('InboxFeedDndOrganizerUuid', feedUuid);
-    // }
-
     let feedUuid = firebase.auth().currentUser.uid;
     // console.log("userId = " + feedUuid);
     return feedUuid;
