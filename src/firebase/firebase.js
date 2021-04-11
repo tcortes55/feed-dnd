@@ -26,11 +26,11 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 var data = null;
 
 
-export function startUi2(callbackSetState) {
+export function startUi(callbackSetState) {
     console.log("startUi2");
     console.log("hideLoginForm no startUi2="+ callbackSetState)
 
-    var uiConfig2 = {
+    var uiConfig = {
         callbacks: {
             signInSuccessWithAuthResult: function(authResult, redirectUrl) {
                 console.log("authResult=" + authResult.user);
@@ -127,7 +127,7 @@ export function startUi2(callbackSetState) {
       };
 
 
-    ui.start('#firebaseui-auth-container', uiConfig2);
+    ui.start('#firebaseui-auth-container', uiConfig);
 }
 
 export function handleSignout() {
