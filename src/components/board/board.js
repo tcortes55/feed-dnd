@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BoardSquare from '../boardSquare';
 import Dustbin from '../dustbin';
 import styled, { css } from 'styled-components';
@@ -7,8 +7,11 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { isMobile } from 'react-device-detect';
 import Carousel from '../carousel';
+import LoginForm from '../loginForm';
 import { Templates, Boards } from '../../constants';
 import Menu from '../menu';
+import firebase from '../../firebase/firebase';
+import { startUi, userIsAnon } from '../../firebase/firebase';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
@@ -64,6 +67,31 @@ function renderBoard(imagePositions, selectedGrid) {
 }
 
 function Board({ imagePositions }) {
+    const [loginFormVisibility, setLoginFormVisibility] = useState(false);
+
+    function hideLoginForm() {
+        setLoginFormVisibility(false);
+    }
+
+    function toggleLoginForm() {
+        if (loginFormVisibility) {
+            setLoginFormVisibility(false);
+        }
+        else {
+            setLoginFormVisibility(true);
+
+            if (userIsAnon()) {
+                startUi(hideLoginForm);
+            }
+        }
+    }
+
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(function(user) {
+            hideLoginForm();
+        });
+    }, []);
+
     const [selectedGrid, setSelectedGrid] = useState(Templates.BLANK)
 
     function updateSelectedGrid(newSelection) {
@@ -75,7 +103,8 @@ function Board({ imagePositions }) {
             <BoardWrapper>
                 {renderBoard(imagePositions, selectedGrid)}
                 { isMobile && <Carousel>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</Carousel> }
-                <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid}></Menu>
+                <LoginForm loginFormVisibility={loginFormVisibility} hideLoginForm={hideLoginForm}></LoginForm>
+                <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid} toggleLoginForm={toggleLoginForm}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
             </BoardWrapper>
         </DndProvider>

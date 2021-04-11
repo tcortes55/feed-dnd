@@ -9,11 +9,24 @@ const MenuItemWrapper = styled.div`
     max-height: 50px;
 `;
 
-function UserForm() {
+const IconWrapper = styled.div`
+    margin: auto;
+    padding: 0px;
+    width: fit-content;
+    height: fit-content;
+`;
+
+function UserForm({ toggleLoginForm }) {
+    function handleClick() {
+        console.log("chamando toggle a partir do click")
+        toggleLoginForm();
+    }
 
     return (
         <MenuItemWrapper>
-            <UserIcon></UserIcon>
+            <IconWrapper onClick={handleClick}>
+                <UserIcon></UserIcon>
+            </IconWrapper>
         </MenuItemWrapper>
     )
 }

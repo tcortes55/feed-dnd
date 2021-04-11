@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as DustbinIconSvg } from '../../assets/dustbin-icon.svg';
-import { ReactComponent as GridIconSvg } from '../../assets/grid-icon.svg';
 import { ReactComponent as PlusIconSvg } from '../../assets/plus-icon.svg';
 import { ReactComponent as UserIconSvg } from '../../assets/user-icon.svg';
 import { ReactComponent as XIconSvg } from '../../assets/x-icon.svg';
@@ -18,6 +17,16 @@ const CircleWrapper = styled.div`
     margin-right: auto;
     border-radius: 50%;
     transform: translateY(-5px);
+`;
+
+const CloseCircleWrapper = styled.div`
+    background-color: ${AppColors.Black}; //yellow;//#e9d5bf;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    float: right;
 `;
 
 export const DustbinIcon = () => {
@@ -39,6 +48,14 @@ export const UploadIcon = () => {
 export const UserIcon = () => {
     return (
         <UserIconSvg fill={AppColors.White} stroke={AppColors.White} width='30px'/>
+    )
+}
+
+export const CloseIcon = () => {
+    return (
+        <CloseCircleWrapper>
+            <XIconSvg fill={AppColors.White} stroke={AppColors.White}/>
+        </CloseCircleWrapper>
     )
 }
 

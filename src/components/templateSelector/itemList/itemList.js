@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Templates, AppColors } from '../../../constants';
+import { CloseIcon } from '../../icons/icons';
 import TemplateItem from '../templateItem';
 import styled, { css } from 'styled-components';
 
@@ -18,9 +19,16 @@ const TemplateList = styled.div`
     margin: 15px;
 `;
 
+const CloseButtonWrapper = styled.div`
+    transform: translate(5px, -5px);
+`;
+
 function ItemList({ updateSelectedGrid, toggleItemList }) {
     return (
         <TemplateListContainer>
+            <CloseButtonWrapper onClick={toggleItemList}>
+                <CloseIcon></CloseIcon>
+            </CloseButtonWrapper>
             <TemplateList>
                 <TemplateItem templateType={Templates.BLANK} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList}  isLarge={true}></TemplateItem>
                 <TemplateItem templateType={Templates.X} updateSelectedGrid={updateSelectedGrid} toggleItemList={toggleItemList} isLarge={true}></TemplateItem>
