@@ -86,6 +86,20 @@ export function startUi(callbackSetState) {
     };
 
     ui.start('#firebaseui-auth-container', uiConfig);
+
+    uiLocalization();
+}
+
+function uiLocalization() {
+    var emailLoginTitle = document.querySelector('[data-provider-id="password"] > span.firebaseui-idp-text-long');
+    emailLoginTitle.innerText = "Login com e-mail";
+
+    var anonymousLoginTitle = document.querySelector('[data-provider-id="anonymous"] > span.firebaseui-idp-text-long');
+    anonymousLoginTitle.innerText = "Continuar como visitante";
+
+    var authUiFooter = document.querySelector('div.firebaseui-card-footer');
+    authUiFooter.parentNode.removeChild(authUiFooter);
+
 }
 
 export function handleSignout() {
