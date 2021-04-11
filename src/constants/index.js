@@ -10,6 +10,7 @@ export const Templates = {
 
 export const AppColors = {
     LightRose: '#e9d5bf',
+    MediumRose: '#e48166',
     MediumBlue: '#013750',
     DarkBlue: '#031b23',
     LightGrey: '#cdcdcd',
