@@ -38,8 +38,8 @@ let init = false;
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    console.log("isAnonymous=" + user.isAnonymous);
-    console.log("email=" + user.email);
+    // console.log("isAnonymous=" + user.isAnonymous);
+    // console.log("email=" + user.email);
    
     if (!init) {
       startApp();
@@ -51,7 +51,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         startApp();
       }
       else {
-        console.log("esvaziando");
+        // console.log("esvaziando");
         initialLoad(generateEmptyTemplate());
       }
     });

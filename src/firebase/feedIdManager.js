@@ -15,6 +15,6 @@ export function getUserId() {
     // }
 
     let feedUuid = firebase.auth().currentUser.uid;
-    console.log("userId = " + feedUuid);
+    // console.log("userId = " + feedUuid);
     return feedUuid;
 }
