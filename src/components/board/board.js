@@ -11,7 +11,7 @@ import LoginForm from '../loginForm';
 import { Templates, Boards } from '../../constants';
 import Menu from '../menu';
 import firebase from '../../firebase/firebase';
-import { startUi } from '../../firebase/firebase';
+import { startUi, userIsAnon } from '../../firebase/firebase';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
@@ -86,7 +86,7 @@ function Board({ imagePositions }) {
         else {
             console.log("setando pra true")
             setLoginFormVisibility(true);
-            if (firebase.auth().currentUser.isAnonymous) {
+            if (userIsAnon()) {
                 startUi(hideLoginForm);
             }
         }

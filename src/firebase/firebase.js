@@ -134,6 +134,16 @@ export function handleSignout() {
     firebase.auth().signOut();
 }
 
+export function userIsLoggedAndNotAnon() {
+    let currentUser = firebase.auth().currentUser;
+    return currentUser && !currentUser.isAnonymous;
+}
+
+export function userIsAnon() {
+    let currentUser = firebase.auth().currentUser;
+    return currentUser.isAnonymous;
+}
+
 export function getImagePositions() {
     var getImagePositionsPromise = new Promise(function(resolve, reject) {
         var imagePositions = {};

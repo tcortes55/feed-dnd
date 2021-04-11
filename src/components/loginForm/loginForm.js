@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../../firebase/firebase';
-import { handleSignout } from '../../firebase/firebase';
+import { handleSignout, userIsLoggedAndNotAnon } from '../../firebase/firebase';
 import styled from 'styled-components';
 
 const AuthContainer = styled.div`
@@ -13,8 +13,7 @@ const AuthWrapper = styled(AuthContainer)`
 `;
 
 function LoginForm({ loginFormVisibility }) {
-    let currentUser = firebase.auth().currentUser;
-    let isLoggedAndNotAnon = currentUser && !currentUser.isAnonymous;
+    let isLoggedAndNotAnon = userIsLoggedAndNotAnon();
         
     return (
         <AuthWrapper>
