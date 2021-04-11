@@ -23,7 +23,7 @@ const AuthWrapper = styled(AuthContainer)`
         height: 100%;
         width: 100%;
         top: 0px;
-        /* z-index: 999; */
+        z-index: 999;
     }
 `;
 
