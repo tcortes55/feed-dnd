@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../../firebase/firebase';
-import { startUi, startUi2 } from '../../firebase/firebase';
+import { startUi2 } from '../../firebase/firebase';
 import styled from 'styled-components';
 
 const AuthContainer = styled.div`

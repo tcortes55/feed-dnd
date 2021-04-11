@@ -11,7 +11,7 @@ import LoginForm from '../loginForm';
 import { Templates, Boards } from '../../constants';
 import Menu from '../menu';
 import firebase from '../../firebase/firebase';
-import { startUi, startUi2 } from '../../firebase/firebase';
+import { startUi2 } from '../../firebase/firebase';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 

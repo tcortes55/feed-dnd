@@ -8,7 +8,6 @@ import { observe, initialLoad } from './PictureManager';
 import { getUserId } from './firebase/feedIdManager';
 import { getImagePositions } from './firebase/firebase';
 import firebase from './firebase/firebase';
-import { startUi } from './firebase/firebase';
 
 
 function generateEmptyTemplate() {
@@ -57,8 +56,6 @@ firebase.auth().onAuthStateChanged(function(user) {
         console.log("esvaziando");
         initialLoad(generateEmptyTemplate());
       }
-
-      // startUi();
     });
   }
 });
