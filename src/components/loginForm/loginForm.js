@@ -27,12 +27,12 @@ function LoginForm({ loginFormVisibility, hideLoginForm }) {
     
     useEffect(() => {
         firebase.auth().onAuthStateChanged(function(user) {
-            if (!(user && !user.isAnonymous))
-            {
-                console.log("startUi2 dentro do useEffect")
-                console.log("hideLoginForm="+ hideLoginForm)
-                startUi2(hideLoginForm);
-            }
+            // if (!(user && !user.isAnonymous))
+            // {
+            //     console.log("startUi2 dentro do useEffect")
+            //     console.log("hideLoginForm="+ hideLoginForm)
+            //     startUi2(hideLoginForm);
+            // }
 
             hideLoginForm();
         });
