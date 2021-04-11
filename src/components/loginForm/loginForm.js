@@ -27,12 +27,20 @@ const AuthWrapper = styled(AuthContainer)`
     }
 `;
 
-function LoginForm({ loginFormVisibility }) {
+function LoginForm({ loginFormVisibility, hideLoginForm }) {
     let isLoggedAndNotAnon = userIsLoggedAndNotAnon();
-        
+    
+    function handleModalClick(e) {
+        if(e.target !== e.currentTarget) {
+            return;
+        }
+
+        hideLoginForm();
+    }
+
     return (
         <AuthWrapper>
-            <AuthContainer className={loginFormVisibility ? 'visible' : 'hidden'}>
+            <AuthContainer className={loginFormVisibility ? 'visible' : 'hidden'} onClick={handleModalClick}>
                 <AuthInnerContainer>
                     <div id ="firebaseui-auth-container"></div>
                     {isLoggedAndNotAnon && <div><button onClick={handleSignout}>SIGNOUT</button></div>}
