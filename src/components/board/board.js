@@ -67,25 +67,19 @@ function renderBoard(imagePositions, selectedGrid) {
 }
 
 function Board({ imagePositions }) {
-
     const [loginFormVisibility, setLoginFormVisibility] = useState(false);
 
-    console.log("loginFormVisibility=" + loginFormVisibility);
-
     function hideLoginForm() {
-        console.log("setando pra false NO HIDE")
         setLoginFormVisibility(false);
     }
 
     function toggleLoginForm() {
-        console.log("entrou no toggle")
         if (loginFormVisibility) {
-            console.log("setando pra false")
             setLoginFormVisibility(false);
         }
         else {
-            console.log("setando pra true")
             setLoginFormVisibility(true);
+
             if (userIsAnon()) {
                 startUi(hideLoginForm);
             }

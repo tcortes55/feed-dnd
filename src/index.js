@@ -37,8 +37,6 @@ var imagesDictionary = generateEmptyTemplate();
 let init = false;
 
 firebase.auth().onAuthStateChanged(function(user) {
-  console.log("AuthChanged index");
-
   if (user) {
     console.log("isAnonymous=" + user.isAnonymous);
     console.log("email=" + user.email);
