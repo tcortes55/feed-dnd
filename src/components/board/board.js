@@ -18,7 +18,7 @@ let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
 const BoardWrapper = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 500px;
     margin: 0px;
     background-color: #e9d5bf;
 
