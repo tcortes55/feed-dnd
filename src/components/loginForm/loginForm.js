@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { handleSignout, userIsLoggedAndNotAnon } from '../../firebase/firebase';
 import { CloseIcon } from '../icons/icons';
 import { AppColors } from '../../constants';
-import { showLoader, hideLoader } from '../../util/loader';
+import { showLoader } from '../../util/loader';
 import styled from 'styled-components';
 
 const AuthInnerContainer = styled.div`

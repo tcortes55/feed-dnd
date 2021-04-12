@@ -127,12 +127,10 @@ export function getImagePositions() {
 }
 
 export function updateImagePositions(imagePositions) {
-    // showLoader();
     var updateImagePositionsPromise = new Promise(function(resolve, reject) {
         db.collection("users").doc(getUserId()).set({ imagePositions: imagePositions})
         .then(function(docRef) {
             resolve(docRef);
-            // hideLoader();
         });
     });
 
