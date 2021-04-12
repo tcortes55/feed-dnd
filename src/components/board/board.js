@@ -90,8 +90,9 @@ function Board({ imagePositions }) {
     useEffect(() => {
         firebase.auth().onAuthStateChanged(function(user) {
             hideLoginForm();
-            watchAuthContainer();
         });
+        
+        watchAuthContainer();
     }, []);
 
     const [selectedGrid, setSelectedGrid] = useState(Templates.BLANK)
