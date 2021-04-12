@@ -7,6 +7,7 @@ import 'firebaseui/dist/firebaseui.css';
 import { getUserId } from './feedIdManager';
 import { runAllCustomizations } from './customizations';
 import { initialLoad } from '../PictureManager';
+import { hideLoader, showLoader } from '../util/loader';
 
 var firebaseConfig = {
     apiKey: "AIzaSyAxdiOlnFBRP-FEoGZnKhJQkQ4BTL4Thyg",
@@ -46,10 +47,13 @@ export function startUi(callbackSetState) {
             
                 return firebase.auth().signInWithCredential(cred)
                     .then(function() {
+                        showLoader();
                         var positions = getImagePositions().then(function(result) {
                             if (result.imagePositions) {
                                 initialLoad(result.imagePositions);
                             }
+
+                            hideLoader();
                         });
                     })
                     .then(function() {
@@ -126,10 +130,12 @@ export function getImagePositions() {
 }
 
 export function updateImagePositions(imagePositions) {
+    // showLoader();
     var updateImagePositionsPromise = new Promise(function(resolve, reject) {
         db.collection("users").doc(getUserId()).set({ imagePositions: imagePositions})
         .then(function(docRef) {
             resolve(docRef);
+            // hideLoader();
         });
     });
 
