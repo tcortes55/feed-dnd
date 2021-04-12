@@ -7,7 +7,10 @@ import styled from 'styled-components';
 const AuthInnerContainer = styled.div`
     background-color: ${AppColors.White};
     padding: 10px;
-    margin: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 50%;
+    transform: translateY(-25%);
 `;
 
 const AuthContainer = styled.div`
@@ -30,6 +33,12 @@ const AuthWrapper = styled(AuthContainer)`
 
 const CloseButtonWrapper = styled.div`
     transform: translate(15px, -15px);
+`;
+
+const SignoutWrapper = styled.div`
+    margin: auto;
+    width: fit-content;
+    padding: 30px;
 `;
 
 function LoginForm({ loginFormVisibility, hideLoginForm }) {
@@ -55,7 +64,7 @@ function LoginForm({ loginFormVisibility, hideLoginForm }) {
                         <CloseIcon></CloseIcon>
                     </CloseButtonWrapper>
                     <div id ="firebaseui-auth-container"></div>
-                    {isLoggedAndNotAnon && <div><button onClick={handleSignout}>SIGNOUT</button></div>}
+                    {isLoggedAndNotAnon && <SignoutWrapper><button onClick={handleSignout}>SAIR</button></SignoutWrapper>}
                 </AuthInnerContainer>
             </AuthContainer>
         </AuthWrapper>
