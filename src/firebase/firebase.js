@@ -5,7 +5,7 @@ import 'firebase/firestore';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 import { getUserId } from './feedIdManager';
-import { uiLocalization, customizeLayout } from './customizations';
+import { runAllCustomizations } from './customizations';
 import { initialLoad } from '../PictureManager';
 
 var firebaseConfig = {
@@ -29,6 +29,7 @@ export function startUi(callbackSetState) {
     var uiConfig = {
         callbacks: {
             signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+                console.log("dentro signInSuccess")
                 callbackSetState();
                 
                 return false;
@@ -40,6 +41,8 @@ export function startUi(callbackSetState) {
                 // The credential the user tried to sign in with.
                 var cred = error.credential;
                 var currentUser = firebase.auth().currentUser;
+
+                console.log("dentro signInFailure")
             
                 return firebase.auth().signInWithCredential(cred)
                     .then(function() {
@@ -57,6 +60,7 @@ export function startUi(callbackSetState) {
                     });
             },
             uiShown: function() {
+                console.log("dentro do uiShown")
             // The widget is rendered.
             // Hide the loader.
                 // document.getElementById('loader').style.display = 'none';
@@ -87,9 +91,6 @@ export function startUi(callbackSetState) {
     };
 
     ui.start('#firebaseui-auth-container', uiConfig);
-
-    uiLocalization();
-    customizeLayout();
 }
 
 export function handleSignout() {

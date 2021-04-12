@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import firebase from '../../firebase/firebase';
 import { handleSignout, userIsLoggedAndNotAnon } from '../../firebase/firebase';
 import { CloseIcon } from '../icons/icons';
 import { AppColors } from '../../constants';

@@ -12,6 +12,7 @@ import { Templates, Boards } from '../../constants';
 import Menu from '../menu';
 import firebase from '../../firebase/firebase';
 import { startUi, userIsAnon } from '../../firebase/firebase';
+import { watchAuthContainer } from '../../firebase/customizations';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
@@ -90,6 +91,8 @@ function Board({ imagePositions }) {
         firebase.auth().onAuthStateChanged(function(user) {
             hideLoginForm();
         });
+        
+        watchAuthContainer();
     }, []);
 
     const [selectedGrid, setSelectedGrid] = useState(Templates.BLANK)
