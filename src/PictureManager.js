@@ -1,13 +1,11 @@
 import { deleteImageFromStorage, updateImagePositions } from './firebase/firebase';
 import { Boards } from './constants';
-import { hideLoader, showLoader } from './util/loader';
 
 let imagePositions = {};
 let observer = null;
 const NUM_COLUMNS = 4;
 
 export function observe(args, o) {
-    // showLoader();
     if (observer) {
         throw new Error('Multiple observers not implemented.');
     }
@@ -18,9 +16,7 @@ export function observe(args, o) {
 }
 
 function emitChange() {
-    // showLoader();
     updateImagePositions(imagePositions);
-    // hideLoader();
     return observer(imagePositions);
 }
 
@@ -70,7 +66,6 @@ function removeFromDeck(imagePositions, origin) {
 }
 
 export function moveImage(positions, originBoard, origin, targetBoard, target) {
-    // showLoader();
     if (!canMoveImage(positions, originBoard, origin, targetBoard, target)) {
         return;
     }
@@ -106,7 +101,6 @@ export function moveImage(positions, originBoard, origin, targetBoard, target) {
     }
 
     emitChange();
-    // hideLoader();
 }
 
 export function canMoveImage(positions, originBoard, origin, targetBoard, target) {
