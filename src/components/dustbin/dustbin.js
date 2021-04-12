@@ -31,7 +31,7 @@ function Dustbin({ imagePositions }) {
                 width: '312px',
                 height: '50px',
                 margin: 'auto',
-                backgroundColor: AppColors.DarkBlue,
+                backgroundColor: AppColors.MediumRose,
                 textAlign: 'center',
                 overflow: 'visible'
             }}
