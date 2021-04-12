@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { runAllCustomizations } from '../../firebase/customizations';
 import { handleSignout, userIsLoggedAndNotAnon } from '../../firebase/firebase';
 import { CloseIcon } from '../icons/icons';
 import { AppColors } from '../../constants';
@@ -38,7 +37,6 @@ function LoginForm({ loginFormVisibility, hideLoginForm }) {
     
     function handleOutOfModalClick(e) {
         if(e.target !== e.currentTarget) {
-            // runAllCustomizations();
             return;
         }
 
@@ -49,14 +47,10 @@ function LoginForm({ loginFormVisibility, hideLoginForm }) {
         hideLoginForm();
     }
 
-    function testChange() {
-        console.log("está mudando DOM");
-    }
-
     return (
         <AuthWrapper>
             <AuthContainer className={loginFormVisibility ? 'visible' : 'hidden'} onClick={handleOutOfModalClick}>
-                <AuthInnerContainer onChange={testChange}>
+                <AuthInnerContainer>
                     <CloseButtonWrapper onClick={handleCloseModalButtonClick}>
                         <CloseIcon></CloseIcon>
                     </CloseButtonWrapper>

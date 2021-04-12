@@ -35,8 +35,6 @@ export function startUi(callbackSetState) {
                 return false;
             },
             signInFailure: function(error) {
-                // uiLocalization();
-                // customizeLayout();
                 if (error.code != 'firebaseui/anonymous-upgrade-merge-conflict') {
                     return Promise.resolve();
                 }
@@ -63,7 +61,6 @@ export function startUi(callbackSetState) {
             },
             uiShown: function() {
                 console.log("dentro do uiShown")
-                // runAllCustomizations();
             // The widget is rendered.
             // Hide the loader.
                 // document.getElementById('loader').style.display = 'none';
