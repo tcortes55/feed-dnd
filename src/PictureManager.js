@@ -139,3 +139,7 @@ export function initialLoad(positions) {
 
     emitChange();
 }
+
+export function runBasicUpdate() {
+    emitChange();
+}

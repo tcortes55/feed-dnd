@@ -1,7 +1,6 @@
 import { AppColors } from '../constants';
 
 export function uiLocalization() {
-    console.log("dentro do uiLocalization")
     var emailLoginTitle = document.querySelector('[data-provider-id="password"] > span.firebaseui-idp-text-long');
     if (emailLoginTitle) {
         emailLoginTitle.innerText = "Login com e-mail";
