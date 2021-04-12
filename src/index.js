@@ -6,6 +6,7 @@ import { observe, initialLoad } from './PictureManager';
 import { getImagePositions } from './firebase/firebase';
 import firebase from './firebase/firebase';
 import { showLoader, hideLoader } from './util/loader';
+import { Templates } from './constants';
 
 function generateEmptyTemplate() {
   var imagesDictionary = {};
@@ -26,6 +27,8 @@ function generateEmptyTemplate() {
   imagesDictionary.deck[1] = null;
   imagesDictionary.deck[2] = null;
   imagesDictionary.deck[3] = null;
+
+  imagesDictionary.template = Templates.BLANK;
 
   return imagesDictionary;
 };

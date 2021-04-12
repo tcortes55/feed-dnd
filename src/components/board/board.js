@@ -8,11 +8,12 @@ import { TouchBackend } from 'react-dnd-touch-backend';
 import { isMobile } from 'react-device-detect';
 import Carousel from '../carousel';
 import LoginForm from '../loginForm';
-import { Templates, Boards, AppColors } from '../../constants';
+import { Boards, AppColors } from '../../constants';
 import Menu from '../menu';
 import firebase from '../../firebase/firebase';
 import { startUi, userIsAnon } from '../../firebase/firebase';
 import { watchAuthContainer } from '../../firebase/customizations';
+import { runBasicUpdate } from '../../PictureManager';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
@@ -95,11 +96,17 @@ function Board({ imagePositions }) {
         watchAuthContainer();
     }, []);
 
-    const [selectedGrid, setSelectedGrid] = useState(Templates.BLANK)
+    const [selectedGrid, setSelectedGrid] = useState(imagePositions.template);
 
     function updateSelectedGrid(newSelection) {
         setSelectedGrid(newSelection);
+        imagePositions.template = newSelection;
     }
+
+    useEffect(() => {
+        setSelectedGrid(imagePositions.template);
+        runBasicUpdate();
+    }, [imagePositions.template]);
 
     return (
         <DndProvider backend={DnDBackend}>

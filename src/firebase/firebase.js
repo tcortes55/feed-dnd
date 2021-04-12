@@ -29,7 +29,6 @@ export function startUi(callbackSetState) {
     var uiConfig = {
         callbacks: {
             signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-                console.log("dentro signInSuccess")
                 callbackSetState();
                 
                 return false;
@@ -41,8 +40,6 @@ export function startUi(callbackSetState) {
                 // The credential the user tried to sign in with.
                 var cred = error.credential;
                 var currentUser = firebase.auth().currentUser;
-
-                console.log("dentro signInFailure")
             
                 return firebase.auth().signInWithCredential(cred)
                     .then(function() {
