@@ -8,7 +8,7 @@ import { observe, initialLoad } from './PictureManager';
 import { getUserId } from './firebase/feedIdManager';
 import { getImagePositions } from './firebase/firebase';
 import firebase from './firebase/firebase';
-
+import { showLoader, hideLoader } from './util/loader';
 
 function generateEmptyTemplate() {
   var imagesDictionary = {};
@@ -53,6 +53,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       else {
         // console.log("esvaziando");
         initialLoad(generateEmptyTemplate());
+        hideLoader();
       }
     });
   }
@@ -75,12 +76,6 @@ function startApp() {
     )
     );
 
-    toggleLoader();
+    hideLoader();
   });
-}
-
-function toggleLoader() {
-  var loader = document.getElementById('cover-spin');
-  console.log(loader.style.display);
-  loader.style.display = 'none';
 }

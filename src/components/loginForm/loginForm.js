@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { handleSignout, userIsLoggedAndNotAnon } from '../../firebase/firebase';
 import { CloseIcon } from '../icons/icons';
 import { AppColors } from '../../constants';
+import { showLoader, hideLoader } from '../../util/loader';
 import styled from 'styled-components';
 
 const AuthInnerContainer = styled.div`
@@ -64,6 +65,11 @@ function LoginForm({ loginFormVisibility, hideLoginForm }) {
         hideLoginForm();
     }
 
+    function handleSignOutButtonClick() {
+        showLoader();
+        handleSignout();
+    }
+
     return (
         <AuthWrapper>
             <AuthContainer className={loginFormVisibility ? 'visible' : 'hidden'} onClick={handleOutOfModalClick}>
@@ -73,7 +79,7 @@ function LoginForm({ loginFormVisibility, hideLoginForm }) {
                     </CloseButtonWrapper>
                     <div id ="firebaseui-auth-container"></div>
                     {isLoggedAndNotAnon && <SignOutWrapper>
-                        <SignOutButton onClick={handleSignout} className="firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-anonymous firebaseui-id-idp-button">
+                        <SignOutButton onClick={handleSignOutButtonClick} className="firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-anonymous firebaseui-id-idp-button">
                             <ButtonLabel className="firebaseui-idp-text firebaseui-idp-text-long">
                                 SAIR
                             </ButtonLabel>
