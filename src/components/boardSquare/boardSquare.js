@@ -23,17 +23,18 @@ function getTemplateBackground(selectedGrid, board, position) {
     case Templates.DIAGONAL:
       switch (position) {
         case 0:
+        case 4:
+        case 8:
+          return AppColors.LightGrey;
+        case 1:
         case 5:
+          return AppColors.Black;
+        case 2:
+        case 6:
+          return AppColors.DarkGrey;
+        case 3:
         case 7:
           return AppColors.MediumGrey;
-        case 1:
-        case 3:
-        case 8:
-          return AppColors.DarkGrey;
-        case 2:
-        case 4:
-        case 6:
-          return AppColors.LightGrey;
       }
   }
 }
