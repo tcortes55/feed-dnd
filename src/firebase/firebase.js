@@ -5,7 +5,7 @@ import 'firebase/firestore';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 import { getUserId } from './feedIdManager';
-import { uiLocalization, customizeLayout } from './customizations';
+import { runAllCustomizations } from './customizations';
 import { initialLoad } from '../PictureManager';
 
 var firebaseConfig = {
@@ -29,17 +29,22 @@ export function startUi(callbackSetState) {
     var uiConfig = {
         callbacks: {
             signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+                console.log("dentro signInSuccess")
                 callbackSetState();
                 
                 return false;
             },
             signInFailure: function(error) {
+                // uiLocalization();
+                // customizeLayout();
                 if (error.code != 'firebaseui/anonymous-upgrade-merge-conflict') {
                     return Promise.resolve();
                 }
                 // The credential the user tried to sign in with.
                 var cred = error.credential;
                 var currentUser = firebase.auth().currentUser;
+
+                console.log("dentro signInFailure")
             
                 return firebase.auth().signInWithCredential(cred)
                     .then(function() {
@@ -57,6 +62,8 @@ export function startUi(callbackSetState) {
                     });
             },
             uiShown: function() {
+                console.log("dentro do uiShown")
+                // runAllCustomizations();
             // The widget is rendered.
             // Hide the loader.
                 // document.getElementById('loader').style.display = 'none';
@@ -88,8 +95,8 @@ export function startUi(callbackSetState) {
 
     ui.start('#firebaseui-auth-container', uiConfig);
 
-    uiLocalization();
-    customizeLayout();
+    console.log("depois do uiStart")    
+    runAllCustomizations();
 }
 
 export function handleSignout() {
