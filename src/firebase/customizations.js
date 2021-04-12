@@ -33,9 +33,7 @@ export function uiLocalization() {
     }
 
     var passwordErrorMessage = document.querySelector('p.firebaseui-id-password-error');
-    console.log("password error antes")
     if (passwordErrorMessage) {
-        console.log("password error depois")
         passwordErrorMessage.innerText = "Senha incorreta";
     }
 
@@ -78,7 +76,6 @@ export function uiLocalization() {
 }
 
 export function customizeLayout() {
-    console.log("dentro do customizeLayout")
     var emailLoginButton = document.querySelector('[data-provider-id="password"]');
     if (emailLoginButton) {
         emailLoginButton.style.backgroundColor = AppColors.MediumBlue;

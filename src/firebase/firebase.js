@@ -91,9 +91,6 @@ export function startUi(callbackSetState) {
     };
 
     ui.start('#firebaseui-auth-container', uiConfig);
-
-    console.log("depois do uiStart")    
-    runAllCustomizations();
 }
 
 export function handleSignout() {
