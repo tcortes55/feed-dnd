@@ -13,6 +13,7 @@ import Menu from '../menu';
 import firebase from '../../firebase/firebase';
 import { startUi, userIsAnon } from '../../firebase/firebase';
 import { watchAuthContainer } from '../../firebase/customizations';
+// import { hideLoader, showLoader } from '../../util/loader';
 
 let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
@@ -68,6 +69,7 @@ function renderBoard(imagePositions, selectedGrid) {
 }
 
 function Board({ imagePositions }) {
+    // showLoader();
     const [loginFormVisibility, setLoginFormVisibility] = useState(false);
 
     function hideLoginForm() {
@@ -101,6 +103,7 @@ function Board({ imagePositions }) {
         setSelectedGrid(newSelection);
     }
 
+    // hideLoader();
     return (
         <DndProvider backend={DnDBackend}>
             <BoardWrapper>
