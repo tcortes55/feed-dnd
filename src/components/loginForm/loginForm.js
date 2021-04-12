@@ -35,10 +35,18 @@ const CloseButtonWrapper = styled.div`
     transform: translate(15px, -15px);
 `;
 
-const SignoutWrapper = styled.div`
+const SignOutWrapper = styled.div`
     margin: auto;
     width: fit-content;
     padding: 30px;
+`;
+
+const SignOutButton = styled.button`
+    background-color: ${AppColors.MediumRose};
+`;
+
+const ButtonLabel = styled.span`
+    padding: 0px;
 `;
 
 function LoginForm({ loginFormVisibility, hideLoginForm }) {
@@ -64,7 +72,13 @@ function LoginForm({ loginFormVisibility, hideLoginForm }) {
                         <CloseIcon></CloseIcon>
                     </CloseButtonWrapper>
                     <div id ="firebaseui-auth-container"></div>
-                    {isLoggedAndNotAnon && <SignoutWrapper><button onClick={handleSignout}>SAIR</button></SignoutWrapper>}
+                    {isLoggedAndNotAnon && <SignOutWrapper>
+                        <SignOutButton onClick={handleSignout} className="firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-anonymous firebaseui-id-idp-button">
+                            <ButtonLabel className="firebaseui-idp-text firebaseui-idp-text-long">
+                                SAIR
+                            </ButtonLabel>
+                        </SignOutButton>
+                    </SignOutWrapper>}
                 </AuthInnerContainer>
             </AuthContainer>
         </AuthWrapper>
