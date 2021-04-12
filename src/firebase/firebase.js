@@ -5,9 +5,8 @@ import 'firebase/firestore';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 import { getUserId } from './feedIdManager';
-import { runAllCustomizations } from './customizations';
 import { initialLoad } from '../PictureManager';
-import { hideLoader, showLoader } from '../util/loader';
+import { showLoader } from '../util/loader';
 
 var firebaseConfig = {
     apiKey: "AIzaSyAxdiOlnFBRP-FEoGZnKhJQkQ4BTL4Thyg",
@@ -52,8 +51,6 @@ export function startUi(callbackSetState) {
                             if (result.imagePositions) {
                                 initialLoad(result.imagePositions);
                             }
-
-                            hideLoader();
                         });
                     })
                     .then(function() {

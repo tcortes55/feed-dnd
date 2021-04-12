@@ -2,10 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import Board from './components/board';
 import { observe, initialLoad } from './PictureManager';
-import { getUserId } from './firebase/feedIdManager';
 import { getImagePositions } from './firebase/firebase';
 import firebase from './firebase/firebase';
 import { showLoader, hideLoader } from './util/loader';
@@ -51,9 +48,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         startApp();
       }
       else {
-        // console.log("esvaziando");
         initialLoad(generateEmptyTemplate());
-        hideLoader();
       }
     });
   }
@@ -67,15 +62,18 @@ function startApp() {
       imagesDictionary = result.imagePositions;
     }
     
-    observe(imagesDictionary, (imagesDictionary) => 
-    ReactDOM.render(
-      <React.StrictMode>
-      <App imagePositions={imagesDictionary}></App>
-    </React.StrictMode>,
-    document.getElementById('root')
-    )
-    );
+    observe(imagesDictionary, (imagesDictionary) => {
+        showLoader();
+        
+        ReactDOM.render(
+          <React.StrictMode>
+          <App imagePositions={imagesDictionary}></App>
+        </React.StrictMode>,
+        document.getElementById('root')
+        );
 
-    hideLoader();
+        hideLoader();
+      }
+    );
   });
 }

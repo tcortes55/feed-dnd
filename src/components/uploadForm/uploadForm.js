@@ -5,7 +5,7 @@ import { getUserId } from '../../firebase/feedIdManager';
 import { UploadIcon } from '../icons/icons';
 import loadImage from 'blueimp-load-image';
 import styled from 'styled-components';
-import { hideLoader, showLoader } from '../../util/loader';
+import { showLoader } from '../../util/loader';
 
 const MenuItemWrapper = styled.div`
     width: 33.33333333%;
@@ -47,7 +47,6 @@ function dataURItoBlob(dataURI) {
 }
 
 async function executeUpload(file, filename, imagePositions) {
-    showLoader();
     let feedId = getUserId();
 
     const uploadTask = storage.ref(`/images/${feedId}/${filename}`).put(file);
@@ -62,7 +61,6 @@ async function executeUpload(file, filename, imagePositions) {
     async () => {
         const firebaseUrl = await storage.ref('images').child(feedId).child(filename).getDownloadURL();
         initialLoadDeck(imagePositions, 0, firebaseUrl);
-        hideLoader();
     });
 }
 
@@ -75,7 +73,7 @@ function UploadForm({ imagePositions }) {
     }
 
     async function handleFirebaseUpload(imagesAsFiles) {
-        // showLoader();
+        showLoader();
         console.log('start of upload');
 
         // TODO: error handling
