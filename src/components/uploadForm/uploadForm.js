@@ -6,6 +6,7 @@ import { UploadIcon } from '../icons/icons';
 import loadImage from 'blueimp-load-image';
 import styled from 'styled-components';
 import { showLoader } from '../../util/loader';
+import { getDateTimeStamp } from '../../util/utils';
 
 const MenuItemWrapper = styled.div`
     width: 33.33333333%;
@@ -85,13 +86,14 @@ function UploadForm({ imagePositions }) {
             (imageAsFile) => {
                 var imgURI;
                 var fileFromCanvas;
+                var fileNameWithTimestamp = getDateTimeStamp() + "_" + imageAsFile.name;
 
                 loadImage(
                     imageAsFile,
                     function (canvas) {
                         imgURI = canvas.toDataURL("image/jpeg");
                         fileFromCanvas = dataURItoBlob(imgURI);
-                        executeUpload(fileFromCanvas, imageAsFile.name, imagePositions);
+                        executeUpload(fileFromCanvas, fileNameWithTimestamp, imagePositions);
                     },
                     loadImgOptions
                 );
