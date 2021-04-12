@@ -74,5 +74,13 @@ function startApp() {
     document.getElementById('root')
     )
     );
+
+    toggleLoader();
   });
+}
+
+function toggleLoader() {
+  var loader = document.getElementById('cover-spin');
+  console.log(loader.style.display);
+  loader.style.display = 'none';
 }
