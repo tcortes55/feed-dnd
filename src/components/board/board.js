@@ -8,7 +8,7 @@ import { TouchBackend } from 'react-dnd-touch-backend';
 import { isMobile } from 'react-device-detect';
 import Carousel from '../carousel';
 import LoginForm from '../loginForm';
-import { Templates, Boards } from '../../constants';
+import { Templates, Boards, AppColors } from '../../constants';
 import Menu from '../menu';
 import firebase from '../../firebase/firebase';
 import { startUi, userIsAnon } from '../../firebase/firebase';
@@ -18,9 +18,9 @@ let DnDBackend = isMobile ? TouchBackend : HTML5Backend;
 
 const BoardWrapper = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 500px;
     margin: 0px;
-    background-color: #e9d5bf;
+    background-color: ${AppColors.LightRose};
 
     @media (min-width: 768px) {
         width: 352px !important;
