@@ -22,6 +22,7 @@ const BoardWrapper = styled.div`
     height: 500px;
     margin: 0px;
     background-color: ${AppColors.LightRose};
+    transform: scale(0.79);
 
     @media (min-width: 768px) {
         width: 352px !important;
