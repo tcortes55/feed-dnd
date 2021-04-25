@@ -8,8 +8,8 @@ import styled from 'styled-components';
 const AuthInnerContainer = styled.div`
     background-color: ${AppColors.White};
     padding: 10px;
-    margin-left: 30px;
-    margin-right: 30px;
+    /* margin-left: 30px;
+    margin-right: 30px; */
     margin-top: 50%;
     /* transform: translateY(-25%); */
     transform: scale(0.79);
