@@ -22,7 +22,6 @@ const BoardWrapper = styled.div`
     height: 500px;
     margin: 0px;
     background-color: ${AppColors.LightRose};
-    transform: scale(0.79);
 
     @media (min-width: 768px) {
         width: 352px !important;
@@ -33,14 +32,14 @@ const BoardWrapper = styled.div`
 const FeedWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
-    max-width: 312px;
+    max-width: 249px;
     margin: auto;
 `;
 const DeckWrapper = styled.div`
     margin: auto;
     margin-top:50px;
     display: flex;
-    max-width: 352px;
+    max-width: 249px;
     overflow-x: scroll;
 `;
 
