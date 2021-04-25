@@ -4,8 +4,8 @@ import ItemTypes, { Boards } from '../../constants';
 import { useDrag } from 'react-dnd';
 
 const PictureWrapper = styled.div`
-    height: ${props => props.reduced ? "60px" : "100px"};
-    width: ${props => props.reduced ? "60px" : "100px"};
+    height: ${props => props.reduced ? "47px" : "79px"};
+    width: ${props => props.reduced ? "47px" : "79px"};
 `;
 
 const Img = styled.img`

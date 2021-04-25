@@ -8,7 +8,8 @@ import styled from 'styled-components';
 
 const MenuContainer = styled.div`
     position: relative;
-    width: 312px;
+    /* width: 312px; */
+    width: 249px;
     height: 50px;
     margin: auto;
     background-color: #031b23;

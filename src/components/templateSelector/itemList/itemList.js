@@ -5,10 +5,10 @@ import TemplateItem from '../templateItem';
 import styled, { css } from 'styled-components';
 
 const TemplateListContainer = styled.div`
-    width: 306px;
+    width: 249px;
     background-color: ${AppColors.DarkBlue};
     float: right;
-    margin-right: 3px;
+    margin-right: 0px;
     margin-top: -159px;
 `;
 

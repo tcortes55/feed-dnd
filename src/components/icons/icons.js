@@ -60,7 +60,7 @@ export const CloseIcon = () => {
 }
 
 export function TemplateBlankIcon({ isLarge }) {
-    const iconWidth = isLarge ? '80px' : '30px';
+    const iconWidth = isLarge ? '65px' : '30px';
 
     return (
         <GridIcon1Svg width={iconWidth}/>
@@ -68,7 +68,7 @@ export function TemplateBlankIcon({ isLarge }) {
 }
 
 export function TemplateXIcon({ isLarge }) {
-    const iconWidth = isLarge ? '80px' : '30px';
+    const iconWidth = isLarge ? '65px' : '30px';
 
     return (
         <GridIcon2Svg width={iconWidth}/>
@@ -76,7 +76,7 @@ export function TemplateXIcon({ isLarge }) {
 }
 
 export function TemplateDiagonalIcon({ isLarge }) {
-    const iconWidth = isLarge ? '80px' : '30px';
+    const iconWidth = isLarge ? '65px' : '30px';
 
     return (
         <GridIcon3Svg width={iconWidth}/>
