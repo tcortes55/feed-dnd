@@ -58,7 +58,7 @@ export function startUi(callbackSetState) {
                     });
             },
             uiShown: function() {
-                console.log("dentro do uiShown")
+                // console.log("dentro do uiShown")
             // The widget is rendered.
             // Hide the loader.
                 // document.getElementById('loader').style.display = 'none';

@@ -28,7 +28,7 @@ function Dustbin({ imagePositions }) {
             ref={drop}
             style={{
                 position: 'relative',
-                width: '249px',
+                width: '252px',
                 height: '50px',
                 margin: 'auto',
                 backgroundColor: AppColors.MediumRose,

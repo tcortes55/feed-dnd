@@ -10,7 +10,7 @@ const AuthInnerContainer = styled.div`
     padding: 10px;
     /* margin-left: 30px;
     margin-right: 30px; */
-    margin-top: 50%;
+    margin-top: 15%;
     /* transform: translateY(-25%); */
     transform: scale(0.79);
 `;
@@ -30,6 +30,10 @@ const AuthWrapper = styled(AuthContainer)`
         width: 100%;
         top: 0px;
         z-index: 999;
+
+        @media (min-width: 480px) {
+            width: 252px !important;
+        }
     }
 `;
 

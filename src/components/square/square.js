@@ -3,8 +3,8 @@ import { Boards } from '../../constants';
 import styled, { css } from 'styled-components';
 
 const SquareWrapper = styled.div`
-    height: ${props => props.reduced ? "47px" : "79px"};
-    width: ${props => props.reduced ? "47px" : "79px"};
+    height: ${props => props.reduced ? "48px" : "80px"};
+    width: ${props => props.reduced ? "48px" : "80px"};
     border: 2px solid white;
 `;
 
