@@ -23,7 +23,7 @@ const BoardWrapper = styled.div`
     margin: 0px;
     background-color: ${AppColors.LightRose};
 
-    @media (min-width: 768px) {
+    @media (min-width: 480px) {
         width: 249px !important;
         height: 100% !important;
         margin: auto;
