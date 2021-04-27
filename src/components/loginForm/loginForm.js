@@ -10,7 +10,7 @@ const AuthInnerContainer = styled.div`
     padding: 10px;
     /* margin-left: 30px;
     margin-right: 30px; */
-    margin-top: 50%;
+    margin-top: 15%;
     /* transform: translateY(-25%); */
     transform: scale(0.79);
 `;
