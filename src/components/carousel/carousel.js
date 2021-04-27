@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import styled, { css } from 'styled-components';
 
 const SliderContainer = styled.div`
-  max-width: 194px;
+  max-width: 196px;
   padding: 24px 28px 24px 28px;
   margin: auto;
   background-color: white;
@@ -20,11 +20,11 @@ const SliderContainer = styled.div`
 
 const ArrowWrapper = styled.div`
   .arrow-left {
-    margin-left: -25px;
+    margin-left: -23px;
   }
 
   .arrow-right {
-    margin-left: 196px;
+    margin-left: 199px;
   }
 `;
 

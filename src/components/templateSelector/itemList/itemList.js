@@ -5,7 +5,7 @@ import TemplateItem from '../templateItem';
 import styled, { css } from 'styled-components';
 
 const TemplateListContainer = styled.div`
-    width: 249px;
+    width: 252px;
     background-color: ${AppColors.DarkBlue};
     float: right;
     margin-right: 0px;

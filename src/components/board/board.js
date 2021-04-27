@@ -24,7 +24,7 @@ const BoardWrapper = styled.div`
     background-color: ${AppColors.LightRose};
 
     @media (min-width: 480px) {
-        width: 249px !important;
+        width: 252px !important;
         height: 100% !important;
         margin: auto;
     }
@@ -32,7 +32,7 @@ const BoardWrapper = styled.div`
 const FeedWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
-    max-width: 249px;
+    max-width: 252px;
     margin: auto;
 `;
 

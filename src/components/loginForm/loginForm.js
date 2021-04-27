@@ -32,7 +32,7 @@ const AuthWrapper = styled(AuthContainer)`
         z-index: 999;
 
         @media (min-width: 480px) {
-            width: 249px !important;
+            width: 252px !important;
         }
     }
 `;
