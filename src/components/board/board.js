@@ -24,7 +24,7 @@ const BoardWrapper = styled.div`
     background-color: ${AppColors.LightRose};
 
     @media (min-width: 768px) {
-        width: 352px !important;
+        width: 249px !important;
         height: 100% !important;
         margin: auto;
     }
@@ -34,13 +34,6 @@ const FeedWrapper = styled.div`
     flex-wrap: wrap;
     max-width: 249px;
     margin: auto;
-`;
-const DeckWrapper = styled.div`
-    margin: auto;
-    margin-top:50px;
-    display: flex;
-    max-width: 249px;
-    overflow-x: scroll;
 `;
 
 function renderSquares(imagePositions, currBoard, selectedGrid) {
@@ -56,16 +49,6 @@ function renderSquares(imagePositions, currBoard, selectedGrid) {
     }
 
     return squares;
-}
-
-function renderBoard(imagePositions, selectedGrid) {
-    const fullBoard = [];
-    fullBoard.push(<FeedWrapper>{renderSquares(imagePositions, Boards.FEED, selectedGrid)}</FeedWrapper>);
-    if (!isMobile) {
-        fullBoard.push(<DeckWrapper>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</DeckWrapper>);
-    }
-
-    return fullBoard;
 }
 
 function Board({ imagePositions }) {
@@ -111,8 +94,8 @@ function Board({ imagePositions }) {
     return (
         <DndProvider backend={DnDBackend}>
             <BoardWrapper>
-                {renderBoard(imagePositions, selectedGrid)}
-                { isMobile && <Carousel>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</Carousel> }
+                <FeedWrapper>{renderSquares(imagePositions, Boards.FEED, selectedGrid)}</FeedWrapper>
+                <Carousel>{renderSquares(imagePositions, Boards.DECK, selectedGrid)}</Carousel>
                 <LoginForm loginFormVisibility={loginFormVisibility} hideLoginForm={hideLoginForm}></LoginForm>
                 <Menu imagePositions={imagePositions} selectedGrid={selectedGrid} updateSelectedGrid={updateSelectedGrid} toggleLoginForm={toggleLoginForm}></Menu>
                 <Dustbin imagePositions={imagePositions}></Dustbin>
