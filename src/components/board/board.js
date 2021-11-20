@@ -91,8 +91,6 @@ function Board({ imagePositions }) {
         runBasicUpdate();
     }, [imagePositions.template]);
 
-    console.log("isMobile=" + isMobile);
-
     return (
         <DndProvider backend={DnDBackend}>
             <BoardWrapper>
