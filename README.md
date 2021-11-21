@@ -39,3 +39,12 @@ The images are saved to Google's Firebase storage. The upload method returns the
 ### Authentication
 
 The application uses [FirebaseUI](https://github.com/firebase/firebaseui-web) library. It was configured to automatically use anonymous authentication on page load, thus, the user is able to use the app without needing to log in. When you click in the login button, there's the option to continue as guest or to login/register with e-mail. The process that follows the login/register action is handled by ```FirebaseUI```.
+
+### Hosting
+
+The app is published to [Vercel](https://vercel.com/) and is integrated to Github; all changes to the master branch are automatically deployed to http://feed-dnd.vercel.app/
+
+## References
+- [React DnD library](https://react-dnd.github.io/react-dnd/about)
+- [FirebaseUI](https://github.com/firebase/firebaseui-web)
+- [Vercel](https://vercel.com/)
