@@ -9,7 +9,7 @@ The app contains a 3x3 grid emulating an Instagram feed, and a list of the image
 
 ![image](https://user-images.githubusercontent.com/35512873/142730575-746173f9-6bf8-480d-8804-1780f149459f.png)
 
-Using the '+' button, you can select images to upload. The grid button on the lower right corner allows you to select different feed templates (a blank template, an 'X' template and a diagonal template). You can then drag each image to put it in the position you prefer.
+Using the ```+``` button, you can select images to upload. The grid button on the lower right corner allows you to select different feed templates (a blank template, an 'X' template and a diagonal template). You can then drag each image to put it in the position you prefer.
 
 ![image](https://github.com/tcortes55/feed-dnd/blob/master/public/feed-dnd-demo.gif)
 
@@ -29,3 +29,13 @@ The ```Board``` receives the ```imagePositions``` object and passes to each ```S
 
 The application uses [React DnD library](https://react-dnd.github.io/react-dnd/about) for the drag and drop functionality.
 In ```PictureManager```, there is a function named ```observe``` which subscribes to the state of ```imagePositions```. ```PictureManager``` exposes method ```movePicture``` (which is called on the drop event to change the values in the arrays) and others.
+
+### Image upload
+
+Once you click ```+``` and select an image to upload, the images are resized and cropped (there's no need to spend storage with high resolution images; we just need a small thumbnail in order to organize the feed).
+
+The images are saved to Google's Firebase storage. The upload method returns the image's URL, which is then added to the ```imagePositions``` corresponding array.
+
+### Authentication
+
+The application uses [FirebaseUI](https://github.com/firebase/firebaseui-web) library. It was configured to automatically use anonymous authentication on page load, thus, the user is able to use the app without needing to log in. When you click in the login button, there's the option to continue as guest or to login/register with e-mail. The process that follows the login/register action is handled by ```FirebaseUI```.
