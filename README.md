@@ -3,7 +3,7 @@
 Instagram feed organizer. Upload your images and try rearranging them to get the best looking feed, ordered according to color patterns.
 The app is published [here](https://feed-dnd.vercel.app/).
 
-## Basic functioning
+## Usage
 
 The app contains a 3x3 grid emulating an Instagram feed, and a list of the images that were uploaded by the user. Both are empty when you open the app for the first time:
 
@@ -17,8 +17,15 @@ The app runs with anonymous authentication. If you click in the login button (lo
 
 ![image](https://user-images.githubusercontent.com/35512873/142732627-dd062d98-d4d5-4a60-919d-170c7a0acd27.png)
 
+## Implementation
 
+The application state (containing the positions of all the uploaded images) is stored in an object called ```imagePositions```, which has an array for the existing places in the feed and another one for the places in the carousel. The arrays have null values in the positions that do not contain images, and the image URL in those that do contain an image.
 
-It was implemented using React.
+The application's main component is the ```Board```, which can be roughly separated in three parts: ```Feed```, ```Carousel``` and ```Menu```. ```Feed``` and ```Carousel``` are composed by ```Squares```, which are components used to render the background color according to the selected template.
 
-React Dnd library
+The ```Board``` receives the ```imagePositions``` object and passes to each ```Square``` its corresponding value in the array. In case a ```Square``` receives an image URL instead of a null value, the image is rendered.
+
+### Drag and Drop functionality
+
+The application uses [React DnD library](https://react-dnd.github.io/react-dnd/about) for the drag and drop functionality.
+In ```PictureManager```, there is a function named ```observe``` which subscribes to the state of ```imagePositions```. ```PictureManager``` exposes method ```movePicture``` (which is called on the drop event to change the values in the arrays) and others.
